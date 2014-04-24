@@ -1,12 +1,21 @@
 package vb.week1.symtab;
 
+import java.util.HashMap;
+import java.util.ListIterator;
+import java.util.Map;
+import java.util.Stack;
+
 public class SymbolTable<Entry extends IdEntry> {
+	private int level;
+	private Map<String, Stack<Entry>> table;
+	
     /**
      * Constructor.
      * @ensures  this.currentLevel() == -1
      */
     public SymbolTable() {
-        // body nog toe te voegen
+        this.level = -1;
+        this.table = new HashMap<>();
     }
 
     /**
@@ -14,7 +23,7 @@ public class SymbolTable<Entry extends IdEntry> {
      * @ensures this.currentLevel() == old.currentLevel()+1;
      */
     public void openScope()  {
-        // body nog toe te voegen
+        this.level++;
     }
 
     /**
@@ -24,12 +33,24 @@ public class SymbolTable<Entry extends IdEntry> {
      * @ensures  this.currentLevel() == old.currentLevel()-1;
      */
     public void closeScope() {
-        // body nog toe te voegen
+        this.level--;
+        for(Stack<Entry> entries : table.values()) {
+        	Stack<Entry> entriez = new Stack<Entry>();
+        	for(Entry e : entries) entriez.add(e);
+        	
+        	ListIterator<Entry> i = entriez.listIterator();
+        	while(i.hasNext()) {
+        		Entry e = i.next();
+        		if(e.getLevel() > this.level){
+        			entries.remove(e);
+        		}
+        	}
+        }
     }
 
     /** Returns the current scope level. */
     public int currentLevel() {
-        return 0; // body nog toe te voegen
+        return this.level;
     }
 
     /**
@@ -44,7 +65,27 @@ public class SymbolTable<Entry extends IdEntry> {
      */
     public void enter(String id, Entry entry)
             throws SymbolTableException {
-        // body nog toe te voegen
+    	if(currentLevel() < 0) {
+    		throw new SymbolTableException("no valid current scope level");
+    	}
+    	
+        if(table.containsKey(id)) {
+        	Stack<Entry> entries = table.get(id);
+        	for(Entry e : entries) {
+        		if(e.getLevel() == currentLevel()) {
+        			throw new SymbolTableException(id + " already declared on current level");
+        		}
+        	}
+        	entry.setLevel(currentLevel());
+        	entries.push(entry);
+        } else {
+        	Stack<Entry> entries = new Stack<Entry>();
+        	table.put(id, entries);
+        	entry.setLevel(currentLevel());
+        	entries.push(entry);
+        }
+        
+        System.out.println("D:" + id + " on level " + currentLevel());
     }
 
     /**
@@ -54,7 +95,20 @@ public class SymbolTable<Entry extends IdEntry> {
      *          null if this SymbolTable does not contain id
      */
     public Entry retrieve(String id) {
-        return null; // body nog toe te voegen
+    	if(table.containsKey(id)) {
+    		Stack<Entry> entries = table.get(id);
+    		if(entries.size() > 0) {
+	    		Entry e = entries.peek();
+	    		System.out.println("U:" + id + " on level " + currentLevel() + ", declared on level " + e.getLevel());
+	    		return e;
+    		} else {
+        		System.out.println("U:" + id + " on level " + currentLevel() + ", *undeclared*");
+    			return null;
+    		}
+    	} else {
+    		System.out.println("U:" + id + " on level " + currentLevel() + ", *undeclared*");
+    		return null;
+    	}
     }
 }
 
