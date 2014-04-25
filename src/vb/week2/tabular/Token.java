@@ -1,5 +1,6 @@
 package vb.week2.tabular;
 
+
 /**
  * VB prac week2: LaTeX tabular -> HTML symbolicName.
  * Token class.
@@ -65,5 +66,9 @@ public class Token {
     /** Levert de String-representatie van dit Token. */
     public String getRepr() {
         return this.repr;
+    }
+    
+    public String toString() {
+    	return (this.kind.toString() + "\t" + "'" + this.repr + "'");
     }
 }
