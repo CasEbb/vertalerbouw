@@ -1,7 +1,7 @@
 latexTabular ::= beginTabular colsSpec rows endTabular
 colsSpec     ::= LCURLY identiﬁer RCURLY
 rows         ::= row* | e
-row          ::= (entry (AMPERSAND entry)* | e) DOUBLE BSLASH
+row          ::= (entry (AMPERSAND entry)* | e) DOUBLE_BSLASH
 entry        ::= num | identiﬁer | e
 beginTabular ::= BSLASH BEGIN LCURLY TABULAR RCURLY
 endTabular   ::= BSLASH END LCURLY TABULAR RCURLY
@@ -10,7 +10,7 @@ identiﬁer    ::= letter (letter|digit)*
 digit        ::= 0-9
 letter       ::= A-z
 BSLASH       ::= "\"
-DOUBLE BLASH ::= "\\"
+DOUBLE_BLASH ::= "\\"
 LCURLY       ::= "{"
 RCURLY       ::= "}"
 AMPERSAND    ::= "&"
