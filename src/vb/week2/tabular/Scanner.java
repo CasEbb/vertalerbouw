@@ -1,6 +1,5 @@
 package vb.week2.tabular;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -87,6 +86,7 @@ public class Scanner {
 		case cSPACE:
 		case cTAB:
 		case cEOLn:
+		case cEOLr:
 			takeIt();
 			break;
 		default:
@@ -185,7 +185,7 @@ public class Scanner {
 		case cEOT:
 			return Kind.EOT;
 		default:
-			throw new SyntaxError("Unexpected character '" + currentChar + "'");
+			throw new SyntaxError("Unexpected character '" + currentChar + "' at line " + getLineNr());
 		}
 	}
 
@@ -198,7 +198,7 @@ public class Scanner {
 	 *             input.
 	 */
 	public Token scan() throws SyntaxError {
-		while (currentChar == cSPACE || currentChar == cTAB || currentChar == cEOLn || currentChar == cPERCENT)
+		while (currentChar == cSPACE || currentChar == cTAB || currentChar == cEOLn || currentChar == cEOLr || currentChar == cPERCENT)
 			scanSeparator();
 		currentSpelling = new StringBuilder();
 		currentKind = scanToken();
@@ -209,15 +209,20 @@ public class Scanner {
 		return this.currentLineNr;
 	}
 
-	public static void main(String[] args) throws SyntaxError, FileNotFoundException {
-			Scanner scanner = new Scanner(System.in);
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		
+		try {
 			Token token = scanner.scan();
 			while (token.getKind() != Kind.EOT) {
 				System.out.println(token);
 				token = scanner.scan();
 			}
 			
-		System.out.println("Scanning OK. Number of lines: " + scanner.getLineNr());
+			System.out.println("Scanning OK. Number of lines: " + scanner.getLineNr());
+		} catch(SyntaxError e) {
+			System.err.println(e.getMessage());
+		}
 	}
 }
 

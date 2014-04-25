@@ -69,6 +69,6 @@ public class Token {
     }
     
     public String toString() {
-    	return (this.kind.toString() + "\t" + "'" + this.repr + "'");
+    	return String.format("%-19s '%s'", this.kind.toString(), this.repr);
     }
 }
