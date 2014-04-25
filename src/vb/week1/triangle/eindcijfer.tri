@@ -1,0 +1,17 @@
+let
+  var o1: Integer;
+  var o2: Integer;
+  var p: Integer;
+  var result: Integer
+in begin
+  getint(var o1);
+  getint(var o2);
+  getint(var p);
+  
+  result := (o1 + o2 + (2 * p)) / 4;
+  
+  if (((o1 + o2) / 2 < 50) \/ (p < 50)) /\ (result >= 45) then
+    result := 44
+  else;
+  putint(result)
+end

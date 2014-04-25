@@ -1,0 +1,66 @@
+let
+  type Line ~
+    record
+      length: Integer,
+      content: array 80 of Char
+    end;
+  proc getline (var line: Line, var numWords: Integer) ~
+    let
+      var ch: Char;
+      var inWhiteSpace: Boolean
+    in begin
+      line.length := 0;
+      inWhiteSpace := true;
+      get(var ch);
+      while \ eol() /\ \ eof() do begin
+        line.content[line.length] := ch;
+        line.length := line.length + 1;
+        
+        if ord(ch) = 32 then
+          inWhiteSpace := true
+        else
+          if inWhiteSpace then
+            begin
+            numWords := numWords + 1;
+            inWhiteSpace := false
+            end
+          else;
+        
+        get(var ch);
+      end;
+    end;
+  proc putline (line: Line) ~
+    let
+      var i: Integer
+    in begin
+      i := 0;
+      while i < line.length do begin
+        put(line.content[i]);
+        i := i + 1
+      end;
+      puteol()
+    end;
+  var currentline: Line;
+  var numLines: Integer;
+  var numWords: Integer;
+  var numCharacters: Integer
+in begin
+  numLines := 0;
+  numWords := 0;
+  numCharacters := 0;
+
+  while \ eof() do begin
+    getline(var currentline, var numWords);
+    then numLines := numLines + 1
+    numCharacters := numCharacters + 1 + currentline.length
+  end;
+  
+  numCharacters := numCharacters - 1;
+  
+  putint(numLines);
+  put(' ');
+  putint(numWords);
+  put(' ');
+  putint(numCharacters);
+  puteol();
+end
