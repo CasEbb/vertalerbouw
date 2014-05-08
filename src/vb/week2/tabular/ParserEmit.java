@@ -32,7 +32,7 @@ public class ParserEmit extends Parser {
 			acceptIt();
 			break;
 		default:
-			throw new SyntaxError("Lege entry. Ik heb " + currentToken.getRepr());
+			html.append("  <td>&nbsp;</td>\n");
 		}
 	}
 
@@ -50,5 +50,11 @@ public class ParserEmit extends Parser {
 	
 	public String emit() {
 		return html.toString();
+	}
+	
+	public static void main(String[] args) {
+		ParserEmit p = new ParserEmit(new Scanner(System.in));
+		p.parse();
+		System.out.println(p.emit());
 	}
 }

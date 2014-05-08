@@ -40,19 +40,25 @@ public class Parser {
 	}
 	
 	protected void parseRows() throws SyntaxError {
-		do {
-			parseRow();
-			accept(Kind.DOUBLE_BSLASH);
+		if(currentToken.getKind() == Kind.NUM || currentToken.getKind() == Kind.IDENTIFIER || currentToken.getKind() == Kind.AMPERSAND) { // starter[row]
+			do {
+				parseRow();
+			}
+			while(currentToken.getKind() == Kind.NUM || currentToken.getKind() == Kind.IDENTIFIER || currentToken.getKind() == Kind.AMPERSAND );
+		} else {
+			// e
 		}
-		while(currentToken.getKind() == Kind.IDENTIFIER);
 	}
 	
 	protected void parseRow() throws SyntaxError {
-		parseEntry();
-		while(currentToken.getKind() == Kind.AMPERSAND) {
-			acceptIt();
+		if(currentToken.getKind() != Kind.NUM || currentToken.getKind() != Kind.IDENTIFIER) { // starter[entry]
 			parseEntry();
+			while(currentToken.getKind() == Kind.AMPERSAND) {
+				acceptIt();
+				parseEntry();
+			}
 		}
+		accept(Kind.DOUBLE_BSLASH);
 	}
 	
 	protected void parseEntry() throws SyntaxError {
@@ -62,7 +68,7 @@ public class Parser {
 			acceptIt();
 			break;
 		default:
-			throw new SyntaxError("Lege entry. Ik heb " + currentToken.getRepr());
+			// assume 'e'
 		}
 	}
 	
@@ -112,8 +118,7 @@ public class Parser {
 	}
 	
 	public static void main(String[] args) {
-		ParserEmit p = new ParserEmit(new Scanner(System.in));
+		Parser p = new Parser(new Scanner(System.in));
 		p.parse();
-		System.out.println(p.emit());
 	}
 }

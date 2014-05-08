@@ -73,7 +73,7 @@ public class Scanner {
 	}
 
 	private boolean isAlphaNumeric(char c) {
-		return (c >= 'A' && c <= 'z') || isNumeric(c);
+		return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || isNumeric(c);
 	}
 	
 	private void scanSeparator() throws SyntaxError {
@@ -126,6 +126,7 @@ public class Scanner {
 			do {
 				takeIt();
 			} while (isNumeric(currentChar));
+			return Kind.NUM;
 		case 'a':
 		case 'b':
 		case 'c':
