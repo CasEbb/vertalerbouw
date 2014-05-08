@@ -1,0 +1,8 @@
+var x: integer;
+var y: integer;
+var z: integer;
+x := y := z := 27;
+print(x);
+print(y);
+print(z);
+z := 3 := 4;

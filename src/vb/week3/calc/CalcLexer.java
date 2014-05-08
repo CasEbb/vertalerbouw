@@ -1,0 +1,1190 @@
+// $ANTLR 3.5.2 ..\\src\\vb\\week3\\calc\\Calc.g 2014-05-08 17:35:05
+
+package vb.week3.calc;
+
+
+import org.antlr.runtime.*;
+import java.util.Stack;
+import java.util.List;
+import java.util.ArrayList;
+
+@SuppressWarnings("all")
+public class CalcLexer extends Lexer {
+	public static final int EOF=-1;
+	public static final int BECOMES=4;
+	public static final int COLON=5;
+	public static final int COMMA=6;
+	public static final int COMMENT=7;
+	public static final int DIGIT=8;
+	public static final int DIVIDE=9;
+	public static final int ELSE=10;
+	public static final int EQUALS=11;
+	public static final int GT=12;
+	public static final int GTE=13;
+	public static final int IDENTIFIER=14;
+	public static final int IF=15;
+	public static final int INTEGER=16;
+	public static final int LETTER=17;
+	public static final int LOWER=18;
+	public static final int LPAREN=19;
+	public static final int LT=20;
+	public static final int LTE=21;
+	public static final int MINUS=22;
+	public static final int NEQUALS=23;
+	public static final int NUMBER=24;
+	public static final int PLUS=25;
+	public static final int PRINT=26;
+	public static final int PROGRAM=27;
+	public static final int RPAREN=28;
+	public static final int SEMICOLON=29;
+	public static final int SWAP=30;
+	public static final int THEN=31;
+	public static final int TIMES=32;
+	public static final int UPPER=33;
+	public static final int VAR=34;
+	public static final int WS=35;
+
+	// delegates
+	// delegators
+	public Lexer[] getDelegates() {
+		return new Lexer[] {};
+	}
+
+	public CalcLexer() {} 
+	public CalcLexer(CharStream input) {
+		this(input, new RecognizerSharedState());
+	}
+	public CalcLexer(CharStream input, RecognizerSharedState state) {
+		super(input,state);
+	}
+	@Override public String getGrammarFileName() { return "..\\src\\vb\\week3\\calc\\Calc.g"; }
+
+	// $ANTLR start "BECOMES"
+	public final void mBECOMES() throws RecognitionException {
+		try {
+			int _type = BECOMES;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:11:9: ( ':=' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:11:11: ':='
+			{
+			match(":="); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "BECOMES"
+
+	// $ANTLR start "COLON"
+	public final void mCOLON() throws RecognitionException {
+		try {
+			int _type = COLON;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:12:7: ( ':' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:12:9: ':'
+			{
+			match(':'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "COLON"
+
+	// $ANTLR start "COMMA"
+	public final void mCOMMA() throws RecognitionException {
+		try {
+			int _type = COMMA;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:13:7: ( ',' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:13:9: ','
+			{
+			match(','); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "COMMA"
+
+	// $ANTLR start "DIVIDE"
+	public final void mDIVIDE() throws RecognitionException {
+		try {
+			int _type = DIVIDE;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:14:8: ( '/' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:14:10: '/'
+			{
+			match('/'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "DIVIDE"
+
+	// $ANTLR start "ELSE"
+	public final void mELSE() throws RecognitionException {
+		try {
+			int _type = ELSE;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:15:6: ( 'else' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:15:8: 'else'
+			{
+			match("else"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "ELSE"
+
+	// $ANTLR start "EQUALS"
+	public final void mEQUALS() throws RecognitionException {
+		try {
+			int _type = EQUALS;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:16:8: ( '==' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:16:10: '=='
+			{
+			match("=="); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "EQUALS"
+
+	// $ANTLR start "GT"
+	public final void mGT() throws RecognitionException {
+		try {
+			int _type = GT;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:17:4: ( '>' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:17:6: '>'
+			{
+			match('>'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "GT"
+
+	// $ANTLR start "GTE"
+	public final void mGTE() throws RecognitionException {
+		try {
+			int _type = GTE;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:18:5: ( '>=' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:18:7: '>='
+			{
+			match(">="); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "GTE"
+
+	// $ANTLR start "IF"
+	public final void mIF() throws RecognitionException {
+		try {
+			int _type = IF;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:19:4: ( 'if' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:19:6: 'if'
+			{
+			match("if"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "IF"
+
+	// $ANTLR start "INTEGER"
+	public final void mINTEGER() throws RecognitionException {
+		try {
+			int _type = INTEGER;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:20:9: ( 'integer' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:20:11: 'integer'
+			{
+			match("integer"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "INTEGER"
+
+	// $ANTLR start "LPAREN"
+	public final void mLPAREN() throws RecognitionException {
+		try {
+			int _type = LPAREN;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:21:8: ( '(' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:21:10: '('
+			{
+			match('('); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "LPAREN"
+
+	// $ANTLR start "LT"
+	public final void mLT() throws RecognitionException {
+		try {
+			int _type = LT;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:22:4: ( '<' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:22:6: '<'
+			{
+			match('<'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "LT"
+
+	// $ANTLR start "LTE"
+	public final void mLTE() throws RecognitionException {
+		try {
+			int _type = LTE;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:23:5: ( '<=' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:23:7: '<='
+			{
+			match("<="); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "LTE"
+
+	// $ANTLR start "MINUS"
+	public final void mMINUS() throws RecognitionException {
+		try {
+			int _type = MINUS;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:24:7: ( '-' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:24:9: '-'
+			{
+			match('-'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "MINUS"
+
+	// $ANTLR start "NEQUALS"
+	public final void mNEQUALS() throws RecognitionException {
+		try {
+			int _type = NEQUALS;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:25:9: ( '!=' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:25:11: '!='
+			{
+			match("!="); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "NEQUALS"
+
+	// $ANTLR start "PLUS"
+	public final void mPLUS() throws RecognitionException {
+		try {
+			int _type = PLUS;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:26:6: ( '+' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:26:8: '+'
+			{
+			match('+'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "PLUS"
+
+	// $ANTLR start "PRINT"
+	public final void mPRINT() throws RecognitionException {
+		try {
+			int _type = PRINT;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:27:7: ( 'print' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:27:9: 'print'
+			{
+			match("print"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "PRINT"
+
+	// $ANTLR start "PROGRAM"
+	public final void mPROGRAM() throws RecognitionException {
+		try {
+			int _type = PROGRAM;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:28:9: ( 'program' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:28:11: 'program'
+			{
+			match("program"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "PROGRAM"
+
+	// $ANTLR start "RPAREN"
+	public final void mRPAREN() throws RecognitionException {
+		try {
+			int _type = RPAREN;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:29:8: ( ')' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:29:10: ')'
+			{
+			match(')'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "RPAREN"
+
+	// $ANTLR start "SEMICOLON"
+	public final void mSEMICOLON() throws RecognitionException {
+		try {
+			int _type = SEMICOLON;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:30:11: ( ';' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:30:13: ';'
+			{
+			match(';'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "SEMICOLON"
+
+	// $ANTLR start "SWAP"
+	public final void mSWAP() throws RecognitionException {
+		try {
+			int _type = SWAP;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:31:6: ( 'swap' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:31:8: 'swap'
+			{
+			match("swap"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "SWAP"
+
+	// $ANTLR start "THEN"
+	public final void mTHEN() throws RecognitionException {
+		try {
+			int _type = THEN;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:32:6: ( 'then' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:32:8: 'then'
+			{
+			match("then"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "THEN"
+
+	// $ANTLR start "TIMES"
+	public final void mTIMES() throws RecognitionException {
+		try {
+			int _type = TIMES;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:33:7: ( '*' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:33:9: '*'
+			{
+			match('*'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "TIMES"
+
+	// $ANTLR start "VAR"
+	public final void mVAR() throws RecognitionException {
+		try {
+			int _type = VAR;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:34:5: ( 'var' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:34:7: 'var'
+			{
+			match("var"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "VAR"
+
+	// $ANTLR start "IDENTIFIER"
+	public final void mIDENTIFIER() throws RecognitionException {
+		try {
+			int _type = IDENTIFIER;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:128:5: ( LETTER ( LETTER | DIGIT )* )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:128:9: LETTER ( LETTER | DIGIT )*
+			{
+			mLETTER(); 
+
+			// ..\\src\\vb\\week3\\calc\\Calc.g:128:16: ( LETTER | DIGIT )*
+			loop1:
+			while (true) {
+				int alt1=2;
+				int LA1_0 = input.LA(1);
+				if ( ((LA1_0 >= '0' && LA1_0 <= '9')||(LA1_0 >= 'A' && LA1_0 <= 'Z')||(LA1_0 >= 'a' && LA1_0 <= 'z')) ) {
+					alt1=1;
+				}
+
+				switch (alt1) {
+				case 1 :
+					// ..\\src\\vb\\week3\\calc\\Calc.g:
+					{
+					if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
+						input.consume();
+					}
+					else {
+						MismatchedSetException mse = new MismatchedSetException(null,input);
+						recover(mse);
+						throw mse;
+					}
+					}
+					break;
+
+				default :
+					break loop1;
+				}
+			}
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "IDENTIFIER"
+
+	// $ANTLR start "NUMBER"
+	public final void mNUMBER() throws RecognitionException {
+		try {
+			int _type = NUMBER;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:132:5: ( ( DIGIT )+ )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:132:9: ( DIGIT )+
+			{
+			// ..\\src\\vb\\week3\\calc\\Calc.g:132:9: ( DIGIT )+
+			int cnt2=0;
+			loop2:
+			while (true) {
+				int alt2=2;
+				int LA2_0 = input.LA(1);
+				if ( ((LA2_0 >= '0' && LA2_0 <= '9')) ) {
+					alt2=1;
+				}
+
+				switch (alt2) {
+				case 1 :
+					// ..\\src\\vb\\week3\\calc\\Calc.g:
+					{
+					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+						input.consume();
+					}
+					else {
+						MismatchedSetException mse = new MismatchedSetException(null,input);
+						recover(mse);
+						throw mse;
+					}
+					}
+					break;
+
+				default :
+					if ( cnt2 >= 1 ) break loop2;
+					EarlyExitException eee = new EarlyExitException(2, input);
+					throw eee;
+				}
+				cnt2++;
+			}
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "NUMBER"
+
+	// $ANTLR start "COMMENT"
+	public final void mCOMMENT() throws RecognitionException {
+		try {
+			int _type = COMMENT;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:137:5: ( '//' ( . )* '\\n' )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:137:9: '//' ( . )* '\\n'
+			{
+			match("//"); 
+
+			// ..\\src\\vb\\week3\\calc\\Calc.g:137:14: ( . )*
+			loop3:
+			while (true) {
+				int alt3=2;
+				int LA3_0 = input.LA(1);
+				if ( (LA3_0=='\n') ) {
+					alt3=2;
+				}
+				else if ( ((LA3_0 >= '\u0000' && LA3_0 <= '\t')||(LA3_0 >= '\u000B' && LA3_0 <= '\uFFFF')) ) {
+					alt3=1;
+				}
+
+				switch (alt3) {
+				case 1 :
+					// ..\\src\\vb\\week3\\calc\\Calc.g:137:14: .
+					{
+					matchAny(); 
+					}
+					break;
+
+				default :
+					break loop3;
+				}
+			}
+
+			match('\n'); 
+			 _channel=HIDDEN; 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "COMMENT"
+
+	// $ANTLR start "WS"
+	public final void mWS() throws RecognitionException {
+		try {
+			int _type = WS;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ..\\src\\vb\\week3\\calc\\Calc.g:142:5: ( ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+ )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:142:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
+			{
+			// ..\\src\\vb\\week3\\calc\\Calc.g:142:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
+			int cnt4=0;
+			loop4:
+			while (true) {
+				int alt4=2;
+				int LA4_0 = input.LA(1);
+				if ( ((LA4_0 >= '\t' && LA4_0 <= '\n')||(LA4_0 >= '\f' && LA4_0 <= '\r')||LA4_0==' ') ) {
+					alt4=1;
+				}
+
+				switch (alt4) {
+				case 1 :
+					// ..\\src\\vb\\week3\\calc\\Calc.g:
+					{
+					if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||(input.LA(1) >= '\f' && input.LA(1) <= '\r')||input.LA(1)==' ' ) {
+						input.consume();
+					}
+					else {
+						MismatchedSetException mse = new MismatchedSetException(null,input);
+						recover(mse);
+						throw mse;
+					}
+					}
+					break;
+
+				default :
+					if ( cnt4 >= 1 ) break loop4;
+					EarlyExitException eee = new EarlyExitException(4, input);
+					throw eee;
+				}
+				cnt4++;
+			}
+
+			 _channel=HIDDEN; 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "WS"
+
+	// $ANTLR start "DIGIT"
+	public final void mDIGIT() throws RecognitionException {
+		try {
+			// ..\\src\\vb\\week3\\calc\\Calc.g:146:17: ( ( '0' .. '9' ) )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:
+			{
+			if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+				input.consume();
+			}
+			else {
+				MismatchedSetException mse = new MismatchedSetException(null,input);
+				recover(mse);
+				throw mse;
+			}
+			}
+
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "DIGIT"
+
+	// $ANTLR start "LOWER"
+	public final void mLOWER() throws RecognitionException {
+		try {
+			// ..\\src\\vb\\week3\\calc\\Calc.g:147:17: ( ( 'a' .. 'z' ) )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:
+			{
+			if ( (input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
+				input.consume();
+			}
+			else {
+				MismatchedSetException mse = new MismatchedSetException(null,input);
+				recover(mse);
+				throw mse;
+			}
+			}
+
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "LOWER"
+
+	// $ANTLR start "UPPER"
+	public final void mUPPER() throws RecognitionException {
+		try {
+			// ..\\src\\vb\\week3\\calc\\Calc.g:148:17: ( ( 'A' .. 'Z' ) )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:
+			{
+			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z') ) {
+				input.consume();
+			}
+			else {
+				MismatchedSetException mse = new MismatchedSetException(null,input);
+				recover(mse);
+				throw mse;
+			}
+			}
+
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "UPPER"
+
+	// $ANTLR start "LETTER"
+	public final void mLETTER() throws RecognitionException {
+		try {
+			// ..\\src\\vb\\week3\\calc\\Calc.g:149:17: ( LOWER | UPPER )
+			// ..\\src\\vb\\week3\\calc\\Calc.g:
+			{
+			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
+				input.consume();
+			}
+			else {
+				MismatchedSetException mse = new MismatchedSetException(null,input);
+				recover(mse);
+				throw mse;
+			}
+			}
+
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "LETTER"
+
+	@Override
+	public void mTokens() throws RecognitionException {
+		// ..\\src\\vb\\week3\\calc\\Calc.g:1:8: ( BECOMES | COLON | COMMA | DIVIDE | ELSE | EQUALS | GT | GTE | IF | INTEGER | LPAREN | LT | LTE | MINUS | NEQUALS | PLUS | PRINT | PROGRAM | RPAREN | SEMICOLON | SWAP | THEN | TIMES | VAR | IDENTIFIER | NUMBER | COMMENT | WS )
+		int alt5=28;
+		alt5 = dfa5.predict(input);
+		switch (alt5) {
+			case 1 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:10: BECOMES
+				{
+				mBECOMES(); 
+
+				}
+				break;
+			case 2 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:18: COLON
+				{
+				mCOLON(); 
+
+				}
+				break;
+			case 3 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:24: COMMA
+				{
+				mCOMMA(); 
+
+				}
+				break;
+			case 4 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:30: DIVIDE
+				{
+				mDIVIDE(); 
+
+				}
+				break;
+			case 5 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:37: ELSE
+				{
+				mELSE(); 
+
+				}
+				break;
+			case 6 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:42: EQUALS
+				{
+				mEQUALS(); 
+
+				}
+				break;
+			case 7 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:49: GT
+				{
+				mGT(); 
+
+				}
+				break;
+			case 8 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:52: GTE
+				{
+				mGTE(); 
+
+				}
+				break;
+			case 9 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:56: IF
+				{
+				mIF(); 
+
+				}
+				break;
+			case 10 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:59: INTEGER
+				{
+				mINTEGER(); 
+
+				}
+				break;
+			case 11 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:67: LPAREN
+				{
+				mLPAREN(); 
+
+				}
+				break;
+			case 12 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:74: LT
+				{
+				mLT(); 
+
+				}
+				break;
+			case 13 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:77: LTE
+				{
+				mLTE(); 
+
+				}
+				break;
+			case 14 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:81: MINUS
+				{
+				mMINUS(); 
+
+				}
+				break;
+			case 15 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:87: NEQUALS
+				{
+				mNEQUALS(); 
+
+				}
+				break;
+			case 16 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:95: PLUS
+				{
+				mPLUS(); 
+
+				}
+				break;
+			case 17 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:100: PRINT
+				{
+				mPRINT(); 
+
+				}
+				break;
+			case 18 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:106: PROGRAM
+				{
+				mPROGRAM(); 
+
+				}
+				break;
+			case 19 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:114: RPAREN
+				{
+				mRPAREN(); 
+
+				}
+				break;
+			case 20 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:121: SEMICOLON
+				{
+				mSEMICOLON(); 
+
+				}
+				break;
+			case 21 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:131: SWAP
+				{
+				mSWAP(); 
+
+				}
+				break;
+			case 22 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:136: THEN
+				{
+				mTHEN(); 
+
+				}
+				break;
+			case 23 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:141: TIMES
+				{
+				mTIMES(); 
+
+				}
+				break;
+			case 24 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:147: VAR
+				{
+				mVAR(); 
+
+				}
+				break;
+			case 25 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:151: IDENTIFIER
+				{
+				mIDENTIFIER(); 
+
+				}
+				break;
+			case 26 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:162: NUMBER
+				{
+				mNUMBER(); 
+
+				}
+				break;
+			case 27 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:169: COMMENT
+				{
+				mCOMMENT(); 
+
+				}
+				break;
+			case 28 :
+				// ..\\src\\vb\\week3\\calc\\Calc.g:1:177: WS
+				{
+				mWS(); 
+
+				}
+				break;
+
+		}
+	}
+
+
+	protected DFA5 dfa5 = new DFA5(this);
+	static final String DFA5_eotS =
+		"\1\uffff\1\30\1\uffff\1\32\1\24\1\uffff\1\35\1\24\1\uffff\1\41\3\uffff"+
+		"\1\24\2\uffff\2\24\1\uffff\1\24\7\uffff\1\24\2\uffff\1\47\1\24\2\uffff"+
+		"\5\24\1\uffff\5\24\1\64\1\65\3\24\1\71\1\72\2\uffff\1\24\1\74\1\24\2\uffff"+
+		"\1\24\1\uffff\1\24\1\100\1\101\2\uffff";
+	static final String DFA5_eofS =
+		"\102\uffff";
+	static final String DFA5_minS =
+		"\1\11\1\75\1\uffff\1\57\1\154\1\uffff\1\75\1\146\1\uffff\1\75\3\uffff"+
+		"\1\162\2\uffff\1\167\1\150\1\uffff\1\141\7\uffff\1\163\2\uffff\1\60\1"+
+		"\164\2\uffff\1\151\1\141\1\145\1\162\1\145\1\uffff\1\145\1\156\1\147\1"+
+		"\160\1\156\2\60\1\147\1\164\1\162\2\60\2\uffff\1\145\1\60\1\141\2\uffff"+
+		"\1\162\1\uffff\1\155\2\60\2\uffff";
+	static final String DFA5_maxS =
+		"\1\172\1\75\1\uffff\1\57\1\154\1\uffff\1\75\1\156\1\uffff\1\75\3\uffff"+
+		"\1\162\2\uffff\1\167\1\150\1\uffff\1\141\7\uffff\1\163\2\uffff\1\172\1"+
+		"\164\2\uffff\1\157\1\141\1\145\1\162\1\145\1\uffff\1\145\1\156\1\147\1"+
+		"\160\1\156\2\172\1\147\1\164\1\162\2\172\2\uffff\1\145\1\172\1\141\2\uffff"+
+		"\1\162\1\uffff\1\155\2\172\2\uffff";
+	static final String DFA5_acceptS =
+		"\2\uffff\1\3\2\uffff\1\6\2\uffff\1\13\1\uffff\1\16\1\17\1\20\1\uffff\1"+
+		"\23\1\24\2\uffff\1\27\1\uffff\1\31\1\32\1\34\1\1\1\2\1\33\1\4\1\uffff"+
+		"\1\10\1\7\2\uffff\1\15\1\14\5\uffff\1\11\14\uffff\1\30\1\5\3\uffff\1\25"+
+		"\1\26\1\uffff\1\21\3\uffff\1\12\1\22";
+	static final String DFA5_specialS =
+		"\102\uffff}>";
+	static final String[] DFA5_transitionS = {
+			"\2\26\1\uffff\2\26\22\uffff\1\26\1\13\6\uffff\1\10\1\16\1\22\1\14\1\2"+
+			"\1\12\1\uffff\1\3\12\25\1\1\1\17\1\11\1\5\1\6\2\uffff\32\24\6\uffff\4"+
+			"\24\1\4\3\24\1\7\6\24\1\15\2\24\1\20\1\21\1\24\1\23\4\24",
+			"\1\27",
+			"",
+			"\1\31",
+			"\1\33",
+			"",
+			"\1\34",
+			"\1\36\7\uffff\1\37",
+			"",
+			"\1\40",
+			"",
+			"",
+			"",
+			"\1\42",
+			"",
+			"",
+			"\1\43",
+			"\1\44",
+			"",
+			"\1\45",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"\1\46",
+			"",
+			"",
+			"\12\24\7\uffff\32\24\6\uffff\32\24",
+			"\1\50",
+			"",
+			"",
+			"\1\51\5\uffff\1\52",
+			"\1\53",
+			"\1\54",
+			"\1\55",
+			"\1\56",
+			"",
+			"\1\57",
+			"\1\60",
+			"\1\61",
+			"\1\62",
+			"\1\63",
+			"\12\24\7\uffff\32\24\6\uffff\32\24",
+			"\12\24\7\uffff\32\24\6\uffff\32\24",
+			"\1\66",
+			"\1\67",
+			"\1\70",
+			"\12\24\7\uffff\32\24\6\uffff\32\24",
+			"\12\24\7\uffff\32\24\6\uffff\32\24",
+			"",
+			"",
+			"\1\73",
+			"\12\24\7\uffff\32\24\6\uffff\32\24",
+			"\1\75",
+			"",
+			"",
+			"\1\76",
+			"",
+			"\1\77",
+			"\12\24\7\uffff\32\24\6\uffff\32\24",
+			"\12\24\7\uffff\32\24\6\uffff\32\24",
+			"",
+			""
+	};
+
+	static final short[] DFA5_eot = DFA.unpackEncodedString(DFA5_eotS);
+	static final short[] DFA5_eof = DFA.unpackEncodedString(DFA5_eofS);
+	static final char[] DFA5_min = DFA.unpackEncodedStringToUnsignedChars(DFA5_minS);
+	static final char[] DFA5_max = DFA.unpackEncodedStringToUnsignedChars(DFA5_maxS);
+	static final short[] DFA5_accept = DFA.unpackEncodedString(DFA5_acceptS);
+	static final short[] DFA5_special = DFA.unpackEncodedString(DFA5_specialS);
+	static final short[][] DFA5_transition;
+
+	static {
+		int numStates = DFA5_transitionS.length;
+		DFA5_transition = new short[numStates][];
+		for (int i=0; i<numStates; i++) {
+			DFA5_transition[i] = DFA.unpackEncodedString(DFA5_transitionS[i]);
+		}
+	}
+
+	protected class DFA5 extends DFA {
+
+		public DFA5(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 5;
+			this.eot = DFA5_eot;
+			this.eof = DFA5_eof;
+			this.min = DFA5_min;
+			this.max = DFA5_max;
+			this.accept = DFA5_accept;
+			this.special = DFA5_special;
+			this.transition = DFA5_transition;
+		}
+		@Override
+		public String getDescription() {
+			return "1:1: Tokens : ( BECOMES | COLON | COMMA | DIVIDE | ELSE | EQUALS | GT | GTE | IF | INTEGER | LPAREN | LT | LTE | MINUS | NEQUALS | PLUS | PRINT | PROGRAM | RPAREN | SEMICOLON | SWAP | THEN | TIMES | VAR | IDENTIFIER | NUMBER | COMMENT | WS );";
+		}
+	}
+
+}
