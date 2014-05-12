@@ -35,6 +35,8 @@ tokens {
     IF          =   'if'        ;
     THEN        =   'then'      ;
     ELSE        =   'else'      ;
+    DO          =   'do'        ;
+    WHILE       =   'while'     ;
 }
 
 @lexer::header {
@@ -69,13 +71,15 @@ declaration
     ;
     
 statement
-    :   assignment
+    :   expr
     |   print_stat
     |   swap_stat
+    |   dowhile_stat    
     ;
 
-assignment
-    :   lvalue BECOMES^ expr
+expr
+    :   if_expr
+    |   binary_expr
     ;
 
 print_stat
@@ -86,6 +90,10 @@ swap_stat
     :   SWAP^ LPAREN! IDENTIFIER COMMA! IDENTIFIER RPAREN!
     ;
 
+dowhile_stat
+    :   DO statements WHILE expr -> ^(DO statements ^(WHILE expr))
+    ;
+
 if_expr
     :   IF^ expr THEN! expr ELSE! expr
     ;
@@ -93,28 +101,23 @@ if_expr
 lvalue
     :   IDENTIFIER
     ;
-
-expr
-    :   if_expr
-    |   binary_expr
-    ;
     
 binary_expr
-    :   expr1 ((LT^ | LTE^ | GT^ | GTE^ | EQUALS^ | NEQUALS^ | BECOMES^) binary_expr )?
+    :   add_expr (((LT^ | LTE^ | GT^ | GTE^ | EQUALS^ | NEQUALS^) add_expr) | (BECOMES^ expr) )?
     ;
     
-expr1
-    :   expr2 ((PLUS^ | MINUS^) expr2 )*
+add_expr
+    :   mult_expr ((PLUS^ | MINUS^) mult_expr )*
     ;
 
-expr2
+mult_expr
     :   operand ((TIMES^ | DIVIDE^) operand )*
     ;
 
 operand
     :   IDENTIFIER
     |   NUMBER
-    |   LPAREN! expr1 RPAREN!
+    |   LPAREN! expr RPAREN!
     ;
 
 type

@@ -32,12 +32,18 @@ declaration
             { store.put($id.text, 0); } 
     ;
 
-statement 
+statement
     :   becomes
     |   ^(PRINT v=expr)
             { System.out.println("" + v);   }
     |   ^(SWAP  var1=IDENTIFIER var2=IDENTIFIER)
             { int new1 = store.get($var2.text); int new2 = store.get($var1.text); store.put($var1.text, new1); store.put($var2.text, new2); }
+    | { int idx = input.index(); }  ^(DO statements=statement+ ^(WHILE cond=expr))
+        {    
+	        if(cond != 0) {
+	        	input.rewind(idx);
+	        }
+        }
     ;
 
 becomes returns [int val = 0;]
@@ -64,24 +70,24 @@ expr returns [int val = 0;]
 
 binary_expr returns [int val = 0;]
     :   z=expr1 { val = z; }
-    |   ^(LT      a=expr1 b=expr1) { val = (a <  b) ? 1 : 0; }
-    |   ^(LTE     a=expr1 b=expr1) { val = (a <= b) ? 1 : 0; }
-    |   ^(GT      a=expr1 b=expr1) { val = (a >  b) ? 1 : 0; }
-    |   ^(GTE     a=expr1 b=expr1) { val = (a >= b) ? 1 : 0; }
-    |   ^(EQUALS  a=expr1 b=expr1) { val = (a == b) ? 1 : 0; }
-    |   ^(NEQUALS a=expr1 b=expr1) { val = (a != b) ? 1 : 0; }
+    |   ^(LT      a=expr b=expr) { val = (a <  b) ? 1 : 0; }
+    |   ^(LTE     a=expr b=expr) { val = (a <= b) ? 1 : 0; }
+    |   ^(GT      a=expr b=expr) { val = (a >  b) ? 1 : 0; }
+    |   ^(GTE     a=expr b=expr) { val = (a >= b) ? 1 : 0; }
+    |   ^(EQUALS  a=expr b=expr) { val = (a == b) ? 1 : 0; }
+    |   ^(NEQUALS a=expr b=expr) { val = (a != b) ? 1 : 0; }
     ;
     
 expr1 returns [int val = 0;] 
     :   z=expr2                   { val = z;      }
-    |   ^(PLUS x=expr2 y=expr2)   { val = x + y;  }
-    |   ^(MINUS x=expr2 y=expr2)  { val = x - y;  }
+    |   ^(PLUS x=expr y=expr)   { val = x + y;  }
+    |   ^(MINUS x=expr y=expr)  { val = x - y;  }
     ;
 
 expr2 returns [int val = 0;]
     :   z=operand                 { val = z;     }
-    |   ^(TIMES x=expr1 y=expr1)  { val = x * y; }
-    |   ^(DIVIDE x=expr1 y=expr1)
+    |   ^(TIMES x=expr y=expr)  { val = x * y; }
+    |   ^(DIVIDE x=expr y=expr)
         {   if (y == 0)
                 throw new CalcException("cannot divide by zero");
             else 

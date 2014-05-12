@@ -5,4 +5,3 @@ x := y := z := 27;
 print(x);
 print(y);
 print(z);
-z := 3 := 4;

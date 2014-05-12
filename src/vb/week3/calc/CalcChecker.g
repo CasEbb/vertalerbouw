@@ -41,12 +41,19 @@ declaration
     ;
  
 statement 
-    :   ^(BECOMES id=IDENTIFIER expr)
-        {   if (!isDeclared($id.text))
-                throw new CalcException($id, "is not declared");
-        }
+    :   becomes
     |   ^(PRINT expr)
     |   ^(SWAP  IDENTIFIER IDENTIFIER)
+    |   ^(DO statement+ ^(WHILE expr))
+    ;
+
+becomes
+	:   ^(BECOMES IDENTIFIER assignment)
+    ;
+
+assignment
+    :   expr
+    |   becomes
     ;
 
 expr
@@ -56,25 +63,24 @@ expr
     
 binary_expr
     :   expr1
-    |   ^(LT expr1 expr1)
-    |   ^(LTE expr1 expr1)
-    |   ^(GT expr1 expr1)
-    |   ^(GTE expr1 expr1)
-    |   ^(EQUALS expr1 expr1)
-    |   ^(NEQUALS expr1 expr1)
-    |   ^(BECOMES IDENTIFIER binary_expr)
+    |   ^(LT expr expr)
+    |   ^(LTE expr expr)
+    |   ^(GT expr expr)
+    |   ^(GTE expr expr)
+    |   ^(EQUALS expr expr)
+    |   ^(NEQUALS expr expr)
     ;
     
 expr1 
     :   expr2
-    |   ^(PLUS expr2 expr2)
-    |   ^(MINUS expr2 expr2)
+    |   ^(PLUS expr expr)
+    |   ^(MINUS expr expr)
     ;
     
 expr2
     :   operand
-    |   ^(TIMES expr1 expr1)
-    |   ^(DIVIDE expr1 expr1)
+    |   ^(TIMES expr expr)
+    |   ^(DIVIDE expr expr)
     ;
     
 operand
