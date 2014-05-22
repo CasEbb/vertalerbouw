@@ -14,12 +14,17 @@
 
 package Triangle.TreeDrawer;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
 
 class DrawerPanel extends JPanel {
-  private Drawer drawer;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+private Drawer drawer;
 
   public DrawerPanel (Drawer drawer) {
     setPreferredSize(new Dimension(4096, 4096));

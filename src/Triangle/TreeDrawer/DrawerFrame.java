@@ -14,12 +14,23 @@
 
 package Triangle.TreeDrawer;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 class DrawerFrame extends JFrame {
-  public DrawerFrame (JPanel panel) {
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+public DrawerFrame (JPanel panel) {
     setSize(300, 200);
     Toolkit tk = Toolkit.getDefaultToolkit();
     Dimension d = tk.getScreenSize();

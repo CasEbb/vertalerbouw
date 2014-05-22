@@ -14,9 +14,8 @@
 
 package Triangle.TreeDrawer;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Point;
 
 public class DrawingTree {
@@ -46,7 +45,6 @@ public class DrawingTree {
   }
 
   private final int FIXED_FONT_HEIGHT = 10;
-  private final int FIXED_FONT_ASCENT = 3;
   private final Color nodeColor = new Color(250, 220, 100);
 
   public void paint (Graphics graphics) {

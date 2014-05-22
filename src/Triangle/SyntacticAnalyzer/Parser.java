@@ -222,7 +222,6 @@ public class Parser {
           commandAST = new CallCommand(iAST, apsAST, commandPos);
 
         } else {
-
           Vname vAST = parseRestOfVname(iAST);
           accept(Token.BECOMES);
           Expression eAST = parseExpression();
@@ -272,6 +271,31 @@ public class Parser {
         commandAST = new WhileCommand(eAST, cAST, commandPos);
       }
       break;
+    
+    case Token.REPEAT:
+      {
+    	acceptIt();
+    	Command cAST = parseSingleCommand();
+    	accept(Token.UNTIL);
+    	Expression eAST = parseExpression();
+    	finish(commandPos);
+    	commandAST = new RepeatCommand(cAST, eAST, commandPos);
+      }
+      break;
+      
+    case Token.CASE:
+      {
+    	acceptIt();
+    	Expression eAST = parseExpression();
+    	accept(Token.OF);
+    	CaseItem ciAST = parseCaseItem();
+    	accept(Token.ELSE);
+    	accept(Token.COLON);
+    	Command cAST = parseSingleCommand();
+    	finish(commandPos);
+    	commandAST = new CaseCommand(eAST, ciAST, cAST, commandPos);
+      }
+      break;
 
     case Token.SEMICOLON:
     case Token.END:
@@ -291,6 +315,27 @@ public class Parser {
     }
 
     return commandAST;
+  }
+
+  CaseItem parseCaseItem() throws SyntaxError {
+    CaseItem ciAST = null;
+
+    SourcePosition fieldPos = new SourcePosition();
+
+    start(fieldPos);
+    IntegerLiteral ilAST = parseIntegerLiteral();
+    accept(Token.COLON);
+    Command cAST = parseSingleCommand();
+    accept(Token.SEMICOLON);
+    if (currentToken.kind == Token.INTLITERAL) {
+      CaseItem ci2AST = parseCaseItem();
+      finish(fieldPos);
+      ciAST = new MultipleCaseItem(ilAST, cAST, ci2AST, fieldPos);
+    } else {
+      finish(fieldPos);
+      ciAST = new SingleCaseItem(ilAST, cAST, fieldPos);
+    }
+    return ciAST;
   }
 
 ///////////////////////////////////////////////////////////////////////////////

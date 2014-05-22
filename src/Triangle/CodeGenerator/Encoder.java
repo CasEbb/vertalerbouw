@@ -14,15 +14,87 @@
 
 package Triangle.CodeGenerator;
 
-import Triangle.AbstractSyntaxTrees.*;
-import Triangle.AbstractSyntaxTrees.Visitor;
-import Triangle.Compiler;
+import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+
+import TAM.Instruction;
+import TAM.Machine;
 import Triangle.ErrorReporter;
 import Triangle.StdEnvironment;
-import TAM.Machine;
-import TAM.Instruction;
-
-import java.io.*;
+import Triangle.AbstractSyntaxTrees.AST;
+import Triangle.AbstractSyntaxTrees.AnyTypeDenoter;
+import Triangle.AbstractSyntaxTrees.ArrayExpression;
+import Triangle.AbstractSyntaxTrees.ArrayTypeDenoter;
+import Triangle.AbstractSyntaxTrees.AssignCommand;
+import Triangle.AbstractSyntaxTrees.BinaryExpression;
+import Triangle.AbstractSyntaxTrees.BinaryOperatorDeclaration;
+import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
+import Triangle.AbstractSyntaxTrees.CallCommand;
+import Triangle.AbstractSyntaxTrees.CallExpression;
+import Triangle.AbstractSyntaxTrees.CaseCommand;
+import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
+import Triangle.AbstractSyntaxTrees.CharacterExpression;
+import Triangle.AbstractSyntaxTrees.CharacterLiteral;
+import Triangle.AbstractSyntaxTrees.ConstActualParameter;
+import Triangle.AbstractSyntaxTrees.ConstDeclaration;
+import Triangle.AbstractSyntaxTrees.ConstFormalParameter;
+import Triangle.AbstractSyntaxTrees.Declaration;
+import Triangle.AbstractSyntaxTrees.DotVname;
+import Triangle.AbstractSyntaxTrees.EmptyActualParameterSequence;
+import Triangle.AbstractSyntaxTrees.EmptyCommand;
+import Triangle.AbstractSyntaxTrees.EmptyExpression;
+import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
+import Triangle.AbstractSyntaxTrees.ErrorTypeDenoter;
+import Triangle.AbstractSyntaxTrees.FuncActualParameter;
+import Triangle.AbstractSyntaxTrees.FuncDeclaration;
+import Triangle.AbstractSyntaxTrees.FuncFormalParameter;
+import Triangle.AbstractSyntaxTrees.Identifier;
+import Triangle.AbstractSyntaxTrees.IfCommand;
+import Triangle.AbstractSyntaxTrees.IfExpression;
+import Triangle.AbstractSyntaxTrees.IntTypeDenoter;
+import Triangle.AbstractSyntaxTrees.IntegerExpression;
+import Triangle.AbstractSyntaxTrees.IntegerLiteral;
+import Triangle.AbstractSyntaxTrees.LetCommand;
+import Triangle.AbstractSyntaxTrees.LetExpression;
+import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
+import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
+import Triangle.AbstractSyntaxTrees.MultipleCaseItem;
+import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
+import Triangle.AbstractSyntaxTrees.MultipleFormalParameterSequence;
+import Triangle.AbstractSyntaxTrees.MultipleRecordAggregate;
+import Triangle.AbstractSyntaxTrees.Operator;
+import Triangle.AbstractSyntaxTrees.ProcActualParameter;
+import Triangle.AbstractSyntaxTrees.ProcDeclaration;
+import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
+import Triangle.AbstractSyntaxTrees.Program;
+import Triangle.AbstractSyntaxTrees.RecordExpression;
+import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.RepeatCommand;
+import Triangle.AbstractSyntaxTrees.SequentialCommand;
+import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
+import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
+import Triangle.AbstractSyntaxTrees.SimpleVname;
+import Triangle.AbstractSyntaxTrees.SingleActualParameterSequence;
+import Triangle.AbstractSyntaxTrees.SingleArrayAggregate;
+import Triangle.AbstractSyntaxTrees.SingleCaseItem;
+import Triangle.AbstractSyntaxTrees.SingleFieldTypeDenoter;
+import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
+import Triangle.AbstractSyntaxTrees.SingleRecordAggregate;
+import Triangle.AbstractSyntaxTrees.SubscriptVname;
+import Triangle.AbstractSyntaxTrees.TypeDeclaration;
+import Triangle.AbstractSyntaxTrees.UnaryExpression;
+import Triangle.AbstractSyntaxTrees.UnaryOperatorDeclaration;
+import Triangle.AbstractSyntaxTrees.VarActualParameter;
+import Triangle.AbstractSyntaxTrees.VarDeclaration;
+import Triangle.AbstractSyntaxTrees.VarFormalParameter;
+import Triangle.AbstractSyntaxTrees.Visitor;
+import Triangle.AbstractSyntaxTrees.Vname;
+import Triangle.AbstractSyntaxTrees.VnameExpression;
+import Triangle.AbstractSyntaxTrees.WhileCommand;
 
 public final class Encoder implements Visitor {
 
@@ -51,7 +123,7 @@ public final class Encoder implements Visitor {
     Frame frame = (Frame) o;
     int jumpifAddr, jumpAddr;
 
-    Integer valSize = (Integer) ast.E.visit(this, frame);
+    ast.E.visit(this, frame);
     jumpifAddr = nextInstrAddr;
     emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, 0);
     ast.C1.visit(this, frame);
@@ -91,7 +163,68 @@ public final class Encoder implements Visitor {
     emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr);
     return null;
   }
+  
+  public Object visitRepeatCommand(RepeatCommand ast, Object o) {
+	Frame frame = (Frame) o;
+	int loopAddr;
+	
+	loopAddr = nextInstrAddr;
+	ast.C.visit(this,  frame);
+	ast.E.visit(this,  frame);
+	emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, loopAddr);
+	return null;
+  }
+  
+  @SuppressWarnings("unchecked")
+public Object visitCaseCommand(CaseCommand ast, Object o) {
+	Frame frame = (Frame) o;
+	
+	ast.E.visit(this, frame);
+	Set<Integer> jumps = (Set<Integer>) ast.CI.visit(this,  frame);
+	ast.C.visit(this, frame);
+	for(Integer addr : jumps) {
+		patch(addr, nextInstrAddr);
+	}
+	emit(Machine.POPop, 0, 0, 1); // remove the result from ast.E
+	return null;
+  }
+  
+  @SuppressWarnings("unchecked")
+  public Object visitMultipleCaseItem(MultipleCaseItem ast, Object o) {
+	Frame frame = (Frame) o;
 
+	emit(Machine.LOADop, 1, Machine.STr, -1);
+	emit(Machine.LOADLop, 0, 0, Integer.parseInt(ast.IL.spelling));
+	emit(Machine.LOADLop, 0, 0, 1);
+	emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.eqDisplacement);
+	int jumpAddr = nextInstrAddr;
+	emit(Machine.JUMPIFop, 0, Machine.CBr, 0); // jump to next label if false
+	ast.C.visit(this, frame);
+	int endOfCaseAddr = nextInstrAddr;
+	emit(Machine.JUMPop, 0, Machine.CBr, 0);   // jump to end of case statement 
+	patch(jumpAddr, nextInstrAddr);
+	Set<Integer> jumps = (Set<Integer>) ast.CI.visit(this, frame);
+	jumps.add(endOfCaseAddr);
+	return jumps;
+  }
+  
+  public Object visitSingleCaseItem(SingleCaseItem ast, Object o) {
+	Frame frame = (Frame) o;
+
+	emit(Machine.LOADop, 1, Machine.STr, -1);
+	emit(Machine.LOADLop, 0, 0, Integer.parseInt(ast.IL.spelling));
+	emit(Machine.LOADLop, 0, 0, 1);
+	emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.eqDisplacement);
+	int jumpAddr = nextInstrAddr;
+	emit(Machine.JUMPIFop, 0, Machine.CBr, 0); // jump to next label if false
+	ast.C.visit(this, frame);
+	int endOfCaseAddr = nextInstrAddr;
+	emit(Machine.JUMPop, 0, Machine.CBr, 0);   // jump to end of case statement 
+	patch(jumpAddr, nextInstrAddr);
+	Set<Integer> jumps = new HashSet<Integer>();
+	jumps.add(endOfCaseAddr);
+	return jumps;
+  }
 
   // Expressions
   public Object visitArrayExpression(ArrayExpression ast, Object o) {
@@ -120,7 +253,6 @@ public final class Encoder implements Visitor {
 
   public Object visitCharacterExpression(CharacterExpression ast,
 						Object o) {
-    Frame frame = (Frame) o;
     Integer valSize = (Integer) ast.type.visit(this, null);
     emit(Machine.LOADLop, 0, 0, ast.CL.spelling.charAt(1));
     return valSize;
@@ -149,7 +281,6 @@ public final class Encoder implements Visitor {
   }
 
   public Object visitIntegerExpression(IntegerExpression ast, Object o) {
-    Frame frame = (Frame) o;
     Integer valSize = (Integer) ast.type.visit(this, null);
     emit(Machine.LOADLop, 0, 0, Integer.parseInt(ast.IL.spelling));
     return valSize;
@@ -620,7 +751,7 @@ public final class Encoder implements Visitor {
   public Object visitSubscriptVname(SubscriptVname ast, Object o) {
     Frame frame = (Frame) o;
     RuntimeEntity baseObject;
-    int elemSize, indexSize;
+    int elemSize;
 
     baseObject = (RuntimeEntity) ast.V.visit(this, frame);
     ast.offset = ast.V.offset;
@@ -633,7 +764,7 @@ public final class Encoder implements Visitor {
       // v-name is indexed by a proper expression, not a literal
       if (ast.indexed)
         frame.size = frame.size + Machine.integerSize;
-      indexSize = ((Integer) ast.E.visit(this, frame)).intValue();
+      ast.E.visit(this, frame);
       if (elemSize != 1) {
         emit(Machine.LOADLop, 0, 0, elemSize);
         emit(Machine.CALLop, Machine.SBr, Machine.PBr,
@@ -693,12 +824,6 @@ public final class Encoder implements Visitor {
   private final void elaborateStdEqRoutine (Declaration routineDeclaration,
                                           int routineOffset) {
     routineDeclaration.entity = new EqualityRoutine (Machine.closureSize, routineOffset);
-    writeTableDetails(routineDeclaration);
-  }
-
-  private final void elaborateStdRoutine (Declaration routineDeclaration,
-                                          int routineOffset) {
-    routineDeclaration.entity = new KnownRoutine (Machine.closureSize, 0, routineOffset);
     writeTableDetails(routineDeclaration);
   }
 

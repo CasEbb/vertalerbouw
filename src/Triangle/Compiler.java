@@ -68,11 +68,6 @@ public class Compiler {
         System.out.println("Syntactic Analysis ...");
         SourceFile source = new SourceFile(sourceName);
 
-        if (source == null) {
-            System.out.println("Can't access source file " + sourceName);
-            System.exit(1);
-        }
-
         scanner  = new Scanner(source);
         reporter = new ErrorReporter();
         parser   = new Parser(scanner, reporter);
@@ -83,14 +78,11 @@ public class Compiler {
         // scanner.enableDebugging();
         theAST = parser.parseProgram();				// 1st pass
         if (reporter.numErrors == 0) {
-            //if (showingAST) {
-            //    drawer.draw(theAST);
-            //}
+            if (showingAST) {
+                 drawer.draw(theAST);
+            }
             System.out.println ("Contextual Analysis ...");
             checker.check(theAST);				// 2nd pass
-            if (showingAST) {
-                drawer.draw(theAST);
-            }
             if (reporter.numErrors == 0) {
                 System.out.println("Code Generation ...");
                 encoder.encodeRun(theAST, showingTable);	// 3rd pass
@@ -114,7 +106,6 @@ public class Compiler {
      *                  the source filename.
      */
     public static void main(String[] args) {
-        boolean compiledOK;
 
         if (args.length != 1) {
             System.out.println("Usage: tc filename");
@@ -122,6 +113,6 @@ public class Compiler {
         }
 
         String sourceName = args[0];
-        compiledOK = compileProgram(sourceName, objectName, false, false);
+        compileProgram(sourceName, objectName, false, false);
     }
 }

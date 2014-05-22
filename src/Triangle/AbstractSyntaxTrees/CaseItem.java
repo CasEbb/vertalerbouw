@@ -1,5 +1,5 @@
 /*
- * @(#)SyntaxError.java                        2.0 1999/08/11
+ * @(#)FieldTypeDenoter.java                        2.0 1999/08/11
  *
  * Copyright (C) 1999 D.A. Watt and D.F. Brown
  * Dept. of Computing Science, University of Glasgow, Glasgow G12 8QQ Scotland
@@ -12,21 +12,15 @@
  * of the authors.
  */
 
-package Triangle.SyntacticAnalyzer;
+package Triangle.AbstractSyntaxTrees;
 
-class SyntaxError extends Exception {
+import Triangle.SyntacticAnalyzer.SourcePosition;
 
-  /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public abstract class CaseItem extends TypeDenoter {
 
-SyntaxError() {
-    super();
-  };
-
-  SyntaxError (String s) {
-    super(s);
+  public CaseItem(SourcePosition thePosition) {
+    super (thePosition);
   }
 
+  public abstract boolean equals (Object obj);
 }
