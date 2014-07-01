@@ -14,7 +14,7 @@
 
 package Triangle.ContextualAnalyzer;
 
-import Triangle.AbstractSyntaxTrees.Declaration;
+import Triangle.AbstractSyntaxTrees.*;
 
 public final class IdentificationTable {
 
@@ -89,13 +89,14 @@ public final class IdentificationTable {
 
     IdEntry entry;
     Declaration attr = null;
-    boolean searching = true;
+    boolean present = false, searching = true;
 
     entry = this.latest;
     while (searching) {
       if (entry == null)
         searching = false;
       else if (entry.id.equals(id)) {
+        present = true;
         searching = false;
         attr = entry.attr;
       } else

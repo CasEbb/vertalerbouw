@@ -14,6 +14,9 @@
 
 package Triangle.SyntacticAnalyzer;
 
+import Triangle.SyntacticAnalyzer.SourceFile;
+import Triangle.SyntacticAnalyzer.Token;
+import Triangle.ErrorReporter;
 
 public final class Scanner {
 

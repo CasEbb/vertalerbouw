@@ -29,11 +29,11 @@ final class Token extends Object {
       boolean searching = true;
 
       while (searching) {
-        boolean comparison = tokenTable[currentKind].equals(spelling);
-        if (comparison) {
+        int comparison = tokenTable[currentKind].compareTo(spelling);
+        if (comparison == 0) {
           this.kind = currentKind;
           searching = false;
-        } else if (currentKind == lastReservedWord) {
+        } else if (comparison > 0 || currentKind == lastReservedWord) {
           this.kind = Token.IDENTIFIER;
           searching = false;
         } else {
@@ -85,30 +85,26 @@ final class Token extends Object {
     TYPE		= 18,
     VAR			= 19,
     WHILE		= 20,
-	// repeat extension
-	REPEAT      = 21,
-	UNTIL       = 22,
-	CASE        = 23,
 
     // punctuation...
-    DOT			= 24,
-    COLON		= 25,
-    SEMICOLON	= 26,
-    COMMA		= 27,
-    BECOMES		= 28,
-    IS			= 29,
+    DOT			= 21,
+    COLON		= 22,
+    SEMICOLON		= 23,
+    COMMA		= 24,
+    BECOMES		= 25,
+    IS			= 26,
 
     // brackets...
-    LPAREN		= 30,
-    RPAREN		= 31,
-    LBRACKET	= 32,
-    RBRACKET	= 33,
-    LCURLY		= 34,
-    RCURLY		= 35,
+    LPAREN		= 27,
+    RPAREN		= 28,
+    LBRACKET		= 29,
+    RBRACKET		= 30,
+    LCURLY		= 31,
+    RCURLY		= 32,
 
     // special tokens...
-    EOT			= 36,
-    ERROR		= 37;
+    EOT			= 33,
+    ERROR		= 34;
 
   private static String[] tokenTable = new String[] {
     "<int>",
@@ -132,9 +128,6 @@ final class Token extends Object {
     "type",
     "var",
     "while",
-    "repeat",
-    "until",
-    "case",
     ".",
     ":",
     ";",
@@ -152,6 +145,6 @@ final class Token extends Object {
   };
 
   private final static int	firstReservedWord = Token.ARRAY,
-  				lastReservedWord  = Token.CASE;
+  				lastReservedWord  = Token.WHILE;
 
 }

@@ -16,12 +16,7 @@ package Triangle.SyntacticAnalyzer;
 
 class SyntaxError extends Exception {
 
-  /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-SyntaxError() {
+  SyntaxError() {
     super();
   };
 

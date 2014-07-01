@@ -14,11 +14,9 @@
 
 package Triangle.TreeDrawer;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Point;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 import Triangle.AbstractSyntaxTrees.Program;
 
@@ -32,8 +30,7 @@ public class Drawer {
 
   // Draw the AST representing a complete program.
 
-  @SuppressWarnings("deprecation")
-public void draw(Program ast) {
+  public void draw(Program ast) {
     theAST = ast;
     panel = new DrawerPanel(this);
     frame = new DrawerFrame(panel);
