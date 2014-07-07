@@ -22,22 +22,36 @@ import org.antlr.stringtemplate.StringTemplateGroup;
 
 import TAM.Assembler;
 
+/**
+ * Het hoofdprogramma van de Høken compiler. Is uitvoerbaar.
+ * 
+ */
 public class Compiler {
 
+	/** Enumeratie van de mogelijke uitvoertypen van de compiler. **/
 	enum Target {
 		TAM, JVM, DOT
 	};
 
-	public static final String version = "0.1";
-
+	/** Huidig geselecteerde uitvoer. **/
 	private Target target = Target.TAM;
+	/** Geeft aan of er uitgebreide uitvoer moet plaatsvinden. **/
 	private boolean verbose = true;
+	/** Het bestand met de broncode. **/
 	private ANTLRFileStream infile;
 
+	/**
+	 * Maakt een nieuwe instantie van <code>Compiler</code> aan met de opgegeven
+	 * argumenten en verwerkt deze.
+	 **/
 	public Compiler(String[] args) {
 		processArgs(args);
 	}
 
+	/**
+	 * Zet de boel in werking en doorloopt het compilatieproces op basis van de
+	 * meegegeven argumenten.
+	 */
 	public void run() {
 		try {
 			long startTime = System.currentTimeMillis();
@@ -94,6 +108,13 @@ public class Compiler {
 		System.exit(0);
 	}
 
+	/**
+	 * Bepaalt op basis van het meegegeven foutaantal of de compilatie gestopt
+	 * moet worden.
+	 * 
+	 * @param errorCount
+	 *            het aantal fouten van de afgelopen fase
+	 */
 	private void haltOnErrors(int errorCount) {
 		if (errorCount > 0) {
 			System.err.println("===> Totaal aantal fouten: " + errorCount);
@@ -101,9 +122,15 @@ public class Compiler {
 		}
 	}
 
+	/**
+	 * Interpreteert de argumenten meegegeven aan de compiler.
+	 * 
+	 * @param args
+	 *            de argumenten
+	 */
 	private void processArgs(String[] args) {
 		if (args == null || args.length == 0) {
-			System.err.println("Høken - versie " + version);
+			System.err.println("Høken ");
 			System.err
 					.println("Gebruik: java hoken.Compiler [opties] hoken.hk");
 			System.err.println("  -silent");
@@ -151,12 +178,26 @@ public class Compiler {
 		}
 	}
 
+	/**
+	 * Drukt een bericht af op basis van de keuze voor uitgebereide
+	 * berichtgeving.
+	 * 
+	 * @param msg
+	 *            het bericht
+	 */
 	private void print(String msg) {
 		if (verbose) {
 			System.err.println(msg);
 		}
 	}
 
+	/**
+	 * Maakt een nieuwe instantie van <code>Compiler</code> en zet de boel in
+	 * werking.
+	 * 
+	 * @param args
+	 *            command-line argumenten
+	 */
 	public static void main(String[] args) {
 		Compiler compiler = new Compiler(args);
 		compiler.run();
