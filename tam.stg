@@ -1,0 +1,99 @@
+
+group tam;
+
+program(instructions) ::= <<
+<instructions; separator="\n">
+HALT                                    ; end of program
+>>
+
+declaration(size) ::= <<
+PUSH        <size>
+>>
+
+constant(size, addrs, val) ::= <<
+PUSH        <size>
+<addrs:{<val>
+STORE(1)    <it>[SB]}; separator="\n">
+>>
+
+addexpr(x, y) ::= <<
+<if(y)><x>
+<y>
+CALL        add
+<else><x>
+<endif>
+>>
+
+subexpr(x, y) ::= <<
+<if(y)><x>
+<y>
+CALL        sub
+<else><x>
+CALL        neg
+<endif>
+>>
+
+notexpr(x) ::= <<
+<x>
+CALL        not
+>>
+
+compound(instructions, numPop, popResult) ::= <<
+<instructions; separator="\n">
+POP(<popResult>)      <numPop>
+>>
+
+binexpr(x, y, instr, noReturn) ::= <<
+<x>
+<y>
+CALL        <instr>
+<if(noReturn)>POP(0)      1
+<endif>
+>>
+
+ifexpr(x, y, instr) ::= <<
+<x>
+<y>
+LOADL       1
+CALL        <instr>
+<if(noReturn)>POP(0)      1
+<endif>
+>>
+
+assign(expr, addr, noReturn) ::= <<
+<expr>
+STORE(1)    <addr>[SB]
+<if(!noReturn)>
+LOAD(1)     <addr>[SB]<endif>
+>>
+
+write(writes, noReturn) ::= <<
+<writes:{<it.attr>
+<if(it.character)>
+CALL        put
+
+<else>
+CALL        putint
+
+<endif>
+}>CALL        puteol
+<if(!noReturn)><last(writes).attr>
+<endif>
+>>
+
+read(reads, noReturn) ::= <<
+<reads:{LOADA       <it.attr>[SB]
+<if(it.character)>CALL        get
+<else>CALL        getint
+<endif>}; separator="\n">
+<if(!noReturn)>LOAD(1)     <last(reads).attr>[SB]
+<endif>
+>>
+
+load(addr) ::= <<
+LOAD(1)     <addr>[SB]
+>>
+
+integer(val) ::= <<
+LOADL       <val>
+>>

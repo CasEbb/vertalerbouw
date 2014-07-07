@@ -10,7 +10,6 @@ options {
 tokens {
     // hulptokens
     SEMICOLON = ';';
-    COLON = ':';
     ASSIGN = ':=';
     EQUALS = '=';
     LPAREN = '(';
@@ -71,7 +70,6 @@ public int getErrorCount() {
     return this.errors;
 }
 
-@Override
 public void displayRecognitionError(String[] tokenNames, RecognitionException e)
 {
     this.errors++;
@@ -79,6 +77,9 @@ public void displayRecognitionError(String[] tokenNames, RecognitionException e)
 }
 }
 
+//=========================
+//  PRODUCTIEREGELS
+//=========================
 program
     :   statements EOF
         -> ^(PROGRAM statements)
@@ -97,13 +98,6 @@ decl:   type id_list
         -> ^(VAR<DeclarationNode> type id_list)
     |   CONST<DeclarationNode>^ type id_list EQUALS! value
     ;
-    
-expr:   assignment_expr
-    ;
-
-assignment_expr
-    :   logical_or_expr (ASSIGN^ assignment_expr)?
-    ;
 
 read_stat
     :   READ^ LPAREN! id_list RPAREN!
@@ -116,6 +110,13 @@ write_stat
 compound_stat
     :   LCURLY statements RCURLY
         -> ^(COMPOUND statements)
+    ;
+
+expr:   assignment_expr
+    ;
+
+assignment_expr
+    :   logical_or_expr (ASSIGN^ expr)?
     ;
 
 logical_or_expr
@@ -201,7 +202,7 @@ type:   INTEGER
 ID  :   (LETTER|UNDERSCORE) (LETTER|DIGIT|UNDERSCORE)*
     ;
 
-INT :	  DIGIT+
+INT :   DIGIT+
     ;
 
 CHAR:  '\'' LETTER '\''
@@ -215,8 +216,8 @@ bool:   TRUE
 //  COMMENTAAR/WITRUIMTE
 //=========================
 COMMENT
-    :   '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;}
-    |   '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}
+    :   'dunoffel!' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;}
+    |   'hennigan!' ( options {greedy=false;} : . )* 'deurgoan!' {$channel=HIDDEN;}
     ;
 
 WS  :   ( ' '

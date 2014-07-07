@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 src\\hoken\\generator\\HokenGenerator.g 2014-07-07 18:57:04
+// $ANTLR 3.5.2 src\\hoken\\generator\\HokenGenerator.g 2014-07-08 00:07:37
 
 package hoken.generator;
 import hoken.ast.*;
@@ -17,11 +17,11 @@ import java.util.HashMap;
 public class HokenGenerator extends TreeParser {
 	public static final String[] tokenNames = new String[] {
 		"<invalid>", "<EOR>", "<DOWN>", "<UP>", "AND", "ASSIGN", "BOOLEAN", "CHAR", 
-		"CHARACTER", "COLON", "COMMA", "COMMENT", "COMPOUND", "CONST", "DIGIT", 
-		"DIVIDE", "EQ", "EQUALS", "FALSE", "GT", "GTE", "ID", "INT", "INTEGER", 
-		"LCURLY", "LETTER", "LPAREN", "LT", "LTE", "MINUS", "MODULO", "NEQ", "NOT", 
-		"OR", "PLUS", "PROGRAM", "RCURLY", "READ", "RPAREN", "SEMICOLON", "TIMES", 
-		"TRUE", "UNDERSCORE", "VAR", "WRITE", "WS"
+		"CHARACTER", "COMMA", "COMMENT", "COMPOUND", "CONST", "DIGIT", "DIVIDE", 
+		"EQ", "EQUALS", "FALSE", "GT", "GTE", "ID", "INT", "INTEGER", "LCURLY", 
+		"LETTER", "LPAREN", "LT", "LTE", "MINUS", "MODULO", "NEQ", "NOT", "OR", 
+		"PLUS", "PROGRAM", "RCURLY", "READ", "RPAREN", "SEMICOLON", "TIMES", "TRUE", 
+		"UNDERSCORE", "VAR", "WRITE", "WS"
 	};
 	public static final int EOF=-1;
 	public static final int AND=4;
@@ -29,43 +29,42 @@ public class HokenGenerator extends TreeParser {
 	public static final int BOOLEAN=6;
 	public static final int CHAR=7;
 	public static final int CHARACTER=8;
-	public static final int COLON=9;
-	public static final int COMMA=10;
-	public static final int COMMENT=11;
-	public static final int COMPOUND=12;
-	public static final int CONST=13;
-	public static final int DIGIT=14;
-	public static final int DIVIDE=15;
-	public static final int EQ=16;
-	public static final int EQUALS=17;
-	public static final int FALSE=18;
-	public static final int GT=19;
-	public static final int GTE=20;
-	public static final int ID=21;
-	public static final int INT=22;
-	public static final int INTEGER=23;
-	public static final int LCURLY=24;
-	public static final int LETTER=25;
-	public static final int LPAREN=26;
-	public static final int LT=27;
-	public static final int LTE=28;
-	public static final int MINUS=29;
-	public static final int MODULO=30;
-	public static final int NEQ=31;
-	public static final int NOT=32;
-	public static final int OR=33;
-	public static final int PLUS=34;
-	public static final int PROGRAM=35;
-	public static final int RCURLY=36;
-	public static final int READ=37;
-	public static final int RPAREN=38;
-	public static final int SEMICOLON=39;
-	public static final int TIMES=40;
-	public static final int TRUE=41;
-	public static final int UNDERSCORE=42;
-	public static final int VAR=43;
-	public static final int WRITE=44;
-	public static final int WS=45;
+	public static final int COMMA=9;
+	public static final int COMMENT=10;
+	public static final int COMPOUND=11;
+	public static final int CONST=12;
+	public static final int DIGIT=13;
+	public static final int DIVIDE=14;
+	public static final int EQ=15;
+	public static final int EQUALS=16;
+	public static final int FALSE=17;
+	public static final int GT=18;
+	public static final int GTE=19;
+	public static final int ID=20;
+	public static final int INT=21;
+	public static final int INTEGER=22;
+	public static final int LCURLY=23;
+	public static final int LETTER=24;
+	public static final int LPAREN=25;
+	public static final int LT=26;
+	public static final int LTE=27;
+	public static final int MINUS=28;
+	public static final int MODULO=29;
+	public static final int NEQ=30;
+	public static final int NOT=31;
+	public static final int OR=32;
+	public static final int PLUS=33;
+	public static final int PROGRAM=34;
+	public static final int RCURLY=35;
+	public static final int READ=36;
+	public static final int RPAREN=37;
+	public static final int SEMICOLON=38;
+	public static final int TIMES=39;
+	public static final int TRUE=40;
+	public static final int UNDERSCORE=41;
+	public static final int VAR=42;
+	public static final int WRITE=43;
+	public static final int WS=44;
 
 	// delegates
 	public TreeParser[] getDelegates() {
@@ -110,15 +109,15 @@ public class HokenGenerator extends TreeParser {
 	private Stack<Integer> popCounter = new Stack<Integer>();
 
 	class IOInstruction {
-		public Object attr;
-		public Type type;
-		IOInstruction(Object attr, Type type) {
-			this.attr = attr;
-			this.type = type;
-		}
-		public boolean isCharacter() { return this.type == Type.CHARACTER; }
-		public boolean isInteger()   { return this.type == Type.INTEGER;   }
-		public boolean isBoolean()   { return this.type == Type.BOOLEAN;   }
+	    public Object attr;
+	    public Type type;
+	    IOInstruction(Object attr, Type type) {
+	        this.attr = attr;
+	        this.type = type;
+	    }
+	    public boolean isCharacter() { return this.type == Type.CHARACTER; }
+	    public boolean isInteger()   { return this.type == Type.INTEGER;   }
+	    public boolean isBoolean()   { return this.type == Type.BOOLEAN;   }
 	}
 
 
@@ -175,7 +174,7 @@ public class HokenGenerator extends TreeParser {
 			}
 
 			// TEMPLATE REWRITE
-			// 35:11: -> program(instructions=$statements)
+			// 35:13: -> program(instructions=$statements)
 			{
 				retval.st = templateLib.getInstanceOf("program",new STAttrMap().put("instructions", list_statements));
 			}
@@ -266,7 +265,7 @@ public class HokenGenerator extends TreeParser {
 				case 1 :
 					// src\\hoken\\generator\\HokenGenerator.g:39:9: ^(declaration= VAR ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ )
 					{
-					declaration=(HokenNode)match(input,VAR,FOLLOW_VAR_in_statement121); 
+					declaration=(HokenNode)match(input,VAR,FOLLOW_VAR_in_statement123); 
 					match(input, Token.DOWN, null); 
 					// src\\hoken\\generator\\HokenGenerator.g:39:27: ( INTEGER | CHARACTER | BOOLEAN )
 					int alt2=3;
@@ -295,19 +294,19 @@ public class HokenGenerator extends TreeParser {
 						case 1 :
 							// src\\hoken\\generator\\HokenGenerator.g:39:28: INTEGER
 							{
-							match(input,INTEGER,FOLLOW_INTEGER_in_statement124); 
+							match(input,INTEGER,FOLLOW_INTEGER_in_statement126); 
 							}
 							break;
 						case 2 :
 							// src\\hoken\\generator\\HokenGenerator.g:39:36: CHARACTER
 							{
-							match(input,CHARACTER,FOLLOW_CHARACTER_in_statement126); 
+							match(input,CHARACTER,FOLLOW_CHARACTER_in_statement128); 
 							}
 							break;
 						case 3 :
 							// src\\hoken\\generator\\HokenGenerator.g:39:46: BOOLEAN
 							{
-							match(input,BOOLEAN,FOLLOW_BOOLEAN_in_statement128); 
+							match(input,BOOLEAN,FOLLOW_BOOLEAN_in_statement130); 
 							}
 							break;
 
@@ -327,7 +326,7 @@ public class HokenGenerator extends TreeParser {
 						case 1 :
 							// src\\hoken\\generator\\HokenGenerator.g:39:56: ids+= ID
 							{
-							ids=(HokenNode)match(input,ID,FOLLOW_ID_in_statement134); 
+							ids=(HokenNode)match(input,ID,FOLLOW_ID_in_statement136); 
 							if (list_ids==null) list_ids=new ArrayList<Object>();
 							list_ids.add(ids);
 							}
@@ -344,12 +343,12 @@ public class HokenGenerator extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					              ((DeclarationNode)declaration).address = this.nextAddr;
-					              this.nextAddr     += list_ids.size();
-					              this.scopeCounter += list_ids.size();
-					          
+					                ((DeclarationNode)declaration).address = this.nextAddr;
+					                this.nextAddr     += list_ids.size();
+					                this.scopeCounter += list_ids.size();
+					            
 					// TEMPLATE REWRITE
-					// 45:11: -> declaration(size=$ids.size())
+					// 45:13: -> declaration(size=$ids.size())
 					{
 						retval.st = templateLib.getInstanceOf("declaration",new STAttrMap().put("size", list_ids.size()));
 					}
@@ -361,7 +360,7 @@ public class HokenGenerator extends TreeParser {
 				case 2 :
 					// src\\hoken\\generator\\HokenGenerator.g:46:9: ^(declaration= CONST ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ val= operand )
 					{
-					declaration=(HokenNode)match(input,CONST,FOLLOW_CONST_in_statement181); 
+					declaration=(HokenNode)match(input,CONST,FOLLOW_CONST_in_statement187); 
 					match(input, Token.DOWN, null); 
 					// src\\hoken\\generator\\HokenGenerator.g:46:29: ( INTEGER | CHARACTER | BOOLEAN )
 					int alt4=3;
@@ -390,19 +389,19 @@ public class HokenGenerator extends TreeParser {
 						case 1 :
 							// src\\hoken\\generator\\HokenGenerator.g:46:30: INTEGER
 							{
-							match(input,INTEGER,FOLLOW_INTEGER_in_statement184); 
+							match(input,INTEGER,FOLLOW_INTEGER_in_statement190); 
 							}
 							break;
 						case 2 :
 							// src\\hoken\\generator\\HokenGenerator.g:46:38: CHARACTER
 							{
-							match(input,CHARACTER,FOLLOW_CHARACTER_in_statement186); 
+							match(input,CHARACTER,FOLLOW_CHARACTER_in_statement192); 
 							}
 							break;
 						case 3 :
 							// src\\hoken\\generator\\HokenGenerator.g:46:48: BOOLEAN
 							{
-							match(input,BOOLEAN,FOLLOW_BOOLEAN_in_statement188); 
+							match(input,BOOLEAN,FOLLOW_BOOLEAN_in_statement194); 
 							}
 							break;
 
@@ -426,7 +425,7 @@ public class HokenGenerator extends TreeParser {
 						case 1 :
 							// src\\hoken\\generator\\HokenGenerator.g:46:58: ids+= ID
 							{
-							ids=(HokenNode)match(input,ID,FOLLOW_ID_in_statement194); 
+							ids=(HokenNode)match(input,ID,FOLLOW_ID_in_statement200); 
 							if (list_ids==null) list_ids=new ArrayList<Object>();
 							list_ids.add(ids);
 							}
@@ -440,23 +439,23 @@ public class HokenGenerator extends TreeParser {
 						cnt5++;
 					}
 
-					pushFollow(FOLLOW_operand_in_statement200);
+					pushFollow(FOLLOW_operand_in_statement206);
 					val=operand();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 
-					              ((DeclarationNode)declaration).address = this.nextAddr;
-					              this.nextAddr     += list_ids.size();
-					              this.scopeCounter += list_ids.size();
-					              
-					              List<Integer> addrs = new ArrayList<Integer>();
-					              for(int i = 0; i < list_ids.size(); i++)
-					                  addrs.add(((DeclarationNode)declaration).address + i);
-					          
+					                ((DeclarationNode)declaration).address = this.nextAddr;
+					                this.nextAddr     += list_ids.size();
+					                this.scopeCounter += list_ids.size();
+
+					                List<Integer> addrs = new ArrayList<Integer>();
+					                for(int i = 0; i < list_ids.size(); i++)
+					                    addrs.add(((DeclarationNode)declaration).address + i);
+					            
 					// TEMPLATE REWRITE
-					// 56:11: -> constant(size=$ids.size()addrs=addrsval=val)
+					// 56:13: -> constant(size=$ids.size()addrs=addrsval=val)
 					{
 						retval.st = templateLib.getInstanceOf("constant",new STAttrMap().put("size", list_ids.size()).put("addrs", addrs).put("val", val));
 					}
@@ -468,7 +467,7 @@ public class HokenGenerator extends TreeParser {
 				case 3 :
 					// src\\hoken\\generator\\HokenGenerator.g:57:9: expr
 					{
-					pushFollow(FOLLOW_expr_in_statement252);
+					pushFollow(FOLLOW_expr_in_statement262);
 					expr1=expr();
 					state._fsp--;
 
@@ -631,9 +630,9 @@ public class HokenGenerator extends TreeParser {
 				case 1 :
 					// src\\hoken\\generator\\HokenGenerator.g:60:9: ^( PLUS x= expr (y= expr )? )
 					{
-					match(input,PLUS,FOLLOW_PLUS_in_expr269); 
+					match(input,PLUS,FOLLOW_PLUS_in_expr279); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr273);
+					pushFollow(FOLLOW_expr_in_expr283);
 					x=expr();
 					state._fsp--;
 
@@ -647,7 +646,7 @@ public class HokenGenerator extends TreeParser {
 						case 1 :
 							// src\\hoken\\generator\\HokenGenerator.g:60:24: y= expr
 							{
-							pushFollow(FOLLOW_expr_in_expr277);
+							pushFollow(FOLLOW_expr_in_expr287);
 							y=expr();
 							state._fsp--;
 
@@ -671,9 +670,9 @@ public class HokenGenerator extends TreeParser {
 				case 2 :
 					// src\\hoken\\generator\\HokenGenerator.g:62:9: ^( MINUS x= expr (y= expr )? )
 					{
-					match(input,MINUS,FOLLOW_MINUS_in_expr316); 
+					match(input,MINUS,FOLLOW_MINUS_in_expr326); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr320);
+					pushFollow(FOLLOW_expr_in_expr330);
 					x=expr();
 					state._fsp--;
 
@@ -687,7 +686,7 @@ public class HokenGenerator extends TreeParser {
 						case 1 :
 							// src\\hoken\\generator\\HokenGenerator.g:62:25: y= expr
 							{
-							pushFollow(FOLLOW_expr_in_expr324);
+							pushFollow(FOLLOW_expr_in_expr334);
 							y=expr();
 							state._fsp--;
 
@@ -711,9 +710,9 @@ public class HokenGenerator extends TreeParser {
 				case 3 :
 					// src\\hoken\\generator\\HokenGenerator.g:64:9: ^( NOT x= expr )
 					{
-					match(input,NOT,FOLLOW_NOT_in_expr363); 
+					match(input,NOT,FOLLOW_NOT_in_expr373); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr367);
+					pushFollow(FOLLOW_expr_in_expr377);
 					x=expr();
 					state._fsp--;
 
@@ -732,13 +731,13 @@ public class HokenGenerator extends TreeParser {
 				case 4 :
 					// src\\hoken\\generator\\HokenGenerator.g:66:9: ^( TIMES x= expr y= expr )
 					{
-					match(input,TIMES,FOLLOW_TIMES_in_expr398); 
+					match(input,TIMES,FOLLOW_TIMES_in_expr408); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr402);
+					pushFollow(FOLLOW_expr_in_expr412);
 					x=expr();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expr_in_expr406);
+					pushFollow(FOLLOW_expr_in_expr416);
 					y=expr();
 					state._fsp--;
 
@@ -757,13 +756,13 @@ public class HokenGenerator extends TreeParser {
 				case 5 :
 					// src\\hoken\\generator\\HokenGenerator.g:68:9: ^( DIVIDE x= expr y= expr )
 					{
-					match(input,DIVIDE,FOLLOW_DIVIDE_in_expr447); 
+					match(input,DIVIDE,FOLLOW_DIVIDE_in_expr457); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr451);
+					pushFollow(FOLLOW_expr_in_expr461);
 					x=expr();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expr_in_expr455);
+					pushFollow(FOLLOW_expr_in_expr465);
 					y=expr();
 					state._fsp--;
 
@@ -782,13 +781,13 @@ public class HokenGenerator extends TreeParser {
 				case 6 :
 					// src\\hoken\\generator\\HokenGenerator.g:70:9: ^( MODULO x= expr y= expr )
 					{
-					match(input,MODULO,FOLLOW_MODULO_in_expr496); 
+					match(input,MODULO,FOLLOW_MODULO_in_expr506); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr500);
+					pushFollow(FOLLOW_expr_in_expr510);
 					x=expr();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expr_in_expr504);
+					pushFollow(FOLLOW_expr_in_expr514);
 					y=expr();
 					state._fsp--;
 
@@ -807,7 +806,7 @@ public class HokenGenerator extends TreeParser {
 				case 7 :
 					// src\\hoken\\generator\\HokenGenerator.g:72:9: ^(compound= COMPOUND (statements+= statement )* )
 					{
-					compound=(HokenNode)match(input,COMPOUND,FOLLOW_COMPOUND_in_expr547); 
+					compound=(HokenNode)match(input,COMPOUND,FOLLOW_COMPOUND_in_expr557); 
 
 					              this.popCounter.push(this.scopeCounter);
 					              this.scopeCounter = 0;
@@ -827,7 +826,7 @@ public class HokenGenerator extends TreeParser {
 							case 1 :
 								// src\\hoken\\generator\\HokenGenerator.g:77:12: statements+= statement
 								{
-								pushFollow(FOLLOW_statement_in_expr574);
+								pushFollow(FOLLOW_statement_in_expr584);
 								statements=statement();
 								state._fsp--;
 
@@ -863,13 +862,13 @@ public class HokenGenerator extends TreeParser {
 				case 8 :
 					// src\\hoken\\generator\\HokenGenerator.g:85:9: ^(op= AND x= expr y= expr )
 					{
-					op=(HokenNode)match(input,AND,FOLLOW_AND_in_expr631); 
+					op=(HokenNode)match(input,AND,FOLLOW_AND_in_expr641); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr635);
+					pushFollow(FOLLOW_expr_in_expr645);
 					x=expr();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expr_in_expr639);
+					pushFollow(FOLLOW_expr_in_expr649);
 					y=expr();
 					state._fsp--;
 
@@ -888,13 +887,13 @@ public class HokenGenerator extends TreeParser {
 				case 9 :
 					// src\\hoken\\generator\\HokenGenerator.g:87:9: ^( OR x= expr y= expr )
 					{
-					match(input,OR,FOLLOW_OR_in_expr685); 
+					match(input,OR,FOLLOW_OR_in_expr695); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr689);
+					pushFollow(FOLLOW_expr_in_expr699);
 					x=expr();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expr_in_expr693);
+					pushFollow(FOLLOW_expr_in_expr703);
 					y=expr();
 					state._fsp--;
 
@@ -913,13 +912,13 @@ public class HokenGenerator extends TreeParser {
 				case 10 :
 					// src\\hoken\\generator\\HokenGenerator.g:89:9: ^( LT x= expr y= expr )
 					{
-					match(input,LT,FOLLOW_LT_in_expr734); 
+					match(input,LT,FOLLOW_LT_in_expr744); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr738);
+					pushFollow(FOLLOW_expr_in_expr748);
 					x=expr();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expr_in_expr742);
+					pushFollow(FOLLOW_expr_in_expr752);
 					y=expr();
 					state._fsp--;
 
@@ -938,13 +937,13 @@ public class HokenGenerator extends TreeParser {
 				case 11 :
 					// src\\hoken\\generator\\HokenGenerator.g:91:9: ^( LTE x= expr y= expr )
 					{
-					match(input,LTE,FOLLOW_LTE_in_expr783); 
+					match(input,LTE,FOLLOW_LTE_in_expr793); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr787);
+					pushFollow(FOLLOW_expr_in_expr797);
 					x=expr();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expr_in_expr791);
+					pushFollow(FOLLOW_expr_in_expr801);
 					y=expr();
 					state._fsp--;
 
@@ -963,13 +962,13 @@ public class HokenGenerator extends TreeParser {
 				case 12 :
 					// src\\hoken\\generator\\HokenGenerator.g:93:9: ^( GT x= expr y= expr )
 					{
-					match(input,GT,FOLLOW_GT_in_expr832); 
+					match(input,GT,FOLLOW_GT_in_expr842); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr836);
+					pushFollow(FOLLOW_expr_in_expr846);
 					x=expr();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expr_in_expr840);
+					pushFollow(FOLLOW_expr_in_expr850);
 					y=expr();
 					state._fsp--;
 
@@ -988,13 +987,13 @@ public class HokenGenerator extends TreeParser {
 				case 13 :
 					// src\\hoken\\generator\\HokenGenerator.g:95:9: ^( GTE x= expr y= expr )
 					{
-					match(input,GTE,FOLLOW_GTE_in_expr881); 
+					match(input,GTE,FOLLOW_GTE_in_expr891); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr885);
+					pushFollow(FOLLOW_expr_in_expr895);
 					x=expr();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expr_in_expr889);
+					pushFollow(FOLLOW_expr_in_expr899);
 					y=expr();
 					state._fsp--;
 
@@ -1013,13 +1012,13 @@ public class HokenGenerator extends TreeParser {
 				case 14 :
 					// src\\hoken\\generator\\HokenGenerator.g:97:9: ^( EQ x= expr y= expr )
 					{
-					match(input,EQ,FOLLOW_EQ_in_expr930); 
+					match(input,EQ,FOLLOW_EQ_in_expr940); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr934);
+					pushFollow(FOLLOW_expr_in_expr944);
 					x=expr();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expr_in_expr938);
+					pushFollow(FOLLOW_expr_in_expr948);
 					y=expr();
 					state._fsp--;
 
@@ -1038,13 +1037,13 @@ public class HokenGenerator extends TreeParser {
 				case 15 :
 					// src\\hoken\\generator\\HokenGenerator.g:99:9: ^( NEQ x= expr y= expr )
 					{
-					match(input,NEQ,FOLLOW_NEQ_in_expr979); 
+					match(input,NEQ,FOLLOW_NEQ_in_expr989); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr983);
+					pushFollow(FOLLOW_expr_in_expr993);
 					x=expr();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expr_in_expr987);
+					pushFollow(FOLLOW_expr_in_expr997);
 					y=expr();
 					state._fsp--;
 
@@ -1063,10 +1062,10 @@ public class HokenGenerator extends TreeParser {
 				case 16 :
 					// src\\hoken\\generator\\HokenGenerator.g:101:9: ^(assign= ASSIGN id= ID e= expr )
 					{
-					assign=(HokenNode)match(input,ASSIGN,FOLLOW_ASSIGN_in_expr1030); 
+					assign=(HokenNode)match(input,ASSIGN,FOLLOW_ASSIGN_in_expr1040); 
 					match(input, Token.DOWN, null); 
-					id=(HokenNode)match(input,ID,FOLLOW_ID_in_expr1034); 
-					pushFollow(FOLLOW_expr_in_expr1038);
+					id=(HokenNode)match(input,ID,FOLLOW_ID_in_expr1044); 
+					pushFollow(FOLLOW_expr_in_expr1048);
 					e=expr();
 					state._fsp--;
 
@@ -1085,7 +1084,7 @@ public class HokenGenerator extends TreeParser {
 				case 17 :
 					// src\\hoken\\generator\\HokenGenerator.g:103:9: ^(write= WRITE (exprs+= expr )+ )
 					{
-					write=(HokenNode)match(input,WRITE,FOLLOW_WRITE_in_expr1081); 
+					write=(HokenNode)match(input,WRITE,FOLLOW_WRITE_in_expr1091); 
 					match(input, Token.DOWN, null); 
 					// src\\hoken\\generator\\HokenGenerator.g:103:23: (exprs+= expr )+
 					int cnt10=0;
@@ -1101,7 +1100,7 @@ public class HokenGenerator extends TreeParser {
 						case 1 :
 							// src\\hoken\\generator\\HokenGenerator.g:103:24: exprs+= expr
 							{
-							pushFollow(FOLLOW_expr_in_expr1086);
+							pushFollow(FOLLOW_expr_in_expr1096);
 							exprs=expr();
 							state._fsp--;
 
@@ -1121,12 +1120,12 @@ public class HokenGenerator extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					    		List<IOInstruction> writes = new ArrayList<IOInstruction>();
-					    		for(Object child : write.getChildren()) {
-					    			HokenNode expr = (HokenNode)child;
-					    			writes.add(new IOInstruction(list_exprs.get(expr.childIndex), expr.type));
-					    		}  
-					    	
+					        List<IOInstruction> writes = new ArrayList<IOInstruction>();
+					        for(Object child : write.getChildren()) {
+					          HokenNode expr = (HokenNode)child;
+					          writes.add(new IOInstruction(list_exprs.get(expr.childIndex), expr.type));
+					        }  
+					      
 					// TEMPLATE REWRITE
 					// 111:11: -> write(writes=writesnoReturn=write.shouldNotReturn())
 					{
@@ -1140,7 +1139,7 @@ public class HokenGenerator extends TreeParser {
 				case 18 :
 					// src\\hoken\\generator\\HokenGenerator.g:112:9: ^(read= READ (ids+= ID )+ )
 					{
-					read=(HokenNode)match(input,READ,FOLLOW_READ_in_expr1133); 
+					read=(HokenNode)match(input,READ,FOLLOW_READ_in_expr1144); 
 					match(input, Token.DOWN, null); 
 					// src\\hoken\\generator\\HokenGenerator.g:112:21: (ids+= ID )+
 					int cnt11=0;
@@ -1156,7 +1155,7 @@ public class HokenGenerator extends TreeParser {
 						case 1 :
 							// src\\hoken\\generator\\HokenGenerator.g:112:22: ids+= ID
 							{
-							ids=(HokenNode)match(input,ID,FOLLOW_ID_in_expr1138); 
+							ids=(HokenNode)match(input,ID,FOLLOW_ID_in_expr1149); 
 							if (list_ids==null) list_ids=new ArrayList<Object>();
 							list_ids.add(ids);
 							}
@@ -1192,7 +1191,7 @@ public class HokenGenerator extends TreeParser {
 				case 19 :
 					// src\\hoken\\generator\\HokenGenerator.g:121:9: operand
 					{
-					pushFollow(FOLLOW_operand_in_expr1185);
+					pushFollow(FOLLOW_operand_in_expr1196);
 					operand2=operand();
 					state._fsp--;
 
@@ -1269,7 +1268,7 @@ public class HokenGenerator extends TreeParser {
 				case 1 :
 					// src\\hoken\\generator\\HokenGenerator.g:125:9: id= ID
 					{
-					id=(HokenNode)match(input,ID,FOLLOW_ID_in_operand1212); 
+					id=(HokenNode)match(input,ID,FOLLOW_ID_in_operand1223); 
 					IdNode I = (IdNode)id;
 					// TEMPLATE REWRITE
 					// 127:11: -> load(addr=((IdNode)$id).declaration.getOffsettedAddress(I))
@@ -1284,7 +1283,7 @@ public class HokenGenerator extends TreeParser {
 				case 2 :
 					// src\\hoken\\generator\\HokenGenerator.g:128:9: intval= INT
 					{
-					intval=(HokenNode)match(input,INT,FOLLOW_INT_in_operand1252); 
+					intval=(HokenNode)match(input,INT,FOLLOW_INT_in_operand1264); 
 					// TEMPLATE REWRITE
 					// 129:11: -> integer(val=$intval.text)
 					{
@@ -1298,7 +1297,7 @@ public class HokenGenerator extends TreeParser {
 				case 3 :
 					// src\\hoken\\generator\\HokenGenerator.g:130:9: charval= CHAR
 					{
-					charval=(HokenNode)match(input,CHAR,FOLLOW_CHAR_in_operand1283); 
+					charval=(HokenNode)match(input,CHAR,FOLLOW_CHAR_in_operand1295); 
 					// TEMPLATE REWRITE
 					// 131:11: -> integer(val=(int)$charval.text.charAt(1))
 					{
@@ -1312,7 +1311,7 @@ public class HokenGenerator extends TreeParser {
 				case 4 :
 					// src\\hoken\\generator\\HokenGenerator.g:132:9: TRUE
 					{
-					match(input,TRUE,FOLLOW_TRUE_in_operand1312); 
+					match(input,TRUE,FOLLOW_TRUE_in_operand1324); 
 					// TEMPLATE REWRITE
 					// 133:11: -> integer(val=1)
 					{
@@ -1326,7 +1325,7 @@ public class HokenGenerator extends TreeParser {
 				case 5 :
 					// src\\hoken\\generator\\HokenGenerator.g:134:9: FALSE
 					{
-					match(input,FALSE,FOLLOW_FALSE_in_operand1341); 
+					match(input,FALSE,FOLLOW_FALSE_in_operand1353); 
 					// TEMPLATE REWRITE
 					// 135:11: -> integer(val=0)
 					{
@@ -1356,73 +1355,73 @@ public class HokenGenerator extends TreeParser {
 
 
 	public static final BitSet FOLLOW_PROGRAM_in_program72 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_statement_in_program77 = new BitSet(new long[]{0x00001B27F87DB0B8L});
-	public static final BitSet FOLLOW_VAR_in_statement121 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_INTEGER_in_statement124 = new BitSet(new long[]{0x0000000000200000L});
-	public static final BitSet FOLLOW_CHARACTER_in_statement126 = new BitSet(new long[]{0x0000000000200000L});
-	public static final BitSet FOLLOW_BOOLEAN_in_statement128 = new BitSet(new long[]{0x0000000000200000L});
-	public static final BitSet FOLLOW_ID_in_statement134 = new BitSet(new long[]{0x0000000000200008L});
-	public static final BitSet FOLLOW_CONST_in_statement181 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_INTEGER_in_statement184 = new BitSet(new long[]{0x0000000000200000L});
-	public static final BitSet FOLLOW_CHARACTER_in_statement186 = new BitSet(new long[]{0x0000000000200000L});
-	public static final BitSet FOLLOW_BOOLEAN_in_statement188 = new BitSet(new long[]{0x0000000000200000L});
-	public static final BitSet FOLLOW_ID_in_statement194 = new BitSet(new long[]{0x0000020000640080L});
-	public static final BitSet FOLLOW_operand_in_statement200 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_expr_in_statement252 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_PLUS_in_expr269 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr273 = new BitSet(new long[]{0x00001327F87D90B8L});
-	public static final BitSet FOLLOW_expr_in_expr277 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_MINUS_in_expr316 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr320 = new BitSet(new long[]{0x00001327F87D90B8L});
-	public static final BitSet FOLLOW_expr_in_expr324 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_NOT_in_expr363 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr367 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_TIMES_in_expr398 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr402 = new BitSet(new long[]{0x00001327F87D90B0L});
-	public static final BitSet FOLLOW_expr_in_expr406 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_DIVIDE_in_expr447 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr451 = new BitSet(new long[]{0x00001327F87D90B0L});
-	public static final BitSet FOLLOW_expr_in_expr455 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_MODULO_in_expr496 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr500 = new BitSet(new long[]{0x00001327F87D90B0L});
-	public static final BitSet FOLLOW_expr_in_expr504 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_COMPOUND_in_expr547 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_statement_in_expr574 = new BitSet(new long[]{0x00001B27F87DB0B8L});
-	public static final BitSet FOLLOW_AND_in_expr631 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr635 = new BitSet(new long[]{0x00001327F87D90B0L});
-	public static final BitSet FOLLOW_expr_in_expr639 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_OR_in_expr685 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr689 = new BitSet(new long[]{0x00001327F87D90B0L});
-	public static final BitSet FOLLOW_expr_in_expr693 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_LT_in_expr734 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr738 = new BitSet(new long[]{0x00001327F87D90B0L});
-	public static final BitSet FOLLOW_expr_in_expr742 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_LTE_in_expr783 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr787 = new BitSet(new long[]{0x00001327F87D90B0L});
-	public static final BitSet FOLLOW_expr_in_expr791 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_GT_in_expr832 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr836 = new BitSet(new long[]{0x00001327F87D90B0L});
-	public static final BitSet FOLLOW_expr_in_expr840 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_GTE_in_expr881 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr885 = new BitSet(new long[]{0x00001327F87D90B0L});
-	public static final BitSet FOLLOW_expr_in_expr889 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_EQ_in_expr930 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr934 = new BitSet(new long[]{0x00001327F87D90B0L});
-	public static final BitSet FOLLOW_expr_in_expr938 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_NEQ_in_expr979 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr983 = new BitSet(new long[]{0x00001327F87D90B0L});
-	public static final BitSet FOLLOW_expr_in_expr987 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_ASSIGN_in_expr1030 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_ID_in_expr1034 = new BitSet(new long[]{0x00001327F87D90B0L});
-	public static final BitSet FOLLOW_expr_in_expr1038 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_WRITE_in_expr1081 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr1086 = new BitSet(new long[]{0x00001327F87D90B8L});
-	public static final BitSet FOLLOW_READ_in_expr1133 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_ID_in_expr1138 = new BitSet(new long[]{0x0000000000200008L});
-	public static final BitSet FOLLOW_operand_in_expr1185 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_operand1212 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_INT_in_operand1252 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_CHAR_in_operand1283 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_TRUE_in_operand1312 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_FALSE_in_operand1341 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_statement_in_program77 = new BitSet(new long[]{0x00000D93FC3ED8B8L});
+	public static final BitSet FOLLOW_VAR_in_statement123 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_INTEGER_in_statement126 = new BitSet(new long[]{0x0000000000100000L});
+	public static final BitSet FOLLOW_CHARACTER_in_statement128 = new BitSet(new long[]{0x0000000000100000L});
+	public static final BitSet FOLLOW_BOOLEAN_in_statement130 = new BitSet(new long[]{0x0000000000100000L});
+	public static final BitSet FOLLOW_ID_in_statement136 = new BitSet(new long[]{0x0000000000100008L});
+	public static final BitSet FOLLOW_CONST_in_statement187 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_INTEGER_in_statement190 = new BitSet(new long[]{0x0000000000100000L});
+	public static final BitSet FOLLOW_CHARACTER_in_statement192 = new BitSet(new long[]{0x0000000000100000L});
+	public static final BitSet FOLLOW_BOOLEAN_in_statement194 = new BitSet(new long[]{0x0000000000100000L});
+	public static final BitSet FOLLOW_ID_in_statement200 = new BitSet(new long[]{0x0000010000320080L});
+	public static final BitSet FOLLOW_operand_in_statement206 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_expr_in_statement262 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_PLUS_in_expr279 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr283 = new BitSet(new long[]{0x00000993FC3EC8B8L});
+	public static final BitSet FOLLOW_expr_in_expr287 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MINUS_in_expr326 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr330 = new BitSet(new long[]{0x00000993FC3EC8B8L});
+	public static final BitSet FOLLOW_expr_in_expr334 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_NOT_in_expr373 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr377 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_TIMES_in_expr408 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr412 = new BitSet(new long[]{0x00000993FC3EC8B0L});
+	public static final BitSet FOLLOW_expr_in_expr416 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_DIVIDE_in_expr457 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr461 = new BitSet(new long[]{0x00000993FC3EC8B0L});
+	public static final BitSet FOLLOW_expr_in_expr465 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MODULO_in_expr506 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr510 = new BitSet(new long[]{0x00000993FC3EC8B0L});
+	public static final BitSet FOLLOW_expr_in_expr514 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_COMPOUND_in_expr557 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_statement_in_expr584 = new BitSet(new long[]{0x00000D93FC3ED8B8L});
+	public static final BitSet FOLLOW_AND_in_expr641 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr645 = new BitSet(new long[]{0x00000993FC3EC8B0L});
+	public static final BitSet FOLLOW_expr_in_expr649 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_OR_in_expr695 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr699 = new BitSet(new long[]{0x00000993FC3EC8B0L});
+	public static final BitSet FOLLOW_expr_in_expr703 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_LT_in_expr744 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr748 = new BitSet(new long[]{0x00000993FC3EC8B0L});
+	public static final BitSet FOLLOW_expr_in_expr752 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_LTE_in_expr793 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr797 = new BitSet(new long[]{0x00000993FC3EC8B0L});
+	public static final BitSet FOLLOW_expr_in_expr801 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_GT_in_expr842 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr846 = new BitSet(new long[]{0x00000993FC3EC8B0L});
+	public static final BitSet FOLLOW_expr_in_expr850 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_GTE_in_expr891 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr895 = new BitSet(new long[]{0x00000993FC3EC8B0L});
+	public static final BitSet FOLLOW_expr_in_expr899 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_EQ_in_expr940 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr944 = new BitSet(new long[]{0x00000993FC3EC8B0L});
+	public static final BitSet FOLLOW_expr_in_expr948 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_NEQ_in_expr989 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr993 = new BitSet(new long[]{0x00000993FC3EC8B0L});
+	public static final BitSet FOLLOW_expr_in_expr997 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_ASSIGN_in_expr1040 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_ID_in_expr1044 = new BitSet(new long[]{0x00000993FC3EC8B0L});
+	public static final BitSet FOLLOW_expr_in_expr1048 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_WRITE_in_expr1091 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr1096 = new BitSet(new long[]{0x00000993FC3EC8B8L});
+	public static final BitSet FOLLOW_READ_in_expr1144 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_ID_in_expr1149 = new BitSet(new long[]{0x0000000000100008L});
+	public static final BitSet FOLLOW_operand_in_expr1196 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_operand1223 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_INT_in_operand1264 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_CHAR_in_operand1295 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_TRUE_in_operand1324 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_FALSE_in_operand1353 = new BitSet(new long[]{0x0000000000000002L});
 }

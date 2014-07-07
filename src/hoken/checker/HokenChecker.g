@@ -32,31 +32,29 @@ public void displayRecognitionError(String[] tokenNames, RecognitionException e)
 }
 
 program
-    :   ^(PROGRAM
-            {symtab.openScope();}
-            statement*
-            {symtab.closeScope();} 
-        )
+    :   ^(PROGRAM {symtab.openScope();} statement* {symtab.closeScope();} )
     ;
 
 statement
     :   ^(declaration=VAR type=(INTEGER|CHARACTER|BOOLEAN) (ids+=ID)+)
             {
-            	declaration.type = Type.getType($type.text);
+                Declarationnode D = (DeclarationNode)declaration;
+                D.type = Type.getType($type.text);
                 for(Object child : $ids) {
-                	String id = ((HokenNode)child).getText();
-                    symtab.enter(id, (DeclarationNode)declaration);
-                    ((DeclarationNode)declaration).ids.add(id);
+                    String id = ((HokenNode)child).getText();
+                    symtab.enter(id, D);
+                    D.ids.add(id);
                 }
             }
     |   ^(declaration=CONST type=(INTEGER|CHARACTER|BOOLEAN) (ids+=ID)+ operand)
             {
-                declaration.type = Type.getType($type.text);
-                ((DeclarationNode)declaration).isConstant = true;
+                DeclarationNode D = (Declarationnode)declaration;
+                D.type = Type.getType($type.text);
+                D.isConstant = true;
                 for(Object child : $ids) {
-                	String id = ((HokenNode)child).getText();
-                    symtab.enter(id, (DeclarationNode)declaration);
-                    ((DeclarationNode)declaration).ids.add(id);
+                    String id = ((HokenNode)child).getText();
+                    symtab.enter(id, D);
+                    D.ids.add(id);
                 }
             }
     |   expr
@@ -75,62 +73,63 @@ expr:   ^(exp=(PLUS|MINUS) expr expr?)
             {compound.type = ((HokenNode)compound.getChild(compound.getChildCount()-1)).type;}
         )
     |   ^(assign=ASSIGN expr expr)
-        {
-            IdNode id;
-            if(((HokenNode)$assign.getChild(0)).getType() != ID) {
-                throw new HokenException($assign, "Linkerkant van een toekenning moet een identifier zijn.");
-            } else {
-                id = (IdNode)$assign.getChild(0);
+            {
+                IdNode id;
+                if(((HokenNode)$assign.getChild(0)).getType() != ID) {
+                    throw new HokenException($assign, "Linkerkant van een toekenning moet een identifier zijn.");
+                } else {
+                    id = (IdNode)$assign.getChild(0);
+                }
+                if(id.declaration.isConstant) {
+                    throw new HokenException($assign, "Identifier '" + id.getText() + "' is een constante.");
+                }
+                Type ex_type = ((HokenNode)$assign.getChild(1)).type;
+                if(id.type != ex_type) {
+                    throw new HokenException($assign, "Verkeerde combinatie: identifier '" + id.getText() + "' is van type " + id.type.toString() + ", maar er wordt " + ex_type.toString() + " toegekend");
+                }
+                ((HokenNode)$assign).type = ex_type;
             }
-            if(id.declaration.isConstant) {
-                throw new HokenException($assign, "Identifier '" + id.getText() + "' is een constante.");
-            }
-            Type ex_type = ((HokenNode)$assign.getChild(1)).type;
-            if(id.type != ex_type) {
-                throw new HokenException($assign, "Verkeerde combinatie: identifier '" + id.getText() + "' is van type " + id.type.toString() + ", maar er wordt " + ex_type.toString() + " toegekend");
-            }
-            ((HokenNode)$assign).type = ex_type;
-        }
     |   ^(write=WRITE expr+)
-        { 
-            for(Object child : write.getChildren()) {
-                HokenNode expr = (HokenNode)child;
-                if(expr.type == Type.VOID)
-                    throw new HokenException(write, "Verkeerd argument: verwachtte [INTEGER, BOOLEAN, CHARACTER], kreeg VOID");
+            { 
+                for(Object child : write.getChildren()) {
+                    HokenNode expr = (HokenNode)child;
+                    if(expr.type == Type.VOID)
+                        throw new HokenException(write, "Verkeerd argument: verwachtte [INTEGER, BOOLEAN, CHARACTER], kreeg VOID");
+                }
+                if(write.getChildCount() == 1)
+                    write.type = ((HokenNode)write.getChild(0)).type;
+                else
+                    write.type = Type.VOID;
             }
-            if(write.getChildCount() == 1)
-                write.type = ((HokenNode)write.getChild(0)).type;
-            else
-                write.type = Type.VOID;
-        }
     |   ^(read=READ idref+)
-        {
-            if($read.getChildCount() == 1)
-                read.type = symtab.retrieve(read.getChild(0)).type;
-            else {
-                read.type = Type.VOID;
-                for(Object id : $read.getChildren())
-                    symtab.retrieve((HokenNode)id);
+            {
+                if($read.getChildCount() == 1)
+                    read.type = symtab.retrieve(read.getChild(0)).type;
+                else {
+                    read.type = Type.VOID;
+                    for(Object id : $read.getChildren())
+                        symtab.retrieve((HokenNode)id);
+                }
             }
-        }
     |   operand
     ;
 
 operand    
     :   idref
     |   i=INT
-        { i.type = Type.INTEGER; }
+            { i.type = Type.INTEGER; }
     |   c=CHAR
-        { c.type = Type.CHARACTER; }
+            { c.type = Type.CHARACTER; }
     |   b=(TRUE|FALSE)
-        { b.type = Type.BOOLEAN; }
+            { b.type = Type.BOOLEAN; }
     ;
 
 idref
     :   id=ID
-        {
-            DeclarationNode ref = symtab.retrieve($id);
-            ((IdNode)$id).declaration = ref;
-            ((IdNode)$id).type = ref.type;
-        }
+            {
+                IdNode I = (IdNode)$id;
+                DeclarationNode ref = symtab.retrieve(I);
+                I.declaration       = ref;
+                I.type              = ref.type;
+            }
     ;

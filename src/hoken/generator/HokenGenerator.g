@@ -18,42 +18,42 @@ private int scopeCounter = 0;
 private Stack<Integer> popCounter = new Stack<Integer>();
 
 class IOInstruction {
-	public Object attr;
-	public Type type;
-	IOInstruction(Object attr, Type type) {
-		this.attr = attr;
-		this.type = type;
-	}
-	public boolean isCharacter() { return this.type == Type.CHARACTER; }
-	public boolean isInteger()   { return this.type == Type.INTEGER;   }
-	public boolean isBoolean()   { return this.type == Type.BOOLEAN;   }
+    public Object attr;
+    public Type type;
+    IOInstruction(Object attr, Type type) {
+        this.attr = attr;
+        this.type = type;
+    }
+    public boolean isCharacter() { return this.type == Type.CHARACTER; }
+    public boolean isInteger()   { return this.type == Type.INTEGER;   }
+    public boolean isBoolean()   { return this.type == Type.BOOLEAN;   }
 }
 }
 
 program
     :   ^(PROGRAM (statements+=statement)*)
-          -> program(instructions={$statements})
+            -> program(instructions={$statements})
     ;
 
 statement
     :   ^(declaration=VAR (INTEGER|CHARACTER|BOOLEAN) (ids+=ID)+)
-          {
-              ((DeclarationNode)declaration).address = this.nextAddr;
-              this.nextAddr     += $ids.size();
-              this.scopeCounter += $ids.size();
-          }
-          -> declaration(size={$ids.size()})
+            {
+                ((DeclarationNode)declaration).address = this.nextAddr;
+                this.nextAddr     += $ids.size();
+                this.scopeCounter += $ids.size();
+            }
+            -> declaration(size={$ids.size()})
     |   ^(declaration=CONST (INTEGER|CHARACTER|BOOLEAN) (ids+=ID)+ val=operand)
-          {
-              ((DeclarationNode)declaration).address = this.nextAddr;
-              this.nextAddr     += $ids.size();
-              this.scopeCounter += $ids.size();
-              
-              List<Integer> addrs = new ArrayList<Integer>();
-              for(int i = 0; i < $ids.size(); i++)
-                  addrs.add(((DeclarationNode)declaration).address + i);
-          }
-          -> constant(size={$ids.size()}, addrs={addrs}, val={val})
+            {
+                ((DeclarationNode)declaration).address = this.nextAddr;
+                this.nextAddr     += $ids.size();
+                this.scopeCounter += $ids.size();
+
+                List<Integer> addrs = new ArrayList<Integer>();
+                for(int i = 0; i < $ids.size(); i++)
+                    addrs.add(((DeclarationNode)declaration).address + i);
+            }
+            -> constant(size={$ids.size()}, addrs={addrs}, val={val})
     |   expr { $st = $expr.st; }
     ;
 
@@ -101,13 +101,13 @@ expr:   ^(PLUS x=expr y=expr?)
     |   ^(assign=ASSIGN id=ID e=expr)
           -> assign(expr={$e.st}, addr={((IdNode)$id).declaration.getOffsettedAddress((IdNode)$id)}, noReturn={assign.shouldNotReturn()})
     |   ^(write=WRITE (exprs+=expr)+)
-    	{
-    		List<IOInstruction> writes = new ArrayList<IOInstruction>();
-    		for(Object child : write.getChildren()) {
-    			HokenNode expr = (HokenNode)child;
-    			writes.add(new IOInstruction($exprs.get(expr.childIndex), expr.type));
-    		}  
-    	}
+      {
+        List<IOInstruction> writes = new ArrayList<IOInstruction>();
+        for(Object child : write.getChildren()) {
+          HokenNode expr = (HokenNode)child;
+          writes.add(new IOInstruction($exprs.get(expr.childIndex), expr.type));
+        }  
+      }
           -> write(writes={writes}, noReturn={write.shouldNotReturn()})
     |   ^(read=READ (ids+=ID)+)
         {
@@ -123,7 +123,7 @@ expr:   ^(PLUS x=expr y=expr?)
 
 operand    
     :   id=ID
-    	  {IdNode I = (IdNode)$id;}
+        {IdNode I = (IdNode)$id;}
           -> load(addr={((IdNode)$id).declaration.getOffsettedAddress(I)})
     |   intval=INT
           -> integer(val={$intval.text})
