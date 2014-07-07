@@ -1,14 +1,14 @@
-grammar VB;
+grammar Hoken;
 
 options {
     k=1;
     language=Java;
     output=AST;
-    ASTLabelType=VBNode;
+    ASTLabelType=HokenNode;
 }
 
 tokens {
-	// hulptokens
+    // hulptokens
     SEMICOLON = ';';
     COLON = ':';
     ASSIGN = ':=';
@@ -37,30 +37,46 @@ tokens {
 
     // keywords
     // io
-    WRITE = 'write';
-    READ = 'read';
+    WRITE = 'skrieben';
+    READ = 'vraogen';
     // variabelen
-    CONST = 'const';
-    INTEGER = 'integer';
-    BOOLEAN = 'boolean';
-    CHARACTER = 'character';
+    CONST = 'blievend';
+    INTEGER = 'getalletjen';
+    BOOLEAN = 'walofneet';
+    CHARACTER = 'lettertjen';
     // waarden
-    TRUE = 'true';
-    FALSE = 'false';
+    TRUE = 'wal';
+    FALSE = 'neet';
 
     // pseudo-tokens voor de AST
     COMPOUND;
     PROGRAM;
-    VAR = 'var';
+    VAR;
 }
 
 @lexer::header {
-package vb.project;
+package hoken.parser;
 }
 
 @header {
-package vb.project;
-import vb.project.nodes.*;
+package hoken.parser;
+import hoken.HokenException;
+import hoken.ast.*;
+}
+
+@members {
+private int errors = 0;
+
+public int getErrorCount() {
+    return this.errors;
+}
+
+@Override
+public void displayRecognitionError(String[] tokenNames, RecognitionException e)
+{
+    this.errors++;
+    emitErrorMessage("'" + e.token.getText() + "' (regel: " + e.line + ", kolom: " + e.charPositionInLine + ") " + getErrorMessage(e, tokenNames));
+}
 }
 
 program
@@ -77,7 +93,8 @@ statement
     |   expr
     ;
 
-decl:   VAR<DeclarationNode>^ type id_list
+decl:   type id_list
+        -> ^(VAR<DeclarationNode> type id_list)
     |   CONST<DeclarationNode>^ type id_list EQUALS! value
     ;
     

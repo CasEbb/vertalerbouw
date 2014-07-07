@@ -1,9 +1,9 @@
-package vb.project.nodes;
+package hoken.ast;
 
 import org.antlr.runtime.Token;
 import org.antlr.runtime.tree.Tree;
 
-public class IdNode extends VBNode {
+public class IdNode extends HokenNode {
 	
 	// Referentie naar de declaratie van deze id
 	public DeclarationNode declaration;
