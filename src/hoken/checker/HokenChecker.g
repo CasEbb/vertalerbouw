@@ -42,17 +42,21 @@ program
 statement
     :   ^(declaration=VAR type=(INTEGER|CHARACTER|BOOLEAN) (ids+=ID)+)
             {
-                for(Object id : $ids) {
-                    symtab.enter(((CommonTree)id).getText(), (DeclarationNode)declaration);
-                    declaration.type = Type.getType($type.text);
+            	declaration.type = Type.getType($type.text);
+                for(Object child : $ids) {
+                	String id = ((HokenNode)child).getText();
+                    symtab.enter(id, (DeclarationNode)declaration);
+                    ((DeclarationNode)declaration).ids.add(id);
                 }
             }
     |   ^(declaration=CONST type=(INTEGER|CHARACTER|BOOLEAN) (ids+=ID)+ operand)
             {
-                for(Object id : $ids) {
-                    symtab.enter(((CommonTree)id).getText(), (DeclarationNode)declaration);
-                    declaration.type = Type.getType($type.text);
-                    ((DeclarationNode)declaration).isConstant = true;
+                declaration.type = Type.getType($type.text);
+                ((DeclarationNode)declaration).isConstant = true;
+                for(Object child : $ids) {
+                	String id = ((HokenNode)child).getText();
+                    symtab.enter(id, (DeclarationNode)declaration);
+                    ((DeclarationNode)declaration).ids.add(id);
                 }
             }
     |   expr
@@ -65,10 +69,10 @@ expr:   ^(exp=(PLUS|MINUS) expr expr?)
     |   ^(exp=(DIVIDE|MODULO|TIMES|AND|OR|LT|LTE|GT|GTE|EQ|NEQ) expr expr)
             {((ExpressionNode)exp).check();}
     |   ^(compound=COMPOUND
-            {compound.type = Type.VOID;}
             {symtab.openScope();} 
             statement*
             {symtab.closeScope();}
+            {compound.type = ((HokenNode)compound.getChild(compound.getChildCount()-1)).type;}
         )
     |   ^(assign=ASSIGN expr expr)
         {

@@ -14,4 +14,8 @@ public class IdNode extends HokenNode {
 	public Tree dupNode() { return new IdNode(this); }
 	public String toString() { return token.getText()+"<IdNode>"; }
 	
+	public boolean isConstant() {
+		return this.declaration.isConstant;
+	}
+
 }

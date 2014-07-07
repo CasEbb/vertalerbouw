@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 ..\\src\\hoken\\parser\\Hoken.g 2014-07-07 00:36:28
+// $ANTLR 3.5.2 src\\hoken\\parser\\Hoken.g 2014-07-07 17:37:32
 
 package hoken.parser;
 
@@ -67,15 +67,15 @@ public class HokenLexer extends Lexer {
 	public HokenLexer(CharStream input, RecognizerSharedState state) {
 		super(input,state);
 	}
-	@Override public String getGrammarFileName() { return "..\\src\\hoken\\parser\\Hoken.g"; }
+	@Override public String getGrammarFileName() { return "src\\hoken\\parser\\Hoken.g"; }
 
 	// $ANTLR start "AND"
 	public final void mAND() throws RecognitionException {
 		try {
 			int _type = AND;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:11:5: ( '&&' )
-			// ..\\src\\hoken\\parser\\Hoken.g:11:7: '&&'
+			// src\\hoken\\parser\\Hoken.g:11:5: ( '&&' )
+			// src\\hoken\\parser\\Hoken.g:11:7: '&&'
 			{
 			match("&&"); 
 
@@ -95,8 +95,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = ASSIGN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:12:8: ( ':=' )
-			// ..\\src\\hoken\\parser\\Hoken.g:12:10: ':='
+			// src\\hoken\\parser\\Hoken.g:12:8: ( ':=' )
+			// src\\hoken\\parser\\Hoken.g:12:10: ':='
 			{
 			match(":="); 
 
@@ -116,8 +116,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = BOOLEAN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:13:9: ( 'walofneet' )
-			// ..\\src\\hoken\\parser\\Hoken.g:13:11: 'walofneet'
+			// src\\hoken\\parser\\Hoken.g:13:9: ( 'walofneet' )
+			// src\\hoken\\parser\\Hoken.g:13:11: 'walofneet'
 			{
 			match("walofneet"); 
 
@@ -137,8 +137,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = CHARACTER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:14:11: ( 'lettertjen' )
-			// ..\\src\\hoken\\parser\\Hoken.g:14:13: 'lettertjen'
+			// src\\hoken\\parser\\Hoken.g:14:11: ( 'lettertjen' )
+			// src\\hoken\\parser\\Hoken.g:14:13: 'lettertjen'
 			{
 			match("lettertjen"); 
 
@@ -158,8 +158,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = COLON;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:15:7: ( ':' )
-			// ..\\src\\hoken\\parser\\Hoken.g:15:9: ':'
+			// src\\hoken\\parser\\Hoken.g:15:7: ( ':' )
+			// src\\hoken\\parser\\Hoken.g:15:9: ':'
 			{
 			match(':'); 
 			}
@@ -178,8 +178,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = COMMA;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:16:7: ( ',' )
-			// ..\\src\\hoken\\parser\\Hoken.g:16:9: ','
+			// src\\hoken\\parser\\Hoken.g:16:7: ( ',' )
+			// src\\hoken\\parser\\Hoken.g:16:9: ','
 			{
 			match(','); 
 			}
@@ -198,8 +198,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = CONST;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:17:7: ( 'blievend' )
-			// ..\\src\\hoken\\parser\\Hoken.g:17:9: 'blievend'
+			// src\\hoken\\parser\\Hoken.g:17:7: ( 'blievend' )
+			// src\\hoken\\parser\\Hoken.g:17:9: 'blievend'
 			{
 			match("blievend"); 
 
@@ -219,8 +219,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = DIVIDE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:18:8: ( '/' )
-			// ..\\src\\hoken\\parser\\Hoken.g:18:10: '/'
+			// src\\hoken\\parser\\Hoken.g:18:8: ( '/' )
+			// src\\hoken\\parser\\Hoken.g:18:10: '/'
 			{
 			match('/'); 
 			}
@@ -239,8 +239,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = EQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:19:4: ( '==' )
-			// ..\\src\\hoken\\parser\\Hoken.g:19:6: '=='
+			// src\\hoken\\parser\\Hoken.g:19:4: ( '==' )
+			// src\\hoken\\parser\\Hoken.g:19:6: '=='
 			{
 			match("=="); 
 
@@ -260,8 +260,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = EQUALS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:20:8: ( '=' )
-			// ..\\src\\hoken\\parser\\Hoken.g:20:10: '='
+			// src\\hoken\\parser\\Hoken.g:20:8: ( '=' )
+			// src\\hoken\\parser\\Hoken.g:20:10: '='
 			{
 			match('='); 
 			}
@@ -280,8 +280,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = FALSE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:21:7: ( 'neet' )
-			// ..\\src\\hoken\\parser\\Hoken.g:21:9: 'neet'
+			// src\\hoken\\parser\\Hoken.g:21:7: ( 'neet' )
+			// src\\hoken\\parser\\Hoken.g:21:9: 'neet'
 			{
 			match("neet"); 
 
@@ -301,8 +301,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = GT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:22:4: ( '>' )
-			// ..\\src\\hoken\\parser\\Hoken.g:22:6: '>'
+			// src\\hoken\\parser\\Hoken.g:22:4: ( '>' )
+			// src\\hoken\\parser\\Hoken.g:22:6: '>'
 			{
 			match('>'); 
 			}
@@ -321,8 +321,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = GTE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:23:5: ( '>=' )
-			// ..\\src\\hoken\\parser\\Hoken.g:23:7: '>='
+			// src\\hoken\\parser\\Hoken.g:23:5: ( '>=' )
+			// src\\hoken\\parser\\Hoken.g:23:7: '>='
 			{
 			match(">="); 
 
@@ -342,8 +342,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = INTEGER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:24:9: ( 'getalletjen' )
-			// ..\\src\\hoken\\parser\\Hoken.g:24:11: 'getalletjen'
+			// src\\hoken\\parser\\Hoken.g:24:9: ( 'getalletjen' )
+			// src\\hoken\\parser\\Hoken.g:24:11: 'getalletjen'
 			{
 			match("getalletjen"); 
 
@@ -363,8 +363,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = LCURLY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:25:8: ( '{' )
-			// ..\\src\\hoken\\parser\\Hoken.g:25:10: '{'
+			// src\\hoken\\parser\\Hoken.g:25:8: ( '{' )
+			// src\\hoken\\parser\\Hoken.g:25:10: '{'
 			{
 			match('{'); 
 			}
@@ -383,8 +383,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = LPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:26:8: ( '(' )
-			// ..\\src\\hoken\\parser\\Hoken.g:26:10: '('
+			// src\\hoken\\parser\\Hoken.g:26:8: ( '(' )
+			// src\\hoken\\parser\\Hoken.g:26:10: '('
 			{
 			match('('); 
 			}
@@ -403,8 +403,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = LT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:27:4: ( '<' )
-			// ..\\src\\hoken\\parser\\Hoken.g:27:6: '<'
+			// src\\hoken\\parser\\Hoken.g:27:4: ( '<' )
+			// src\\hoken\\parser\\Hoken.g:27:6: '<'
 			{
 			match('<'); 
 			}
@@ -423,8 +423,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = LTE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:28:5: ( '<=' )
-			// ..\\src\\hoken\\parser\\Hoken.g:28:7: '<='
+			// src\\hoken\\parser\\Hoken.g:28:5: ( '<=' )
+			// src\\hoken\\parser\\Hoken.g:28:7: '<='
 			{
 			match("<="); 
 
@@ -444,8 +444,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = MINUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:29:7: ( '-' )
-			// ..\\src\\hoken\\parser\\Hoken.g:29:9: '-'
+			// src\\hoken\\parser\\Hoken.g:29:7: ( '-' )
+			// src\\hoken\\parser\\Hoken.g:29:9: '-'
 			{
 			match('-'); 
 			}
@@ -464,8 +464,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = MODULO;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:30:8: ( '%' )
-			// ..\\src\\hoken\\parser\\Hoken.g:30:10: '%'
+			// src\\hoken\\parser\\Hoken.g:30:8: ( '%' )
+			// src\\hoken\\parser\\Hoken.g:30:10: '%'
 			{
 			match('%'); 
 			}
@@ -484,8 +484,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = NEQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:31:5: ( '<>' )
-			// ..\\src\\hoken\\parser\\Hoken.g:31:7: '<>'
+			// src\\hoken\\parser\\Hoken.g:31:5: ( '<>' )
+			// src\\hoken\\parser\\Hoken.g:31:7: '<>'
 			{
 			match("<>"); 
 
@@ -505,8 +505,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = NOT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:32:5: ( '!' )
-			// ..\\src\\hoken\\parser\\Hoken.g:32:7: '!'
+			// src\\hoken\\parser\\Hoken.g:32:5: ( '!' )
+			// src\\hoken\\parser\\Hoken.g:32:7: '!'
 			{
 			match('!'); 
 			}
@@ -525,8 +525,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = OR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:33:4: ( '||' )
-			// ..\\src\\hoken\\parser\\Hoken.g:33:6: '||'
+			// src\\hoken\\parser\\Hoken.g:33:4: ( '||' )
+			// src\\hoken\\parser\\Hoken.g:33:6: '||'
 			{
 			match("||"); 
 
@@ -546,8 +546,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = PLUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:34:6: ( '+' )
-			// ..\\src\\hoken\\parser\\Hoken.g:34:8: '+'
+			// src\\hoken\\parser\\Hoken.g:34:6: ( '+' )
+			// src\\hoken\\parser\\Hoken.g:34:8: '+'
 			{
 			match('+'); 
 			}
@@ -566,8 +566,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = RCURLY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:35:8: ( '}' )
-			// ..\\src\\hoken\\parser\\Hoken.g:35:10: '}'
+			// src\\hoken\\parser\\Hoken.g:35:8: ( '}' )
+			// src\\hoken\\parser\\Hoken.g:35:10: '}'
 			{
 			match('}'); 
 			}
@@ -586,8 +586,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = READ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:36:6: ( 'vraogen' )
-			// ..\\src\\hoken\\parser\\Hoken.g:36:8: 'vraogen'
+			// src\\hoken\\parser\\Hoken.g:36:6: ( 'vraogen' )
+			// src\\hoken\\parser\\Hoken.g:36:8: 'vraogen'
 			{
 			match("vraogen"); 
 
@@ -607,8 +607,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = RPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:37:8: ( ')' )
-			// ..\\src\\hoken\\parser\\Hoken.g:37:10: ')'
+			// src\\hoken\\parser\\Hoken.g:37:8: ( ')' )
+			// src\\hoken\\parser\\Hoken.g:37:10: ')'
 			{
 			match(')'); 
 			}
@@ -627,8 +627,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = SEMICOLON;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:38:11: ( ';' )
-			// ..\\src\\hoken\\parser\\Hoken.g:38:13: ';'
+			// src\\hoken\\parser\\Hoken.g:38:11: ( ';' )
+			// src\\hoken\\parser\\Hoken.g:38:13: ';'
 			{
 			match(';'); 
 			}
@@ -647,8 +647,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = TIMES;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:39:7: ( '*' )
-			// ..\\src\\hoken\\parser\\Hoken.g:39:9: '*'
+			// src\\hoken\\parser\\Hoken.g:39:7: ( '*' )
+			// src\\hoken\\parser\\Hoken.g:39:9: '*'
 			{
 			match('*'); 
 			}
@@ -667,8 +667,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = TRUE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:40:6: ( 'wal' )
-			// ..\\src\\hoken\\parser\\Hoken.g:40:8: 'wal'
+			// src\\hoken\\parser\\Hoken.g:40:6: ( 'wal' )
+			// src\\hoken\\parser\\Hoken.g:40:8: 'wal'
 			{
 			match("wal"); 
 
@@ -688,8 +688,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = WRITE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:41:7: ( 'skrieben' )
-			// ..\\src\\hoken\\parser\\Hoken.g:41:9: 'skrieben'
+			// src\\hoken\\parser\\Hoken.g:41:7: ( 'skrieben' )
+			// src\\hoken\\parser\\Hoken.g:41:9: 'skrieben'
 			{
 			match("skrieben"); 
 
@@ -709,8 +709,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = ID;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:201:5: ( ( LETTER | UNDERSCORE ) ( LETTER | DIGIT | UNDERSCORE )* )
-			// ..\\src\\hoken\\parser\\Hoken.g:201:9: ( LETTER | UNDERSCORE ) ( LETTER | DIGIT | UNDERSCORE )*
+			// src\\hoken\\parser\\Hoken.g:201:5: ( ( LETTER | UNDERSCORE ) ( LETTER | DIGIT | UNDERSCORE )* )
+			// src\\hoken\\parser\\Hoken.g:201:9: ( LETTER | UNDERSCORE ) ( LETTER | DIGIT | UNDERSCORE )*
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -720,7 +720,7 @@ public class HokenLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// ..\\src\\hoken\\parser\\Hoken.g:201:29: ( LETTER | DIGIT | UNDERSCORE )*
+			// src\\hoken\\parser\\Hoken.g:201:29: ( LETTER | DIGIT | UNDERSCORE )*
 			loop1:
 			while (true) {
 				int alt1=2;
@@ -731,7 +731,7 @@ public class HokenLexer extends Lexer {
 
 				switch (alt1) {
 				case 1 :
-					// ..\\src\\hoken\\parser\\Hoken.g:
+					// src\\hoken\\parser\\Hoken.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 						input.consume();
@@ -765,10 +765,10 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = INT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:204:5: ( ( DIGIT )+ )
-			// ..\\src\\hoken\\parser\\Hoken.g:204:9: ( DIGIT )+
+			// src\\hoken\\parser\\Hoken.g:204:5: ( ( DIGIT )+ )
+			// src\\hoken\\parser\\Hoken.g:204:9: ( DIGIT )+
 			{
-			// ..\\src\\hoken\\parser\\Hoken.g:204:9: ( DIGIT )+
+			// src\\hoken\\parser\\Hoken.g:204:9: ( DIGIT )+
 			int cnt2=0;
 			loop2:
 			while (true) {
@@ -780,7 +780,7 @@ public class HokenLexer extends Lexer {
 
 				switch (alt2) {
 				case 1 :
-					// ..\\src\\hoken\\parser\\Hoken.g:
+					// src\\hoken\\parser\\Hoken.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 						input.consume();
@@ -817,8 +817,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = CHAR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:207:5: ( '\\'' LETTER '\\'' )
-			// ..\\src\\hoken\\parser\\Hoken.g:207:8: '\\'' LETTER '\\''
+			// src\\hoken\\parser\\Hoken.g:207:5: ( '\\'' LETTER '\\'' )
+			// src\\hoken\\parser\\Hoken.g:207:8: '\\'' LETTER '\\''
 			{
 			match('\''); 
 			mLETTER(); 
@@ -840,7 +840,7 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:218:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
+			// src\\hoken\\parser\\Hoken.g:218:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
 			int alt6=2;
 			int LA6_0 = input.LA(1);
 			if ( (LA6_0=='/') ) {
@@ -874,11 +874,11 @@ public class HokenLexer extends Lexer {
 
 			switch (alt6) {
 				case 1 :
-					// ..\\src\\hoken\\parser\\Hoken.g:218:9: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
+					// src\\hoken\\parser\\Hoken.g:218:9: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
 					{
 					match("//"); 
 
-					// ..\\src\\hoken\\parser\\Hoken.g:218:14: (~ ( '\\n' | '\\r' ) )*
+					// src\\hoken\\parser\\Hoken.g:218:14: (~ ( '\\n' | '\\r' ) )*
 					loop3:
 					while (true) {
 						int alt3=2;
@@ -889,7 +889,7 @@ public class HokenLexer extends Lexer {
 
 						switch (alt3) {
 						case 1 :
-							// ..\\src\\hoken\\parser\\Hoken.g:
+							// src\\hoken\\parser\\Hoken.g:
 							{
 							if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '\t')||(input.LA(1) >= '\u000B' && input.LA(1) <= '\f')||(input.LA(1) >= '\u000E' && input.LA(1) <= '\uFFFF') ) {
 								input.consume();
@@ -907,7 +907,7 @@ public class HokenLexer extends Lexer {
 						}
 					}
 
-					// ..\\src\\hoken\\parser\\Hoken.g:218:28: ( '\\r' )?
+					// src\\hoken\\parser\\Hoken.g:218:28: ( '\\r' )?
 					int alt4=2;
 					int LA4_0 = input.LA(1);
 					if ( (LA4_0=='\r') ) {
@@ -915,7 +915,7 @@ public class HokenLexer extends Lexer {
 					}
 					switch (alt4) {
 						case 1 :
-							// ..\\src\\hoken\\parser\\Hoken.g:218:28: '\\r'
+							// src\\hoken\\parser\\Hoken.g:218:28: '\\r'
 							{
 							match('\r'); 
 							}
@@ -928,11 +928,11 @@ public class HokenLexer extends Lexer {
 					}
 					break;
 				case 2 :
-					// ..\\src\\hoken\\parser\\Hoken.g:219:9: '/*' ( options {greedy=false; } : . )* '*/'
+					// src\\hoken\\parser\\Hoken.g:219:9: '/*' ( options {greedy=false; } : . )* '*/'
 					{
 					match("/*"); 
 
-					// ..\\src\\hoken\\parser\\Hoken.g:219:14: ( options {greedy=false; } : . )*
+					// src\\hoken\\parser\\Hoken.g:219:14: ( options {greedy=false; } : . )*
 					loop5:
 					while (true) {
 						int alt5=2;
@@ -953,7 +953,7 @@ public class HokenLexer extends Lexer {
 
 						switch (alt5) {
 						case 1 :
-							// ..\\src\\hoken\\parser\\Hoken.g:219:42: .
+							// src\\hoken\\parser\\Hoken.g:219:42: .
 							{
 							matchAny(); 
 							}
@@ -985,8 +985,8 @@ public class HokenLexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ..\\src\\hoken\\parser\\Hoken.g:222:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
-			// ..\\src\\hoken\\parser\\Hoken.g:222:9: ( ' ' | '\\t' | '\\r' | '\\n' )
+			// src\\hoken\\parser\\Hoken.g:222:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
+			// src\\hoken\\parser\\Hoken.g:222:9: ( ' ' | '\\t' | '\\r' | '\\n' )
 			{
 			if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
 				input.consume();
@@ -1011,8 +1011,8 @@ public class HokenLexer extends Lexer {
 	// $ANTLR start "LETTER"
 	public final void mLETTER() throws RecognitionException {
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:235:5: ( 'a' .. 'z' | 'A' .. 'Z' )
-			// ..\\src\\hoken\\parser\\Hoken.g:
+			// src\\hoken\\parser\\Hoken.g:235:5: ( 'a' .. 'z' | 'A' .. 'Z' )
+			// src\\hoken\\parser\\Hoken.g:
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -1034,8 +1034,8 @@ public class HokenLexer extends Lexer {
 	// $ANTLR start "DIGIT"
 	public final void mDIGIT() throws RecognitionException {
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:241:5: ( '0' .. '9' )
-			// ..\\src\\hoken\\parser\\Hoken.g:
+			// src\\hoken\\parser\\Hoken.g:241:5: ( '0' .. '9' )
+			// src\\hoken\\parser\\Hoken.g:
 			{
 			if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 				input.consume();
@@ -1057,8 +1057,8 @@ public class HokenLexer extends Lexer {
 	// $ANTLR start "UNDERSCORE"
 	public final void mUNDERSCORE() throws RecognitionException {
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:246:5: ( '_' )
-			// ..\\src\\hoken\\parser\\Hoken.g:246:9: '_'
+			// src\\hoken\\parser\\Hoken.g:246:5: ( '_' )
+			// src\\hoken\\parser\\Hoken.g:246:9: '_'
 			{
 			match('_'); 
 			}
@@ -1072,257 +1072,257 @@ public class HokenLexer extends Lexer {
 
 	@Override
 	public void mTokens() throws RecognitionException {
-		// ..\\src\\hoken\\parser\\Hoken.g:1:8: ( AND | ASSIGN | BOOLEAN | CHARACTER | COLON | COMMA | CONST | DIVIDE | EQ | EQUALS | FALSE | GT | GTE | INTEGER | LCURLY | LPAREN | LT | LTE | MINUS | MODULO | NEQ | NOT | OR | PLUS | RCURLY | READ | RPAREN | SEMICOLON | TIMES | TRUE | WRITE | ID | INT | CHAR | COMMENT | WS )
+		// src\\hoken\\parser\\Hoken.g:1:8: ( AND | ASSIGN | BOOLEAN | CHARACTER | COLON | COMMA | CONST | DIVIDE | EQ | EQUALS | FALSE | GT | GTE | INTEGER | LCURLY | LPAREN | LT | LTE | MINUS | MODULO | NEQ | NOT | OR | PLUS | RCURLY | READ | RPAREN | SEMICOLON | TIMES | TRUE | WRITE | ID | INT | CHAR | COMMENT | WS )
 		int alt7=36;
 		alt7 = dfa7.predict(input);
 		switch (alt7) {
 			case 1 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:10: AND
+				// src\\hoken\\parser\\Hoken.g:1:10: AND
 				{
 				mAND(); 
 
 				}
 				break;
 			case 2 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:14: ASSIGN
+				// src\\hoken\\parser\\Hoken.g:1:14: ASSIGN
 				{
 				mASSIGN(); 
 
 				}
 				break;
 			case 3 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:21: BOOLEAN
+				// src\\hoken\\parser\\Hoken.g:1:21: BOOLEAN
 				{
 				mBOOLEAN(); 
 
 				}
 				break;
 			case 4 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:29: CHARACTER
+				// src\\hoken\\parser\\Hoken.g:1:29: CHARACTER
 				{
 				mCHARACTER(); 
 
 				}
 				break;
 			case 5 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:39: COLON
+				// src\\hoken\\parser\\Hoken.g:1:39: COLON
 				{
 				mCOLON(); 
 
 				}
 				break;
 			case 6 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:45: COMMA
+				// src\\hoken\\parser\\Hoken.g:1:45: COMMA
 				{
 				mCOMMA(); 
 
 				}
 				break;
 			case 7 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:51: CONST
+				// src\\hoken\\parser\\Hoken.g:1:51: CONST
 				{
 				mCONST(); 
 
 				}
 				break;
 			case 8 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:57: DIVIDE
+				// src\\hoken\\parser\\Hoken.g:1:57: DIVIDE
 				{
 				mDIVIDE(); 
 
 				}
 				break;
 			case 9 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:64: EQ
+				// src\\hoken\\parser\\Hoken.g:1:64: EQ
 				{
 				mEQ(); 
 
 				}
 				break;
 			case 10 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:67: EQUALS
+				// src\\hoken\\parser\\Hoken.g:1:67: EQUALS
 				{
 				mEQUALS(); 
 
 				}
 				break;
 			case 11 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:74: FALSE
+				// src\\hoken\\parser\\Hoken.g:1:74: FALSE
 				{
 				mFALSE(); 
 
 				}
 				break;
 			case 12 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:80: GT
+				// src\\hoken\\parser\\Hoken.g:1:80: GT
 				{
 				mGT(); 
 
 				}
 				break;
 			case 13 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:83: GTE
+				// src\\hoken\\parser\\Hoken.g:1:83: GTE
 				{
 				mGTE(); 
 
 				}
 				break;
 			case 14 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:87: INTEGER
+				// src\\hoken\\parser\\Hoken.g:1:87: INTEGER
 				{
 				mINTEGER(); 
 
 				}
 				break;
 			case 15 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:95: LCURLY
+				// src\\hoken\\parser\\Hoken.g:1:95: LCURLY
 				{
 				mLCURLY(); 
 
 				}
 				break;
 			case 16 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:102: LPAREN
+				// src\\hoken\\parser\\Hoken.g:1:102: LPAREN
 				{
 				mLPAREN(); 
 
 				}
 				break;
 			case 17 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:109: LT
+				// src\\hoken\\parser\\Hoken.g:1:109: LT
 				{
 				mLT(); 
 
 				}
 				break;
 			case 18 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:112: LTE
+				// src\\hoken\\parser\\Hoken.g:1:112: LTE
 				{
 				mLTE(); 
 
 				}
 				break;
 			case 19 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:116: MINUS
+				// src\\hoken\\parser\\Hoken.g:1:116: MINUS
 				{
 				mMINUS(); 
 
 				}
 				break;
 			case 20 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:122: MODULO
+				// src\\hoken\\parser\\Hoken.g:1:122: MODULO
 				{
 				mMODULO(); 
 
 				}
 				break;
 			case 21 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:129: NEQ
+				// src\\hoken\\parser\\Hoken.g:1:129: NEQ
 				{
 				mNEQ(); 
 
 				}
 				break;
 			case 22 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:133: NOT
+				// src\\hoken\\parser\\Hoken.g:1:133: NOT
 				{
 				mNOT(); 
 
 				}
 				break;
 			case 23 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:137: OR
+				// src\\hoken\\parser\\Hoken.g:1:137: OR
 				{
 				mOR(); 
 
 				}
 				break;
 			case 24 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:140: PLUS
+				// src\\hoken\\parser\\Hoken.g:1:140: PLUS
 				{
 				mPLUS(); 
 
 				}
 				break;
 			case 25 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:145: RCURLY
+				// src\\hoken\\parser\\Hoken.g:1:145: RCURLY
 				{
 				mRCURLY(); 
 
 				}
 				break;
 			case 26 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:152: READ
+				// src\\hoken\\parser\\Hoken.g:1:152: READ
 				{
 				mREAD(); 
 
 				}
 				break;
 			case 27 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:157: RPAREN
+				// src\\hoken\\parser\\Hoken.g:1:157: RPAREN
 				{
 				mRPAREN(); 
 
 				}
 				break;
 			case 28 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:164: SEMICOLON
+				// src\\hoken\\parser\\Hoken.g:1:164: SEMICOLON
 				{
 				mSEMICOLON(); 
 
 				}
 				break;
 			case 29 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:174: TIMES
+				// src\\hoken\\parser\\Hoken.g:1:174: TIMES
 				{
 				mTIMES(); 
 
 				}
 				break;
 			case 30 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:180: TRUE
+				// src\\hoken\\parser\\Hoken.g:1:180: TRUE
 				{
 				mTRUE(); 
 
 				}
 				break;
 			case 31 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:185: WRITE
+				// src\\hoken\\parser\\Hoken.g:1:185: WRITE
 				{
 				mWRITE(); 
 
 				}
 				break;
 			case 32 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:191: ID
+				// src\\hoken\\parser\\Hoken.g:1:191: ID
 				{
 				mID(); 
 
 				}
 				break;
 			case 33 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:194: INT
+				// src\\hoken\\parser\\Hoken.g:1:194: INT
 				{
 				mINT(); 
 
 				}
 				break;
 			case 34 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:198: CHAR
+				// src\\hoken\\parser\\Hoken.g:1:198: CHAR
 				{
 				mCHAR(); 
 
 				}
 				break;
 			case 35 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:203: COMMENT
+				// src\\hoken\\parser\\Hoken.g:1:203: COMMENT
 				{
 				mCOMMENT(); 
 
 				}
 				break;
 			case 36 :
-				// ..\\src\\hoken\\parser\\Hoken.g:1:211: WS
+				// src\\hoken\\parser\\Hoken.g:1:211: WS
 				{
 				mWS(); 
 

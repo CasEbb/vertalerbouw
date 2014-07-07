@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 ..\\src\\hoken\\checker\\HokenChecker.g 2014-07-07 13:30:29
+// $ANTLR 3.5.2 src\\hoken\\checker\\HokenChecker.g 2014-07-07 17:47:35
 
 package hoken.checker;
 import hoken.HokenException;
@@ -81,7 +81,7 @@ public class HokenChecker extends TreeParser {
 	}
 
 	@Override public String[] getTokenNames() { return HokenChecker.tokenNames; }
-	@Override public String getGrammarFileName() { return "..\\src\\hoken\\checker\\HokenChecker.g"; }
+	@Override public String getGrammarFileName() { return "src\\hoken\\checker\\HokenChecker.g"; }
 
 
 	private int errors = 0;
@@ -104,17 +104,17 @@ public class HokenChecker extends TreeParser {
 
 
 	// $ANTLR start "program"
-	// ..\\src\\hoken\\checker\\HokenChecker.g:34:1: program : ^( PROGRAM ( statement )* ) ;
+	// src\\hoken\\checker\\HokenChecker.g:34:1: program : ^( PROGRAM ( statement )* ) ;
 	public final void program() throws RecognitionException {
 		try {
-			// ..\\src\\hoken\\checker\\HokenChecker.g:35:5: ( ^( PROGRAM ( statement )* ) )
-			// ..\\src\\hoken\\checker\\HokenChecker.g:35:9: ^( PROGRAM ( statement )* )
+			// src\\hoken\\checker\\HokenChecker.g:35:5: ( ^( PROGRAM ( statement )* ) )
+			// src\\hoken\\checker\\HokenChecker.g:35:9: ^( PROGRAM ( statement )* )
 			{
 			match(input,PROGRAM,FOLLOW_PROGRAM_in_program63); 
 			symtab.openScope();
 			if ( input.LA(1)==Token.DOWN ) {
 				match(input, Token.DOWN, null); 
-				// ..\\src\\hoken\\checker\\HokenChecker.g:37:13: ( statement )*
+				// src\\hoken\\checker\\HokenChecker.g:37:13: ( statement )*
 				loop1:
 				while (true) {
 					int alt1=2;
@@ -125,7 +125,7 @@ public class HokenChecker extends TreeParser {
 
 					switch (alt1) {
 					case 1 :
-						// ..\\src\\hoken\\checker\\HokenChecker.g:37:13: statement
+						// src\\hoken\\checker\\HokenChecker.g:37:13: statement
 						{
 						pushFollow(FOLLOW_statement_in_program91);
 						statement();
@@ -159,7 +159,7 @@ public class HokenChecker extends TreeParser {
 
 
 	// $ANTLR start "statement"
-	// ..\\src\\hoken\\checker\\HokenChecker.g:42:1: statement : ( ^(declaration= VAR type= ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ ) | ^(declaration= CONST type= ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ operand ) | expr );
+	// src\\hoken\\checker\\HokenChecker.g:42:1: statement : ( ^(declaration= VAR type= ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ ) | ^(declaration= CONST type= ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ operand ) | expr );
 	public final void statement() throws RecognitionException {
 		HokenNode declaration=null;
 		HokenNode type=null;
@@ -167,7 +167,7 @@ public class HokenChecker extends TreeParser {
 		List<Object> list_ids=null;
 
 		try {
-			// ..\\src\\hoken\\checker\\HokenChecker.g:43:5: ( ^(declaration= VAR type= ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ ) | ^(declaration= CONST type= ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ operand ) | expr )
+			// src\\hoken\\checker\\HokenChecker.g:43:5: ( ^(declaration= VAR type= ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ ) | ^(declaration= CONST type= ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ operand ) | expr )
 			int alt4=3;
 			switch ( input.LA(1) ) {
 			case VAR:
@@ -214,7 +214,7 @@ public class HokenChecker extends TreeParser {
 			}
 			switch (alt4) {
 				case 1 :
-					// ..\\src\\hoken\\checker\\HokenChecker.g:43:9: ^(declaration= VAR type= ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ )
+					// src\\hoken\\checker\\HokenChecker.g:43:9: ^(declaration= VAR type= ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ )
 					{
 					declaration=(HokenNode)match(input,VAR,FOLLOW_VAR_in_statement139); 
 					match(input, Token.DOWN, null); 
@@ -227,7 +227,7 @@ public class HokenChecker extends TreeParser {
 						MismatchedSetException mse = new MismatchedSetException(null,input);
 						throw mse;
 					}
-					// ..\\src\\hoken\\checker\\HokenChecker.g:43:60: (ids+= ID )+
+					// src\\hoken\\checker\\HokenChecker.g:43:60: (ids+= ID )+
 					int cnt2=0;
 					loop2:
 					while (true) {
@@ -239,7 +239,7 @@ public class HokenChecker extends TreeParser {
 
 						switch (alt2) {
 						case 1 :
-							// ..\\src\\hoken\\checker\\HokenChecker.g:43:61: ids+= ID
+							// src\\hoken\\checker\\HokenChecker.g:43:61: ids+= ID
 							{
 							ids=(HokenNode)match(input,ID,FOLLOW_ID_in_statement154); 
 							if (list_ids==null) list_ids=new ArrayList<Object>();
@@ -258,15 +258,17 @@ public class HokenChecker extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					                for(Object id : list_ids) {
-					                    symtab.enter(((CommonTree)id).getText(), (DeclarationNode)declaration);
-					                    declaration.type = Type.getType((type!=null?type.getText():null));
+					            	declaration.type = Type.getType((type!=null?type.getText():null));
+					                for(Object child : list_ids) {
+					                	String id = ((HokenNode)child).getText();
+					                    symtab.enter(id, (DeclarationNode)declaration);
+					                    ((DeclarationNode)declaration).ids.add(id);
 					                }
 					            
 					}
 					break;
 				case 2 :
-					// ..\\src\\hoken\\checker\\HokenChecker.g:50:9: ^(declaration= CONST type= ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ operand )
+					// src\\hoken\\checker\\HokenChecker.g:52:9: ^(declaration= CONST type= ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ operand )
 					{
 					declaration=(HokenNode)match(input,CONST,FOLLOW_CONST_in_statement184); 
 					match(input, Token.DOWN, null); 
@@ -279,7 +281,7 @@ public class HokenChecker extends TreeParser {
 						MismatchedSetException mse = new MismatchedSetException(null,input);
 						throw mse;
 					}
-					// ..\\src\\hoken\\checker\\HokenChecker.g:50:62: (ids+= ID )+
+					// src\\hoken\\checker\\HokenChecker.g:52:62: (ids+= ID )+
 					int cnt3=0;
 					loop3:
 					while (true) {
@@ -295,7 +297,7 @@ public class HokenChecker extends TreeParser {
 
 						switch (alt3) {
 						case 1 :
-							// ..\\src\\hoken\\checker\\HokenChecker.g:50:63: ids+= ID
+							// src\\hoken\\checker\\HokenChecker.g:52:63: ids+= ID
 							{
 							ids=(HokenNode)match(input,ID,FOLLOW_ID_in_statement199); 
 							if (list_ids==null) list_ids=new ArrayList<Object>();
@@ -318,16 +320,18 @@ public class HokenChecker extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					                for(Object id : list_ids) {
-					                    symtab.enter(((CommonTree)id).getText(), (DeclarationNode)declaration);
-					                    declaration.type = Type.getType((type!=null?type.getText():null));
-					                    ((DeclarationNode)declaration).isConstant = true;
+					                declaration.type = Type.getType((type!=null?type.getText():null));
+					                ((DeclarationNode)declaration).isConstant = true;
+					                for(Object child : list_ids) {
+					                	String id = ((HokenNode)child).getText();
+					                    symtab.enter(id, (DeclarationNode)declaration);
+					                    ((DeclarationNode)declaration).ids.add(id);
 					                }
 					            
 					}
 					break;
 				case 3 :
-					// ..\\src\\hoken\\checker\\HokenChecker.g:58:9: expr
+					// src\\hoken\\checker\\HokenChecker.g:62:9: expr
 					{
 					pushFollow(FOLLOW_expr_in_statement228);
 					expr();
@@ -351,7 +355,7 @@ public class HokenChecker extends TreeParser {
 
 
 	// $ANTLR start "expr"
-	// ..\\src\\hoken\\checker\\HokenChecker.g:61:1: expr : ( ^(exp= ( PLUS | MINUS ) expr ( expr )? ) | ^(exp= NOT expr ) | ^(exp= ( DIVIDE | MODULO | TIMES | AND | OR | LT | LTE | GT | GTE | EQ | NEQ ) expr expr ) | ^(compound= COMPOUND ( statement )* ) | ^(assign= ASSIGN expr expr ) | ^(write= WRITE ( expr )+ ) | ^(read= READ ( idref )+ ) | operand );
+	// src\\hoken\\checker\\HokenChecker.g:65:1: expr : ( ^(exp= ( PLUS | MINUS ) expr ( expr )? ) | ^(exp= NOT expr ) | ^(exp= ( DIVIDE | MODULO | TIMES | AND | OR | LT | LTE | GT | GTE | EQ | NEQ ) expr expr ) | ^(compound= COMPOUND ( statement )* ) | ^(assign= ASSIGN expr expr ) | ^(write= WRITE ( expr )+ ) | ^(read= READ ( idref )+ ) | operand );
 	public final void expr() throws RecognitionException {
 		HokenNode exp=null;
 		HokenNode compound=null;
@@ -360,7 +364,7 @@ public class HokenChecker extends TreeParser {
 		HokenNode read=null;
 
 		try {
-			// ..\\src\\hoken\\checker\\HokenChecker.g:61:5: ( ^(exp= ( PLUS | MINUS ) expr ( expr )? ) | ^(exp= NOT expr ) | ^(exp= ( DIVIDE | MODULO | TIMES | AND | OR | LT | LTE | GT | GTE | EQ | NEQ ) expr expr ) | ^(compound= COMPOUND ( statement )* ) | ^(assign= ASSIGN expr expr ) | ^(write= WRITE ( expr )+ ) | ^(read= READ ( idref )+ ) | operand )
+			// src\\hoken\\checker\\HokenChecker.g:65:5: ( ^(exp= ( PLUS | MINUS ) expr ( expr )? ) | ^(exp= NOT expr ) | ^(exp= ( DIVIDE | MODULO | TIMES | AND | OR | LT | LTE | GT | GTE | EQ | NEQ ) expr expr ) | ^(compound= COMPOUND ( statement )* ) | ^(assign= ASSIGN expr expr ) | ^(write= WRITE ( expr )+ ) | ^(read= READ ( idref )+ ) | operand )
 			int alt9=8;
 			switch ( input.LA(1) ) {
 			case MINUS:
@@ -425,7 +429,7 @@ public class HokenChecker extends TreeParser {
 			}
 			switch (alt9) {
 				case 1 :
-					// ..\\src\\hoken\\checker\\HokenChecker.g:61:9: ^(exp= ( PLUS | MINUS ) expr ( expr )? )
+					// src\\hoken\\checker\\HokenChecker.g:65:9: ^(exp= ( PLUS | MINUS ) expr ( expr )? )
 					{
 					exp=(HokenNode)input.LT(1);
 					if ( input.LA(1)==MINUS||input.LA(1)==PLUS ) {
@@ -441,7 +445,7 @@ public class HokenChecker extends TreeParser {
 					expr();
 					state._fsp--;
 
-					// ..\\src\\hoken\\checker\\HokenChecker.g:61:33: ( expr )?
+					// src\\hoken\\checker\\HokenChecker.g:65:33: ( expr )?
 					int alt5=2;
 					int LA5_0 = input.LA(1);
 					if ( ((LA5_0 >= AND && LA5_0 <= ASSIGN)||LA5_0==CHAR||LA5_0==COMPOUND||(LA5_0 >= DIVIDE && LA5_0 <= EQ)||(LA5_0 >= FALSE && LA5_0 <= INT)||(LA5_0 >= LT && LA5_0 <= PLUS)||LA5_0==READ||(LA5_0 >= TIMES && LA5_0 <= TRUE)||LA5_0==WRITE) ) {
@@ -449,7 +453,7 @@ public class HokenChecker extends TreeParser {
 					}
 					switch (alt5) {
 						case 1 :
-							// ..\\src\\hoken\\checker\\HokenChecker.g:61:33: expr
+							// src\\hoken\\checker\\HokenChecker.g:65:33: expr
 							{
 							pushFollow(FOLLOW_expr_in_expr253);
 							expr();
@@ -466,7 +470,7 @@ public class HokenChecker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// ..\\src\\hoken\\checker\\HokenChecker.g:63:9: ^(exp= NOT expr )
+					// src\\hoken\\checker\\HokenChecker.g:67:9: ^(exp= NOT expr )
 					{
 					exp=(HokenNode)match(input,NOT,FOLLOW_NOT_in_expr282); 
 					match(input, Token.DOWN, null); 
@@ -480,7 +484,7 @@ public class HokenChecker extends TreeParser {
 					}
 					break;
 				case 3 :
-					// ..\\src\\hoken\\checker\\HokenChecker.g:65:9: ^(exp= ( DIVIDE | MODULO | TIMES | AND | OR | LT | LTE | GT | GTE | EQ | NEQ ) expr expr )
+					// src\\hoken\\checker\\HokenChecker.g:69:9: ^(exp= ( DIVIDE | MODULO | TIMES | AND | OR | LT | LTE | GT | GTE | EQ | NEQ ) expr expr )
 					{
 					exp=(HokenNode)input.LT(1);
 					if ( input.LA(1)==AND||(input.LA(1) >= DIVIDE && input.LA(1) <= EQ)||(input.LA(1) >= GT && input.LA(1) <= GTE)||(input.LA(1) >= LT && input.LA(1) <= LTE)||(input.LA(1) >= MODULO && input.LA(1) <= NEQ)||input.LA(1)==OR||input.LA(1)==TIMES ) {
@@ -506,14 +510,13 @@ public class HokenChecker extends TreeParser {
 					}
 					break;
 				case 4 :
-					// ..\\src\\hoken\\checker\\HokenChecker.g:67:9: ^(compound= COMPOUND ( statement )* )
+					// src\\hoken\\checker\\HokenChecker.g:71:9: ^(compound= COMPOUND ( statement )* )
 					{
 					compound=(HokenNode)match(input,COMPOUND,FOLLOW_COMPOUND_in_expr366); 
-					compound.type = Type.VOID;
 					symtab.openScope();
 					if ( input.LA(1)==Token.DOWN ) {
 						match(input, Token.DOWN, null); 
-						// ..\\src\\hoken\\checker\\HokenChecker.g:70:13: ( statement )*
+						// src\\hoken\\checker\\HokenChecker.g:73:13: ( statement )*
 						loop6:
 						while (true) {
 							int alt6=2;
@@ -524,9 +527,9 @@ public class HokenChecker extends TreeParser {
 
 							switch (alt6) {
 							case 1 :
-								// ..\\src\\hoken\\checker\\HokenChecker.g:70:13: statement
+								// src\\hoken\\checker\\HokenChecker.g:73:13: statement
 								{
-								pushFollow(FOLLOW_statement_in_expr409);
+								pushFollow(FOLLOW_statement_in_expr395);
 								statement();
 								state._fsp--;
 
@@ -539,13 +542,14 @@ public class HokenChecker extends TreeParser {
 						}
 
 						symtab.closeScope();
+						compound.type = ((HokenNode)compound.getChild(compound.getChildCount()-1)).type;
 						match(input, Token.UP, null); 
 					}
 
 					}
 					break;
 				case 5 :
-					// ..\\src\\hoken\\checker\\HokenChecker.g:73:9: ^(assign= ASSIGN expr expr )
+					// src\\hoken\\checker\\HokenChecker.g:77:9: ^(assign= ASSIGN expr expr )
 					{
 					assign=(HokenNode)match(input,ASSIGN,FOLLOW_ASSIGN_in_expr447); 
 					match(input, Token.DOWN, null); 
@@ -571,18 +575,18 @@ public class HokenChecker extends TreeParser {
 					            }
 					            Type ex_type = ((HokenNode)assign.getChild(1)).type;
 					            if(id.type != ex_type) {
-					                throw new HokenException(assign, "Verkeerde combinatie: identifier '" + id.getText() + "' is van type " + id.type + ", maar er wordt " + ex_type + " toegekend");
+					                throw new HokenException(assign, "Verkeerde combinatie: identifier '" + id.getText() + "' is van type " + id.type.toString() + ", maar er wordt " + ex_type.toString() + " toegekend");
 					            }
 					            ((HokenNode)assign).type = ex_type;
 					        
 					}
 					break;
 				case 6 :
-					// ..\\src\\hoken\\checker\\HokenChecker.g:90:9: ^(write= WRITE ( expr )+ )
+					// src\\hoken\\checker\\HokenChecker.g:94:9: ^(write= WRITE ( expr )+ )
 					{
 					write=(HokenNode)match(input,WRITE,FOLLOW_WRITE_in_expr475); 
 					match(input, Token.DOWN, null); 
-					// ..\\src\\hoken\\checker\\HokenChecker.g:90:23: ( expr )+
+					// src\\hoken\\checker\\HokenChecker.g:94:23: ( expr )+
 					int cnt7=0;
 					loop7:
 					while (true) {
@@ -594,7 +598,7 @@ public class HokenChecker extends TreeParser {
 
 						switch (alt7) {
 						case 1 :
-							// ..\\src\\hoken\\checker\\HokenChecker.g:90:23: expr
+							// src\\hoken\\checker\\HokenChecker.g:94:23: expr
 							{
 							pushFollow(FOLLOW_expr_in_expr477);
 							expr();
@@ -627,11 +631,11 @@ public class HokenChecker extends TreeParser {
 					}
 					break;
 				case 7 :
-					// ..\\src\\hoken\\checker\\HokenChecker.g:102:9: ^(read= READ ( idref )+ )
+					// src\\hoken\\checker\\HokenChecker.g:106:9: ^(read= READ ( idref )+ )
 					{
 					read=(HokenNode)match(input,READ,FOLLOW_READ_in_expr502); 
 					match(input, Token.DOWN, null); 
-					// ..\\src\\hoken\\checker\\HokenChecker.g:102:21: ( idref )+
+					// src\\hoken\\checker\\HokenChecker.g:106:21: ( idref )+
 					int cnt8=0;
 					loop8:
 					while (true) {
@@ -643,7 +647,7 @@ public class HokenChecker extends TreeParser {
 
 						switch (alt8) {
 						case 1 :
-							// ..\\src\\hoken\\checker\\HokenChecker.g:102:21: idref
+							// src\\hoken\\checker\\HokenChecker.g:106:21: idref
 							{
 							pushFollow(FOLLOW_idref_in_expr504);
 							idref();
@@ -674,7 +678,7 @@ public class HokenChecker extends TreeParser {
 					}
 					break;
 				case 8 :
-					// ..\\src\\hoken\\checker\\HokenChecker.g:112:9: operand
+					// src\\hoken\\checker\\HokenChecker.g:116:9: operand
 					{
 					pushFollow(FOLLOW_operand_in_expr526);
 					operand();
@@ -698,14 +702,14 @@ public class HokenChecker extends TreeParser {
 
 
 	// $ANTLR start "operand"
-	// ..\\src\\hoken\\checker\\HokenChecker.g:115:1: operand : ( idref |i= INT |c= CHAR |b= ( TRUE | FALSE ) );
+	// src\\hoken\\checker\\HokenChecker.g:119:1: operand : ( idref |i= INT |c= CHAR |b= ( TRUE | FALSE ) );
 	public final void operand() throws RecognitionException {
 		HokenNode i=null;
 		HokenNode c=null;
 		HokenNode b=null;
 
 		try {
-			// ..\\src\\hoken\\checker\\HokenChecker.g:116:5: ( idref |i= INT |c= CHAR |b= ( TRUE | FALSE ) )
+			// src\\hoken\\checker\\HokenChecker.g:120:5: ( idref |i= INT |c= CHAR |b= ( TRUE | FALSE ) )
 			int alt10=4;
 			switch ( input.LA(1) ) {
 			case ID:
@@ -736,7 +740,7 @@ public class HokenChecker extends TreeParser {
 			}
 			switch (alt10) {
 				case 1 :
-					// ..\\src\\hoken\\checker\\HokenChecker.g:116:9: idref
+					// src\\hoken\\checker\\HokenChecker.g:120:9: idref
 					{
 					pushFollow(FOLLOW_idref_in_operand549);
 					idref();
@@ -745,21 +749,21 @@ public class HokenChecker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// ..\\src\\hoken\\checker\\HokenChecker.g:117:9: i= INT
+					// src\\hoken\\checker\\HokenChecker.g:121:9: i= INT
 					{
 					i=(HokenNode)match(input,INT,FOLLOW_INT_in_operand561); 
 					 i.type = Type.INTEGER; 
 					}
 					break;
 				case 3 :
-					// ..\\src\\hoken\\checker\\HokenChecker.g:119:9: c= CHAR
+					// src\\hoken\\checker\\HokenChecker.g:123:9: c= CHAR
 					{
 					c=(HokenNode)match(input,CHAR,FOLLOW_CHAR_in_operand583); 
 					 c.type = Type.CHARACTER; 
 					}
 					break;
 				case 4 :
-					// ..\\src\\hoken\\checker\\HokenChecker.g:121:9: b= ( TRUE | FALSE )
+					// src\\hoken\\checker\\HokenChecker.g:125:9: b= ( TRUE | FALSE )
 					{
 					b=(HokenNode)input.LT(1);
 					if ( input.LA(1)==FALSE||input.LA(1)==TRUE ) {
@@ -789,13 +793,13 @@ public class HokenChecker extends TreeParser {
 
 
 	// $ANTLR start "idref"
-	// ..\\src\\hoken\\checker\\HokenChecker.g:125:1: idref : id= ID ;
+	// src\\hoken\\checker\\HokenChecker.g:129:1: idref : id= ID ;
 	public final void idref() throws RecognitionException {
 		HokenNode id=null;
 
 		try {
-			// ..\\src\\hoken\\checker\\HokenChecker.g:126:5: (id= ID )
-			// ..\\src\\hoken\\checker\\HokenChecker.g:126:9: id= ID
+			// src\\hoken\\checker\\HokenChecker.g:130:5: (id= ID )
+			// src\\hoken\\checker\\HokenChecker.g:130:9: id= ID
 			{
 			id=(HokenNode)match(input,ID,FOLLOW_ID_in_idref640); 
 
@@ -839,7 +843,7 @@ public class HokenChecker extends TreeParser {
 	public static final BitSet FOLLOW_expr_in_expr336 = new BitSet(new long[]{0x00001327F87D90B0L});
 	public static final BitSet FOLLOW_expr_in_expr338 = new BitSet(new long[]{0x0000000000000008L});
 	public static final BitSet FOLLOW_COMPOUND_in_expr366 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_statement_in_expr409 = new BitSet(new long[]{0x00001B27F87DB0B8L});
+	public static final BitSet FOLLOW_statement_in_expr395 = new BitSet(new long[]{0x00001B27F87DB0B8L});
 	public static final BitSet FOLLOW_ASSIGN_in_expr447 = new BitSet(new long[]{0x0000000000000004L});
 	public static final BitSet FOLLOW_expr_in_expr449 = new BitSet(new long[]{0x00001327F87D90B0L});
 	public static final BitSet FOLLOW_expr_in_expr451 = new BitSet(new long[]{0x0000000000000008L});

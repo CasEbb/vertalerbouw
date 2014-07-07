@@ -14,6 +14,8 @@ import hoken.ast.*;
 
 @members {
 private int nextAddr = 0;
+private int scopeCounter = 0;
+private Stack<Integer> popCounter = new Stack<Integer>();
 
 class IOInstruction {
 	public Object attr;
@@ -37,10 +39,21 @@ statement
     :   ^(declaration=VAR (INTEGER|CHARACTER|BOOLEAN) (ids+=ID)+)
           {
               ((DeclarationNode)declaration).address = this.nextAddr;
-              this.nextAddr += $ids.size();
+              this.nextAddr     += $ids.size();
+              this.scopeCounter += $ids.size();
           }
           -> declaration(size={$ids.size()})
-    |   ^(CONST (INTEGER|CHARACTER|BOOLEAN) (ids+=ID)+ operand)
+    |   ^(declaration=CONST (INTEGER|CHARACTER|BOOLEAN) (ids+=ID)+ val=operand)
+          {
+              ((DeclarationNode)declaration).address = this.nextAddr;
+              this.nextAddr     += $ids.size();
+              this.scopeCounter += $ids.size();
+              
+              List<Integer> addrs = new ArrayList<Integer>();
+              for(int i = 0; i < $ids.size(); i++)
+                  addrs.add(((DeclarationNode)declaration).address + i);
+          }
+          -> constant(size={$ids.size()}, addrs={addrs}, val={val})
     |   expr { $st = $expr.st; }
     ;
 
@@ -56,10 +69,21 @@ expr:   ^(PLUS x=expr y=expr?)
           -> binexpr(x={$x.st}, y={$y.st}, instr={"div"})
     |   ^(MODULO x=expr y=expr)
           -> binexpr(x={$x.st}, y={$y.st}, instr={"mod"})
-    |   ^(COMPOUND (statements+=statement)*)
-          -> compound(instructions={$statements})
-    |   ^(AND x=expr y=expr)
-          -> binexpr(x={$x.st}, y={$y.st}, instr={"and"})
+    |   ^(compound=COMPOUND
+          {
+              this.popCounter.push(this.scopeCounter);
+              this.scopeCounter = 0;
+          }
+          (statements+=statement)*)
+          {
+              int pop            = this.scopeCounter;            // onthouden hoeveel variabelen we moeten poppen
+              this.scopeCounter  = this.popCounter.pop();        // scopeCounter terugzetten op de vorige scope
+              this.nextAddr     -= pop;                          // volgende adres kan omlaag
+              int result         = (compound.type != Type.VOID) ? 1 : 0; // onthoud een result als compound niet VOID is
+          }
+          -> compound(instructions={$statements}, numPop={pop}, popResult={result})
+    |   ^(op=AND x=expr y=expr)
+          -> binexpr(x={$x.st}, y={$y.st}, instr={"and"}, noReturn={op.shouldNotReturn()})
     |   ^(OR x=expr y=expr)
           -> binexpr(x={$x.st}, y={$y.st}, instr={"or"})
     |   ^(LT x=expr y=expr)
@@ -75,7 +99,7 @@ expr:   ^(PLUS x=expr y=expr?)
     |   ^(NEQ x=expr y=expr)
           -> ifexpr(x={$x.st}, y={$y.st}, instr={"ne"})
     |   ^(assign=ASSIGN id=ID e=expr)
-          -> assign(expr={$e.st}, addr={((IdNode)$id).declaration.address})
+          -> assign(expr={$e.st}, addr={((IdNode)$id).declaration.getOffsettedAddress((IdNode)$id)}, noReturn={assign.shouldNotReturn()})
     |   ^(write=WRITE (exprs+=expr)+)
     	{
     		List<IOInstruction> writes = new ArrayList<IOInstruction>();
@@ -84,22 +108,23 @@ expr:   ^(PLUS x=expr y=expr?)
     			writes.add(new IOInstruction($exprs.get(expr.childIndex), expr.type));
     		}  
     	}
-          -> write(writes={writes})
+          -> write(writes={writes}, noReturn={write.shouldNotReturn()})
     |   ^(read=READ (ids+=ID)+)
         {
             List<IOInstruction> reads = new ArrayList<IOInstruction>();
             for(Object child : $ids) {
                 IdNode I = (IdNode)child;
-                reads.add(new IOInstruction(I.declaration.address, I.declaration.type));
+                reads.add(new IOInstruction(I.declaration.getOffsettedAddress(I), I.declaration.type));
             }
         }
-          -> read(reads={reads})
+          -> read(reads={reads}, noReturn={read.shouldNotReturn()})
     |   operand { $st = $operand.st; }
     ;
 
 operand    
     :   id=ID
-          -> load(addr={((IdNode)$id).declaration.address})
+    	  {IdNode I = (IdNode)$id;}
+          -> load(addr={((IdNode)$id).declaration.getOffsettedAddress(I)})
     |   intval=INT
           -> integer(val={$intval.text})
     |   charval=CHAR

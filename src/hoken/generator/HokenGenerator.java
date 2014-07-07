@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 ..\\src\\hoken\\generator\\HokenGenerator.g 2014-07-07 14:09:55
+// $ANTLR 3.5.2 src\\hoken\\generator\\HokenGenerator.g 2014-07-07 18:57:04
 
 package hoken.generator;
 import hoken.ast.*;
@@ -102,10 +102,12 @@ public class HokenGenerator extends TreeParser {
 		}
 	}
 	@Override public String[] getTokenNames() { return HokenGenerator.tokenNames; }
-	@Override public String getGrammarFileName() { return "..\\src\\hoken\\generator\\HokenGenerator.g"; }
+	@Override public String getGrammarFileName() { return "src\\hoken\\generator\\HokenGenerator.g"; }
 
 
 	private int nextAddr = 0;
+	private int scopeCounter = 0;
+	private Stack<Integer> popCounter = new Stack<Integer>();
 
 	class IOInstruction {
 		public Object attr;
@@ -128,7 +130,7 @@ public class HokenGenerator extends TreeParser {
 
 
 	// $ANTLR start "program"
-	// ..\\src\\hoken\\generator\\HokenGenerator.g:31:1: program : ^( PROGRAM (statements+= statement )* ) -> program(instructions=$statements);
+	// src\\hoken\\generator\\HokenGenerator.g:33:1: program : ^( PROGRAM (statements+= statement )* ) -> program(instructions=$statements);
 	public final HokenGenerator.program_return program() throws RecognitionException {
 		HokenGenerator.program_return retval = new HokenGenerator.program_return();
 		retval.start = input.LT(1);
@@ -136,13 +138,13 @@ public class HokenGenerator extends TreeParser {
 		List<Object> list_statements=null;
 		RuleReturnScope statements = null;
 		try {
-			// ..\\src\\hoken\\generator\\HokenGenerator.g:32:5: ( ^( PROGRAM (statements+= statement )* ) -> program(instructions=$statements))
-			// ..\\src\\hoken\\generator\\HokenGenerator.g:32:9: ^( PROGRAM (statements+= statement )* )
+			// src\\hoken\\generator\\HokenGenerator.g:34:5: ( ^( PROGRAM (statements+= statement )* ) -> program(instructions=$statements))
+			// src\\hoken\\generator\\HokenGenerator.g:34:9: ^( PROGRAM (statements+= statement )* )
 			{
 			match(input,PROGRAM,FOLLOW_PROGRAM_in_program72); 
 			if ( input.LA(1)==Token.DOWN ) {
 				match(input, Token.DOWN, null); 
-				// ..\\src\\hoken\\generator\\HokenGenerator.g:32:19: (statements+= statement )*
+				// src\\hoken\\generator\\HokenGenerator.g:34:19: (statements+= statement )*
 				loop1:
 				while (true) {
 					int alt1=2;
@@ -153,7 +155,7 @@ public class HokenGenerator extends TreeParser {
 
 					switch (alt1) {
 					case 1 :
-						// ..\\src\\hoken\\generator\\HokenGenerator.g:32:20: statements+= statement
+						// src\\hoken\\generator\\HokenGenerator.g:34:20: statements+= statement
 						{
 						pushFollow(FOLLOW_statement_in_program77);
 						statements=statement();
@@ -173,7 +175,7 @@ public class HokenGenerator extends TreeParser {
 			}
 
 			// TEMPLATE REWRITE
-			// 33:11: -> program(instructions=$statements)
+			// 35:11: -> program(instructions=$statements)
 			{
 				retval.st = templateLib.getInstanceOf("program",new STAttrMap().put("instructions", list_statements));
 			}
@@ -203,7 +205,7 @@ public class HokenGenerator extends TreeParser {
 
 
 	// $ANTLR start "statement"
-	// ..\\src\\hoken\\generator\\HokenGenerator.g:36:1: statement : ( ^(declaration= VAR ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ ) -> declaration(size=$ids.size())| ^( CONST ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ operand ) | expr );
+	// src\\hoken\\generator\\HokenGenerator.g:38:1: statement : ( ^(declaration= VAR ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ ) -> declaration(size=$ids.size())| ^(declaration= CONST ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ val= operand ) -> constant(size=$ids.size()addrs=addrsval=val)| expr );
 	public final HokenGenerator.statement_return statement() throws RecognitionException {
 		HokenGenerator.statement_return retval = new HokenGenerator.statement_return();
 		retval.start = input.LT(1);
@@ -211,20 +213,21 @@ public class HokenGenerator extends TreeParser {
 		HokenNode declaration=null;
 		HokenNode ids=null;
 		List<Object> list_ids=null;
+		TreeRuleReturnScope val =null;
 		TreeRuleReturnScope expr1 =null;
 
 		try {
-			// ..\\src\\hoken\\generator\\HokenGenerator.g:37:5: ( ^(declaration= VAR ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ ) -> declaration(size=$ids.size())| ^( CONST ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ operand ) | expr )
-			int alt5=3;
+			// src\\hoken\\generator\\HokenGenerator.g:39:5: ( ^(declaration= VAR ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ ) -> declaration(size=$ids.size())| ^(declaration= CONST ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ val= operand ) -> constant(size=$ids.size()addrs=addrsval=val)| expr )
+			int alt6=3;
 			switch ( input.LA(1) ) {
 			case VAR:
 				{
-				alt5=1;
+				alt6=1;
 				}
 				break;
 			case CONST:
 				{
-				alt5=2;
+				alt6=2;
 				}
 				break;
 			case AND:
@@ -251,21 +254,21 @@ public class HokenGenerator extends TreeParser {
 			case TRUE:
 			case WRITE:
 				{
-				alt5=3;
+				alt6=3;
 				}
 				break;
 			default:
 				NoViableAltException nvae =
-					new NoViableAltException("", 5, 0, input);
+					new NoViableAltException("", 6, 0, input);
 				throw nvae;
 			}
-			switch (alt5) {
+			switch (alt6) {
 				case 1 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:37:9: ^(declaration= VAR ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ )
+					// src\\hoken\\generator\\HokenGenerator.g:39:9: ^(declaration= VAR ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ )
 					{
 					declaration=(HokenNode)match(input,VAR,FOLLOW_VAR_in_statement121); 
 					match(input, Token.DOWN, null); 
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:37:27: ( INTEGER | CHARACTER | BOOLEAN )
+					// src\\hoken\\generator\\HokenGenerator.g:39:27: ( INTEGER | CHARACTER | BOOLEAN )
 					int alt2=3;
 					switch ( input.LA(1) ) {
 					case INTEGER:
@@ -290,19 +293,19 @@ public class HokenGenerator extends TreeParser {
 					}
 					switch (alt2) {
 						case 1 :
-							// ..\\src\\hoken\\generator\\HokenGenerator.g:37:28: INTEGER
+							// src\\hoken\\generator\\HokenGenerator.g:39:28: INTEGER
 							{
 							match(input,INTEGER,FOLLOW_INTEGER_in_statement124); 
 							}
 							break;
 						case 2 :
-							// ..\\src\\hoken\\generator\\HokenGenerator.g:37:36: CHARACTER
+							// src\\hoken\\generator\\HokenGenerator.g:39:36: CHARACTER
 							{
 							match(input,CHARACTER,FOLLOW_CHARACTER_in_statement126); 
 							}
 							break;
 						case 3 :
-							// ..\\src\\hoken\\generator\\HokenGenerator.g:37:46: BOOLEAN
+							// src\\hoken\\generator\\HokenGenerator.g:39:46: BOOLEAN
 							{
 							match(input,BOOLEAN,FOLLOW_BOOLEAN_in_statement128); 
 							}
@@ -310,7 +313,7 @@ public class HokenGenerator extends TreeParser {
 
 					}
 
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:37:55: (ids+= ID )+
+					// src\\hoken\\generator\\HokenGenerator.g:39:55: (ids+= ID )+
 					int cnt3=0;
 					loop3:
 					while (true) {
@@ -322,7 +325,7 @@ public class HokenGenerator extends TreeParser {
 
 						switch (alt3) {
 						case 1 :
-							// ..\\src\\hoken\\generator\\HokenGenerator.g:37:56: ids+= ID
+							// src\\hoken\\generator\\HokenGenerator.g:39:56: ids+= ID
 							{
 							ids=(HokenNode)match(input,ID,FOLLOW_ID_in_statement134); 
 							if (list_ids==null) list_ids=new ArrayList<Object>();
@@ -342,10 +345,11 @@ public class HokenGenerator extends TreeParser {
 
 
 					              ((DeclarationNode)declaration).address = this.nextAddr;
-					              this.nextAddr += list_ids.size();
+					              this.nextAddr     += list_ids.size();
+					              this.scopeCounter += list_ids.size();
 					          
 					// TEMPLATE REWRITE
-					// 42:11: -> declaration(size=$ids.size())
+					// 45:11: -> declaration(size=$ids.size())
 					{
 						retval.st = templateLib.getInstanceOf("declaration",new STAttrMap().put("size", list_ids.size()));
 					}
@@ -355,62 +359,116 @@ public class HokenGenerator extends TreeParser {
 					}
 					break;
 				case 2 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:43:9: ^( CONST ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ operand )
+					// src\\hoken\\generator\\HokenGenerator.g:46:9: ^(declaration= CONST ( INTEGER | CHARACTER | BOOLEAN ) (ids+= ID )+ val= operand )
 					{
-					match(input,CONST,FOLLOW_CONST_in_statement179); 
+					declaration=(HokenNode)match(input,CONST,FOLLOW_CONST_in_statement181); 
 					match(input, Token.DOWN, null); 
-					if ( input.LA(1)==BOOLEAN||input.LA(1)==CHARACTER||input.LA(1)==INTEGER ) {
-						input.consume();
-						state.errorRecovery=false;
+					// src\\hoken\\generator\\HokenGenerator.g:46:29: ( INTEGER | CHARACTER | BOOLEAN )
+					int alt4=3;
+					switch ( input.LA(1) ) {
+					case INTEGER:
+						{
+						alt4=1;
+						}
+						break;
+					case CHARACTER:
+						{
+						alt4=2;
+						}
+						break;
+					case BOOLEAN:
+						{
+						alt4=3;
+						}
+						break;
+					default:
+						NoViableAltException nvae =
+							new NoViableAltException("", 4, 0, input);
+						throw nvae;
 					}
-					else {
-						MismatchedSetException mse = new MismatchedSetException(null,input);
-						throw mse;
+					switch (alt4) {
+						case 1 :
+							// src\\hoken\\generator\\HokenGenerator.g:46:30: INTEGER
+							{
+							match(input,INTEGER,FOLLOW_INTEGER_in_statement184); 
+							}
+							break;
+						case 2 :
+							// src\\hoken\\generator\\HokenGenerator.g:46:38: CHARACTER
+							{
+							match(input,CHARACTER,FOLLOW_CHARACTER_in_statement186); 
+							}
+							break;
+						case 3 :
+							// src\\hoken\\generator\\HokenGenerator.g:46:48: BOOLEAN
+							{
+							match(input,BOOLEAN,FOLLOW_BOOLEAN_in_statement188); 
+							}
+							break;
+
 					}
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:43:45: (ids+= ID )+
-					int cnt4=0;
-					loop4:
+
+					// src\\hoken\\generator\\HokenGenerator.g:46:57: (ids+= ID )+
+					int cnt5=0;
+					loop5:
 					while (true) {
-						int alt4=2;
-						int LA4_0 = input.LA(1);
-						if ( (LA4_0==ID) ) {
-							int LA4_1 = input.LA(2);
-							if ( (LA4_1==CHAR||LA4_1==FALSE||(LA4_1 >= ID && LA4_1 <= INT)||LA4_1==TRUE) ) {
-								alt4=1;
+						int alt5=2;
+						int LA5_0 = input.LA(1);
+						if ( (LA5_0==ID) ) {
+							int LA5_1 = input.LA(2);
+							if ( (LA5_1==CHAR||LA5_1==FALSE||(LA5_1 >= ID && LA5_1 <= INT)||LA5_1==TRUE) ) {
+								alt5=1;
 							}
 
 						}
 
-						switch (alt4) {
+						switch (alt5) {
 						case 1 :
-							// ..\\src\\hoken\\generator\\HokenGenerator.g:43:46: ids+= ID
+							// src\\hoken\\generator\\HokenGenerator.g:46:58: ids+= ID
 							{
-							ids=(HokenNode)match(input,ID,FOLLOW_ID_in_statement192); 
+							ids=(HokenNode)match(input,ID,FOLLOW_ID_in_statement194); 
 							if (list_ids==null) list_ids=new ArrayList<Object>();
 							list_ids.add(ids);
 							}
 							break;
 
 						default :
-							if ( cnt4 >= 1 ) break loop4;
-							EarlyExitException eee = new EarlyExitException(4, input);
+							if ( cnt5 >= 1 ) break loop5;
+							EarlyExitException eee = new EarlyExitException(5, input);
 							throw eee;
 						}
-						cnt4++;
+						cnt5++;
 					}
 
-					pushFollow(FOLLOW_operand_in_statement196);
-					operand();
+					pushFollow(FOLLOW_operand_in_statement200);
+					val=operand();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
+
+					              ((DeclarationNode)declaration).address = this.nextAddr;
+					              this.nextAddr     += list_ids.size();
+					              this.scopeCounter += list_ids.size();
+					              
+					              List<Integer> addrs = new ArrayList<Integer>();
+					              for(int i = 0; i < list_ids.size(); i++)
+					                  addrs.add(((DeclarationNode)declaration).address + i);
+					          
+					// TEMPLATE REWRITE
+					// 56:11: -> constant(size=$ids.size()addrs=addrsval=val)
+					{
+						retval.st = templateLib.getInstanceOf("constant",new STAttrMap().put("size", list_ids.size()).put("addrs", addrs).put("val", val));
+					}
+
+
+
 					}
 					break;
 				case 3 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:44:9: expr
+					// src\\hoken\\generator\\HokenGenerator.g:57:9: expr
 					{
-					pushFollow(FOLLOW_expr_in_statement207);
+					pushFollow(FOLLOW_expr_in_statement252);
 					expr1=expr();
 					state._fsp--;
 
@@ -440,11 +498,13 @@ public class HokenGenerator extends TreeParser {
 
 
 	// $ANTLR start "expr"
-	// ..\\src\\hoken\\generator\\HokenGenerator.g:47:1: expr : ( ^( PLUS x= expr (y= expr )? ) -> addexpr(x=$x.sty=$y.st)| ^( MINUS x= expr (y= expr )? ) -> subexpr(x=$x.sty=$y.st)| ^( NOT x= expr ) -> notexpr(x=$x.st)| ^( TIMES x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"mult\")| ^( DIVIDE x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"div\")| ^( MODULO x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"mod\")| ^( COMPOUND (statements+= statement )* ) -> compound(instructions=$statements)| ^( AND x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"and\")| ^( OR x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"or\")| ^( LT x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"lt\")| ^( LTE x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"le\")| ^( GT x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"gt\")| ^( GTE x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"ge\")| ^( EQ x= expr y= expr ) -> ifexpr(x=$x.sty=$y.stinstr=\"eq\")| ^( NEQ x= expr y= expr ) -> ifexpr(x=$x.sty=$y.stinstr=\"ne\")| ^(assign= ASSIGN id= ID e= expr ) -> assign(expr=$e.staddr=((IdNode)$id).declaration.address)| ^(write= WRITE (exprs+= expr )+ ) -> write(writes=writes)| ^(read= READ (ids+= ID )+ ) -> read(reads=reads)| operand );
+	// src\\hoken\\generator\\HokenGenerator.g:60:1: expr : ( ^( PLUS x= expr (y= expr )? ) -> addexpr(x=$x.sty=$y.st)| ^( MINUS x= expr (y= expr )? ) -> subexpr(x=$x.sty=$y.st)| ^( NOT x= expr ) -> notexpr(x=$x.st)| ^( TIMES x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"mult\")| ^( DIVIDE x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"div\")| ^( MODULO x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"mod\")| ^(compound= COMPOUND (statements+= statement )* ) -> compound(instructions=$statementsnumPop=poppopResult=result)| ^(op= AND x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"and\"noReturn=op.shouldNotReturn())| ^( OR x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"or\")| ^( LT x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"lt\")| ^( LTE x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"le\")| ^( GT x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"gt\")| ^( GTE x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"ge\")| ^( EQ x= expr y= expr ) -> ifexpr(x=$x.sty=$y.stinstr=\"eq\")| ^( NEQ x= expr y= expr ) -> ifexpr(x=$x.sty=$y.stinstr=\"ne\")| ^(assign= ASSIGN id= ID e= expr ) -> assign(expr=$e.staddr=((IdNode)$id).declaration.getOffsettedAddress((IdNode)$id)noReturn=assign.shouldNotReturn())| ^(write= WRITE (exprs+= expr )+ ) -> write(writes=writesnoReturn=write.shouldNotReturn())| ^(read= READ (ids+= ID )+ ) -> read(reads=readsnoReturn=read.shouldNotReturn())| operand );
 	public final HokenGenerator.expr_return expr() throws RecognitionException {
 		HokenGenerator.expr_return retval = new HokenGenerator.expr_return();
 		retval.start = input.LT(1);
 
+		HokenNode compound=null;
+		HokenNode op=null;
 		HokenNode assign=null;
 		HokenNode id=null;
 		HokenNode write=null;
@@ -460,97 +520,97 @@ public class HokenGenerator extends TreeParser {
 		RuleReturnScope statements = null;
 		RuleReturnScope exprs = null;
 		try {
-			// ..\\src\\hoken\\generator\\HokenGenerator.g:47:5: ( ^( PLUS x= expr (y= expr )? ) -> addexpr(x=$x.sty=$y.st)| ^( MINUS x= expr (y= expr )? ) -> subexpr(x=$x.sty=$y.st)| ^( NOT x= expr ) -> notexpr(x=$x.st)| ^( TIMES x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"mult\")| ^( DIVIDE x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"div\")| ^( MODULO x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"mod\")| ^( COMPOUND (statements+= statement )* ) -> compound(instructions=$statements)| ^( AND x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"and\")| ^( OR x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"or\")| ^( LT x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"lt\")| ^( LTE x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"le\")| ^( GT x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"gt\")| ^( GTE x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"ge\")| ^( EQ x= expr y= expr ) -> ifexpr(x=$x.sty=$y.stinstr=\"eq\")| ^( NEQ x= expr y= expr ) -> ifexpr(x=$x.sty=$y.stinstr=\"ne\")| ^(assign= ASSIGN id= ID e= expr ) -> assign(expr=$e.staddr=((IdNode)$id).declaration.address)| ^(write= WRITE (exprs+= expr )+ ) -> write(writes=writes)| ^(read= READ (ids+= ID )+ ) -> read(reads=reads)| operand )
-			int alt11=19;
+			// src\\hoken\\generator\\HokenGenerator.g:60:5: ( ^( PLUS x= expr (y= expr )? ) -> addexpr(x=$x.sty=$y.st)| ^( MINUS x= expr (y= expr )? ) -> subexpr(x=$x.sty=$y.st)| ^( NOT x= expr ) -> notexpr(x=$x.st)| ^( TIMES x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"mult\")| ^( DIVIDE x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"div\")| ^( MODULO x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"mod\")| ^(compound= COMPOUND (statements+= statement )* ) -> compound(instructions=$statementsnumPop=poppopResult=result)| ^(op= AND x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"and\"noReturn=op.shouldNotReturn())| ^( OR x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"or\")| ^( LT x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"lt\")| ^( LTE x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"le\")| ^( GT x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"gt\")| ^( GTE x= expr y= expr ) -> binexpr(x=$x.sty=$y.stinstr=\"ge\")| ^( EQ x= expr y= expr ) -> ifexpr(x=$x.sty=$y.stinstr=\"eq\")| ^( NEQ x= expr y= expr ) -> ifexpr(x=$x.sty=$y.stinstr=\"ne\")| ^(assign= ASSIGN id= ID e= expr ) -> assign(expr=$e.staddr=((IdNode)$id).declaration.getOffsettedAddress((IdNode)$id)noReturn=assign.shouldNotReturn())| ^(write= WRITE (exprs+= expr )+ ) -> write(writes=writesnoReturn=write.shouldNotReturn())| ^(read= READ (ids+= ID )+ ) -> read(reads=readsnoReturn=read.shouldNotReturn())| operand )
+			int alt12=19;
 			switch ( input.LA(1) ) {
 			case PLUS:
 				{
-				alt11=1;
+				alt12=1;
 				}
 				break;
 			case MINUS:
 				{
-				alt11=2;
+				alt12=2;
 				}
 				break;
 			case NOT:
 				{
-				alt11=3;
+				alt12=3;
 				}
 				break;
 			case TIMES:
 				{
-				alt11=4;
+				alt12=4;
 				}
 				break;
 			case DIVIDE:
 				{
-				alt11=5;
+				alt12=5;
 				}
 				break;
 			case MODULO:
 				{
-				alt11=6;
+				alt12=6;
 				}
 				break;
 			case COMPOUND:
 				{
-				alt11=7;
+				alt12=7;
 				}
 				break;
 			case AND:
 				{
-				alt11=8;
+				alt12=8;
 				}
 				break;
 			case OR:
 				{
-				alt11=9;
+				alt12=9;
 				}
 				break;
 			case LT:
 				{
-				alt11=10;
+				alt12=10;
 				}
 				break;
 			case LTE:
 				{
-				alt11=11;
+				alt12=11;
 				}
 				break;
 			case GT:
 				{
-				alt11=12;
+				alt12=12;
 				}
 				break;
 			case GTE:
 				{
-				alt11=13;
+				alt12=13;
 				}
 				break;
 			case EQ:
 				{
-				alt11=14;
+				alt12=14;
 				}
 				break;
 			case NEQ:
 				{
-				alt11=15;
+				alt12=15;
 				}
 				break;
 			case ASSIGN:
 				{
-				alt11=16;
+				alt12=16;
 				}
 				break;
 			case WRITE:
 				{
-				alt11=17;
+				alt12=17;
 				}
 				break;
 			case READ:
 				{
-				alt11=18;
+				alt12=18;
 				}
 				break;
 			case CHAR:
@@ -559,35 +619,35 @@ public class HokenGenerator extends TreeParser {
 			case INT:
 			case TRUE:
 				{
-				alt11=19;
+				alt12=19;
 				}
 				break;
 			default:
 				NoViableAltException nvae =
-					new NoViableAltException("", 11, 0, input);
+					new NoViableAltException("", 12, 0, input);
 				throw nvae;
 			}
-			switch (alt11) {
+			switch (alt12) {
 				case 1 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:47:9: ^( PLUS x= expr (y= expr )? )
+					// src\\hoken\\generator\\HokenGenerator.g:60:9: ^( PLUS x= expr (y= expr )? )
 					{
-					match(input,PLUS,FOLLOW_PLUS_in_expr224); 
+					match(input,PLUS,FOLLOW_PLUS_in_expr269); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr228);
+					pushFollow(FOLLOW_expr_in_expr273);
 					x=expr();
 					state._fsp--;
 
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:47:24: (y= expr )?
-					int alt6=2;
-					int LA6_0 = input.LA(1);
-					if ( ((LA6_0 >= AND && LA6_0 <= ASSIGN)||LA6_0==CHAR||LA6_0==COMPOUND||(LA6_0 >= DIVIDE && LA6_0 <= EQ)||(LA6_0 >= FALSE && LA6_0 <= INT)||(LA6_0 >= LT && LA6_0 <= PLUS)||LA6_0==READ||(LA6_0 >= TIMES && LA6_0 <= TRUE)||LA6_0==WRITE) ) {
-						alt6=1;
+					// src\\hoken\\generator\\HokenGenerator.g:60:24: (y= expr )?
+					int alt7=2;
+					int LA7_0 = input.LA(1);
+					if ( ((LA7_0 >= AND && LA7_0 <= ASSIGN)||LA7_0==CHAR||LA7_0==COMPOUND||(LA7_0 >= DIVIDE && LA7_0 <= EQ)||(LA7_0 >= FALSE && LA7_0 <= INT)||(LA7_0 >= LT && LA7_0 <= PLUS)||LA7_0==READ||(LA7_0 >= TIMES && LA7_0 <= TRUE)||LA7_0==WRITE) ) {
+						alt7=1;
 					}
-					switch (alt6) {
+					switch (alt7) {
 						case 1 :
-							// ..\\src\\hoken\\generator\\HokenGenerator.g:47:24: y= expr
+							// src\\hoken\\generator\\HokenGenerator.g:60:24: y= expr
 							{
-							pushFollow(FOLLOW_expr_in_expr232);
+							pushFollow(FOLLOW_expr_in_expr277);
 							y=expr();
 							state._fsp--;
 
@@ -599,7 +659,7 @@ public class HokenGenerator extends TreeParser {
 					match(input, Token.UP, null); 
 
 					// TEMPLATE REWRITE
-					// 48:11: -> addexpr(x=$x.sty=$y.st)
+					// 61:11: -> addexpr(x=$x.sty=$y.st)
 					{
 						retval.st = templateLib.getInstanceOf("addexpr",new STAttrMap().put("x", (x!=null?((StringTemplate)x.getTemplate()):null)).put("y", (y!=null?((StringTemplate)y.getTemplate()):null)));
 					}
@@ -609,25 +669,25 @@ public class HokenGenerator extends TreeParser {
 					}
 					break;
 				case 2 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:49:9: ^( MINUS x= expr (y= expr )? )
+					// src\\hoken\\generator\\HokenGenerator.g:62:9: ^( MINUS x= expr (y= expr )? )
 					{
-					match(input,MINUS,FOLLOW_MINUS_in_expr271); 
+					match(input,MINUS,FOLLOW_MINUS_in_expr316); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr275);
+					pushFollow(FOLLOW_expr_in_expr320);
 					x=expr();
 					state._fsp--;
 
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:49:25: (y= expr )?
-					int alt7=2;
-					int LA7_0 = input.LA(1);
-					if ( ((LA7_0 >= AND && LA7_0 <= ASSIGN)||LA7_0==CHAR||LA7_0==COMPOUND||(LA7_0 >= DIVIDE && LA7_0 <= EQ)||(LA7_0 >= FALSE && LA7_0 <= INT)||(LA7_0 >= LT && LA7_0 <= PLUS)||LA7_0==READ||(LA7_0 >= TIMES && LA7_0 <= TRUE)||LA7_0==WRITE) ) {
-						alt7=1;
+					// src\\hoken\\generator\\HokenGenerator.g:62:25: (y= expr )?
+					int alt8=2;
+					int LA8_0 = input.LA(1);
+					if ( ((LA8_0 >= AND && LA8_0 <= ASSIGN)||LA8_0==CHAR||LA8_0==COMPOUND||(LA8_0 >= DIVIDE && LA8_0 <= EQ)||(LA8_0 >= FALSE && LA8_0 <= INT)||(LA8_0 >= LT && LA8_0 <= PLUS)||LA8_0==READ||(LA8_0 >= TIMES && LA8_0 <= TRUE)||LA8_0==WRITE) ) {
+						alt8=1;
 					}
-					switch (alt7) {
+					switch (alt8) {
 						case 1 :
-							// ..\\src\\hoken\\generator\\HokenGenerator.g:49:25: y= expr
+							// src\\hoken\\generator\\HokenGenerator.g:62:25: y= expr
 							{
-							pushFollow(FOLLOW_expr_in_expr279);
+							pushFollow(FOLLOW_expr_in_expr324);
 							y=expr();
 							state._fsp--;
 
@@ -639,7 +699,7 @@ public class HokenGenerator extends TreeParser {
 					match(input, Token.UP, null); 
 
 					// TEMPLATE REWRITE
-					// 50:11: -> subexpr(x=$x.sty=$y.st)
+					// 63:11: -> subexpr(x=$x.sty=$y.st)
 					{
 						retval.st = templateLib.getInstanceOf("subexpr",new STAttrMap().put("x", (x!=null?((StringTemplate)x.getTemplate()):null)).put("y", (y!=null?((StringTemplate)y.getTemplate()):null)));
 					}
@@ -649,18 +709,18 @@ public class HokenGenerator extends TreeParser {
 					}
 					break;
 				case 3 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:51:9: ^( NOT x= expr )
+					// src\\hoken\\generator\\HokenGenerator.g:64:9: ^( NOT x= expr )
 					{
-					match(input,NOT,FOLLOW_NOT_in_expr318); 
+					match(input,NOT,FOLLOW_NOT_in_expr363); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr322);
+					pushFollow(FOLLOW_expr_in_expr367);
 					x=expr();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 					// TEMPLATE REWRITE
-					// 52:11: -> notexpr(x=$x.st)
+					// 65:11: -> notexpr(x=$x.st)
 					{
 						retval.st = templateLib.getInstanceOf("notexpr",new STAttrMap().put("x", (x!=null?((StringTemplate)x.getTemplate()):null)));
 					}
@@ -670,22 +730,22 @@ public class HokenGenerator extends TreeParser {
 					}
 					break;
 				case 4 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:53:9: ^( TIMES x= expr y= expr )
+					// src\\hoken\\generator\\HokenGenerator.g:66:9: ^( TIMES x= expr y= expr )
 					{
-					match(input,TIMES,FOLLOW_TIMES_in_expr353); 
+					match(input,TIMES,FOLLOW_TIMES_in_expr398); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr357);
+					pushFollow(FOLLOW_expr_in_expr402);
 					x=expr();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expr_in_expr361);
+					pushFollow(FOLLOW_expr_in_expr406);
 					y=expr();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 					// TEMPLATE REWRITE
-					// 54:11: -> binexpr(x=$x.sty=$y.stinstr=\"mult\")
+					// 67:11: -> binexpr(x=$x.sty=$y.stinstr=\"mult\")
 					{
 						retval.st = templateLib.getInstanceOf("binexpr",new STAttrMap().put("x", (x!=null?((StringTemplate)x.getTemplate()):null)).put("y", (y!=null?((StringTemplate)y.getTemplate()):null)).put("instr", "mult"));
 					}
@@ -695,22 +755,22 @@ public class HokenGenerator extends TreeParser {
 					}
 					break;
 				case 5 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:55:9: ^( DIVIDE x= expr y= expr )
+					// src\\hoken\\generator\\HokenGenerator.g:68:9: ^( DIVIDE x= expr y= expr )
 					{
-					match(input,DIVIDE,FOLLOW_DIVIDE_in_expr402); 
+					match(input,DIVIDE,FOLLOW_DIVIDE_in_expr447); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr406);
+					pushFollow(FOLLOW_expr_in_expr451);
 					x=expr();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expr_in_expr410);
+					pushFollow(FOLLOW_expr_in_expr455);
 					y=expr();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 					// TEMPLATE REWRITE
-					// 56:11: -> binexpr(x=$x.sty=$y.stinstr=\"div\")
+					// 69:11: -> binexpr(x=$x.sty=$y.stinstr=\"div\")
 					{
 						retval.st = templateLib.getInstanceOf("binexpr",new STAttrMap().put("x", (x!=null?((StringTemplate)x.getTemplate()):null)).put("y", (y!=null?((StringTemplate)y.getTemplate()):null)).put("instr", "div"));
 					}
@@ -720,22 +780,22 @@ public class HokenGenerator extends TreeParser {
 					}
 					break;
 				case 6 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:57:9: ^( MODULO x= expr y= expr )
+					// src\\hoken\\generator\\HokenGenerator.g:70:9: ^( MODULO x= expr y= expr )
 					{
-					match(input,MODULO,FOLLOW_MODULO_in_expr451); 
+					match(input,MODULO,FOLLOW_MODULO_in_expr496); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr455);
+					pushFollow(FOLLOW_expr_in_expr500);
 					x=expr();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expr_in_expr459);
+					pushFollow(FOLLOW_expr_in_expr504);
 					y=expr();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 					// TEMPLATE REWRITE
-					// 58:11: -> binexpr(x=$x.sty=$y.stinstr=\"mod\")
+					// 71:11: -> binexpr(x=$x.sty=$y.stinstr=\"mod\")
 					{
 						retval.st = templateLib.getInstanceOf("binexpr",new STAttrMap().put("x", (x!=null?((StringTemplate)x.getTemplate()):null)).put("y", (y!=null?((StringTemplate)y.getTemplate()):null)).put("instr", "mod"));
 					}
@@ -745,25 +805,29 @@ public class HokenGenerator extends TreeParser {
 					}
 					break;
 				case 7 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:59:9: ^( COMPOUND (statements+= statement )* )
+					// src\\hoken\\generator\\HokenGenerator.g:72:9: ^(compound= COMPOUND (statements+= statement )* )
 					{
-					match(input,COMPOUND,FOLLOW_COMPOUND_in_expr500); 
+					compound=(HokenNode)match(input,COMPOUND,FOLLOW_COMPOUND_in_expr547); 
+
+					              this.popCounter.push(this.scopeCounter);
+					              this.scopeCounter = 0;
+					          
 					if ( input.LA(1)==Token.DOWN ) {
 						match(input, Token.DOWN, null); 
-						// ..\\src\\hoken\\generator\\HokenGenerator.g:59:20: (statements+= statement )*
-						loop8:
+						// src\\hoken\\generator\\HokenGenerator.g:77:11: (statements+= statement )*
+						loop9:
 						while (true) {
-							int alt8=2;
-							int LA8_0 = input.LA(1);
-							if ( ((LA8_0 >= AND && LA8_0 <= ASSIGN)||LA8_0==CHAR||(LA8_0 >= COMPOUND && LA8_0 <= CONST)||(LA8_0 >= DIVIDE && LA8_0 <= EQ)||(LA8_0 >= FALSE && LA8_0 <= INT)||(LA8_0 >= LT && LA8_0 <= PLUS)||LA8_0==READ||(LA8_0 >= TIMES && LA8_0 <= TRUE)||(LA8_0 >= VAR && LA8_0 <= WRITE)) ) {
-								alt8=1;
+							int alt9=2;
+							int LA9_0 = input.LA(1);
+							if ( ((LA9_0 >= AND && LA9_0 <= ASSIGN)||LA9_0==CHAR||(LA9_0 >= COMPOUND && LA9_0 <= CONST)||(LA9_0 >= DIVIDE && LA9_0 <= EQ)||(LA9_0 >= FALSE && LA9_0 <= INT)||(LA9_0 >= LT && LA9_0 <= PLUS)||LA9_0==READ||(LA9_0 >= TIMES && LA9_0 <= TRUE)||(LA9_0 >= VAR && LA9_0 <= WRITE)) ) {
+								alt9=1;
 							}
 
-							switch (alt8) {
+							switch (alt9) {
 							case 1 :
-								// ..\\src\\hoken\\generator\\HokenGenerator.g:59:21: statements+= statement
+								// src\\hoken\\generator\\HokenGenerator.g:77:12: statements+= statement
 								{
-								pushFollow(FOLLOW_statement_in_expr505);
+								pushFollow(FOLLOW_statement_in_expr574);
 								statements=statement();
 								state._fsp--;
 
@@ -773,17 +837,23 @@ public class HokenGenerator extends TreeParser {
 								break;
 
 							default :
-								break loop8;
+								break loop9;
 							}
 						}
 
 						match(input, Token.UP, null); 
 					}
 
+
+					              int pop            = this.scopeCounter;            // onthouden hoeveel variabelen we moeten poppen
+					              this.scopeCounter  = this.popCounter.pop();        // scopeCounter terugzetten op de vorige scope
+					              this.nextAddr     -= pop;                          // volgende adres kan omlaag
+					              int result         = (compound.type != Type.VOID) ? 1 : 0; // onthoud een result als compound niet VOID is
+					          
 					// TEMPLATE REWRITE
-					// 60:11: -> compound(instructions=$statements)
+					// 84:11: -> compound(instructions=$statementsnumPop=poppopResult=result)
 					{
-						retval.st = templateLib.getInstanceOf("compound",new STAttrMap().put("instructions", list_statements));
+						retval.st = templateLib.getInstanceOf("compound",new STAttrMap().put("instructions", list_statements).put("numPop", pop).put("popResult", result));
 					}
 
 
@@ -791,24 +861,24 @@ public class HokenGenerator extends TreeParser {
 					}
 					break;
 				case 8 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:61:9: ^( AND x= expr y= expr )
+					// src\\hoken\\generator\\HokenGenerator.g:85:9: ^(op= AND x= expr y= expr )
 					{
-					match(input,AND,FOLLOW_AND_in_expr538); 
+					op=(HokenNode)match(input,AND,FOLLOW_AND_in_expr631); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr542);
+					pushFollow(FOLLOW_expr_in_expr635);
 					x=expr();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expr_in_expr546);
+					pushFollow(FOLLOW_expr_in_expr639);
 					y=expr();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 					// TEMPLATE REWRITE
-					// 62:11: -> binexpr(x=$x.sty=$y.stinstr=\"and\")
+					// 86:11: -> binexpr(x=$x.sty=$y.stinstr=\"and\"noReturn=op.shouldNotReturn())
 					{
-						retval.st = templateLib.getInstanceOf("binexpr",new STAttrMap().put("x", (x!=null?((StringTemplate)x.getTemplate()):null)).put("y", (y!=null?((StringTemplate)y.getTemplate()):null)).put("instr", "and"));
+						retval.st = templateLib.getInstanceOf("binexpr",new STAttrMap().put("x", (x!=null?((StringTemplate)x.getTemplate()):null)).put("y", (y!=null?((StringTemplate)y.getTemplate()):null)).put("instr", "and").put("noReturn", op.shouldNotReturn()));
 					}
 
 
@@ -816,59 +886,9 @@ public class HokenGenerator extends TreeParser {
 					}
 					break;
 				case 9 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:63:9: ^( OR x= expr y= expr )
+					// src\\hoken\\generator\\HokenGenerator.g:87:9: ^( OR x= expr y= expr )
 					{
-					match(input,OR,FOLLOW_OR_in_expr587); 
-					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr591);
-					x=expr();
-					state._fsp--;
-
-					pushFollow(FOLLOW_expr_in_expr595);
-					y=expr();
-					state._fsp--;
-
-					match(input, Token.UP, null); 
-
-					// TEMPLATE REWRITE
-					// 64:11: -> binexpr(x=$x.sty=$y.stinstr=\"or\")
-					{
-						retval.st = templateLib.getInstanceOf("binexpr",new STAttrMap().put("x", (x!=null?((StringTemplate)x.getTemplate()):null)).put("y", (y!=null?((StringTemplate)y.getTemplate()):null)).put("instr", "or"));
-					}
-
-
-
-					}
-					break;
-				case 10 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:65:9: ^( LT x= expr y= expr )
-					{
-					match(input,LT,FOLLOW_LT_in_expr636); 
-					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expr_in_expr640);
-					x=expr();
-					state._fsp--;
-
-					pushFollow(FOLLOW_expr_in_expr644);
-					y=expr();
-					state._fsp--;
-
-					match(input, Token.UP, null); 
-
-					// TEMPLATE REWRITE
-					// 66:11: -> binexpr(x=$x.sty=$y.stinstr=\"lt\")
-					{
-						retval.st = templateLib.getInstanceOf("binexpr",new STAttrMap().put("x", (x!=null?((StringTemplate)x.getTemplate()):null)).put("y", (y!=null?((StringTemplate)y.getTemplate()):null)).put("instr", "lt"));
-					}
-
-
-
-					}
-					break;
-				case 11 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:67:9: ^( LTE x= expr y= expr )
-					{
-					match(input,LTE,FOLLOW_LTE_in_expr685); 
+					match(input,OR,FOLLOW_OR_in_expr685); 
 					match(input, Token.DOWN, null); 
 					pushFollow(FOLLOW_expr_in_expr689);
 					x=expr();
@@ -881,19 +901,19 @@ public class HokenGenerator extends TreeParser {
 					match(input, Token.UP, null); 
 
 					// TEMPLATE REWRITE
-					// 68:11: -> binexpr(x=$x.sty=$y.stinstr=\"le\")
+					// 88:11: -> binexpr(x=$x.sty=$y.stinstr=\"or\")
 					{
-						retval.st = templateLib.getInstanceOf("binexpr",new STAttrMap().put("x", (x!=null?((StringTemplate)x.getTemplate()):null)).put("y", (y!=null?((StringTemplate)y.getTemplate()):null)).put("instr", "le"));
+						retval.st = templateLib.getInstanceOf("binexpr",new STAttrMap().put("x", (x!=null?((StringTemplate)x.getTemplate()):null)).put("y", (y!=null?((StringTemplate)y.getTemplate()):null)).put("instr", "or"));
 					}
 
 
 
 					}
 					break;
-				case 12 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:69:9: ^( GT x= expr y= expr )
+				case 10 :
+					// src\\hoken\\generator\\HokenGenerator.g:89:9: ^( LT x= expr y= expr )
 					{
-					match(input,GT,FOLLOW_GT_in_expr734); 
+					match(input,LT,FOLLOW_LT_in_expr734); 
 					match(input, Token.DOWN, null); 
 					pushFollow(FOLLOW_expr_in_expr738);
 					x=expr();
@@ -906,19 +926,19 @@ public class HokenGenerator extends TreeParser {
 					match(input, Token.UP, null); 
 
 					// TEMPLATE REWRITE
-					// 70:11: -> binexpr(x=$x.sty=$y.stinstr=\"gt\")
+					// 90:11: -> binexpr(x=$x.sty=$y.stinstr=\"lt\")
 					{
-						retval.st = templateLib.getInstanceOf("binexpr",new STAttrMap().put("x", (x!=null?((StringTemplate)x.getTemplate()):null)).put("y", (y!=null?((StringTemplate)y.getTemplate()):null)).put("instr", "gt"));
+						retval.st = templateLib.getInstanceOf("binexpr",new STAttrMap().put("x", (x!=null?((StringTemplate)x.getTemplate()):null)).put("y", (y!=null?((StringTemplate)y.getTemplate()):null)).put("instr", "lt"));
 					}
 
 
 
 					}
 					break;
-				case 13 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:71:9: ^( GTE x= expr y= expr )
+				case 11 :
+					// src\\hoken\\generator\\HokenGenerator.g:91:9: ^( LTE x= expr y= expr )
 					{
-					match(input,GTE,FOLLOW_GTE_in_expr783); 
+					match(input,LTE,FOLLOW_LTE_in_expr783); 
 					match(input, Token.DOWN, null); 
 					pushFollow(FOLLOW_expr_in_expr787);
 					x=expr();
@@ -931,19 +951,19 @@ public class HokenGenerator extends TreeParser {
 					match(input, Token.UP, null); 
 
 					// TEMPLATE REWRITE
-					// 72:11: -> binexpr(x=$x.sty=$y.stinstr=\"ge\")
+					// 92:11: -> binexpr(x=$x.sty=$y.stinstr=\"le\")
 					{
-						retval.st = templateLib.getInstanceOf("binexpr",new STAttrMap().put("x", (x!=null?((StringTemplate)x.getTemplate()):null)).put("y", (y!=null?((StringTemplate)y.getTemplate()):null)).put("instr", "ge"));
+						retval.st = templateLib.getInstanceOf("binexpr",new STAttrMap().put("x", (x!=null?((StringTemplate)x.getTemplate()):null)).put("y", (y!=null?((StringTemplate)y.getTemplate()):null)).put("instr", "le"));
 					}
 
 
 
 					}
 					break;
-				case 14 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:73:9: ^( EQ x= expr y= expr )
+				case 12 :
+					// src\\hoken\\generator\\HokenGenerator.g:93:9: ^( GT x= expr y= expr )
 					{
-					match(input,EQ,FOLLOW_EQ_in_expr832); 
+					match(input,GT,FOLLOW_GT_in_expr832); 
 					match(input, Token.DOWN, null); 
 					pushFollow(FOLLOW_expr_in_expr836);
 					x=expr();
@@ -956,19 +976,19 @@ public class HokenGenerator extends TreeParser {
 					match(input, Token.UP, null); 
 
 					// TEMPLATE REWRITE
-					// 74:11: -> ifexpr(x=$x.sty=$y.stinstr=\"eq\")
+					// 94:11: -> binexpr(x=$x.sty=$y.stinstr=\"gt\")
 					{
-						retval.st = templateLib.getInstanceOf("ifexpr",new STAttrMap().put("x", (x!=null?((StringTemplate)x.getTemplate()):null)).put("y", (y!=null?((StringTemplate)y.getTemplate()):null)).put("instr", "eq"));
+						retval.st = templateLib.getInstanceOf("binexpr",new STAttrMap().put("x", (x!=null?((StringTemplate)x.getTemplate()):null)).put("y", (y!=null?((StringTemplate)y.getTemplate()):null)).put("instr", "gt"));
 					}
 
 
 
 					}
 					break;
-				case 15 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:75:9: ^( NEQ x= expr y= expr )
+				case 13 :
+					// src\\hoken\\generator\\HokenGenerator.g:95:9: ^( GTE x= expr y= expr )
 					{
-					match(input,NEQ,FOLLOW_NEQ_in_expr881); 
+					match(input,GTE,FOLLOW_GTE_in_expr881); 
 					match(input, Token.DOWN, null); 
 					pushFollow(FOLLOW_expr_in_expr885);
 					x=expr();
@@ -981,7 +1001,57 @@ public class HokenGenerator extends TreeParser {
 					match(input, Token.UP, null); 
 
 					// TEMPLATE REWRITE
-					// 76:11: -> ifexpr(x=$x.sty=$y.stinstr=\"ne\")
+					// 96:11: -> binexpr(x=$x.sty=$y.stinstr=\"ge\")
+					{
+						retval.st = templateLib.getInstanceOf("binexpr",new STAttrMap().put("x", (x!=null?((StringTemplate)x.getTemplate()):null)).put("y", (y!=null?((StringTemplate)y.getTemplate()):null)).put("instr", "ge"));
+					}
+
+
+
+					}
+					break;
+				case 14 :
+					// src\\hoken\\generator\\HokenGenerator.g:97:9: ^( EQ x= expr y= expr )
+					{
+					match(input,EQ,FOLLOW_EQ_in_expr930); 
+					match(input, Token.DOWN, null); 
+					pushFollow(FOLLOW_expr_in_expr934);
+					x=expr();
+					state._fsp--;
+
+					pushFollow(FOLLOW_expr_in_expr938);
+					y=expr();
+					state._fsp--;
+
+					match(input, Token.UP, null); 
+
+					// TEMPLATE REWRITE
+					// 98:11: -> ifexpr(x=$x.sty=$y.stinstr=\"eq\")
+					{
+						retval.st = templateLib.getInstanceOf("ifexpr",new STAttrMap().put("x", (x!=null?((StringTemplate)x.getTemplate()):null)).put("y", (y!=null?((StringTemplate)y.getTemplate()):null)).put("instr", "eq"));
+					}
+
+
+
+					}
+					break;
+				case 15 :
+					// src\\hoken\\generator\\HokenGenerator.g:99:9: ^( NEQ x= expr y= expr )
+					{
+					match(input,NEQ,FOLLOW_NEQ_in_expr979); 
+					match(input, Token.DOWN, null); 
+					pushFollow(FOLLOW_expr_in_expr983);
+					x=expr();
+					state._fsp--;
+
+					pushFollow(FOLLOW_expr_in_expr987);
+					y=expr();
+					state._fsp--;
+
+					match(input, Token.UP, null); 
+
+					// TEMPLATE REWRITE
+					// 100:11: -> ifexpr(x=$x.sty=$y.stinstr=\"ne\")
 					{
 						retval.st = templateLib.getInstanceOf("ifexpr",new STAttrMap().put("x", (x!=null?((StringTemplate)x.getTemplate()):null)).put("y", (y!=null?((StringTemplate)y.getTemplate()):null)).put("instr", "ne"));
 					}
@@ -991,21 +1061,21 @@ public class HokenGenerator extends TreeParser {
 					}
 					break;
 				case 16 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:77:9: ^(assign= ASSIGN id= ID e= expr )
+					// src\\hoken\\generator\\HokenGenerator.g:101:9: ^(assign= ASSIGN id= ID e= expr )
 					{
-					assign=(HokenNode)match(input,ASSIGN,FOLLOW_ASSIGN_in_expr932); 
+					assign=(HokenNode)match(input,ASSIGN,FOLLOW_ASSIGN_in_expr1030); 
 					match(input, Token.DOWN, null); 
-					id=(HokenNode)match(input,ID,FOLLOW_ID_in_expr936); 
-					pushFollow(FOLLOW_expr_in_expr940);
+					id=(HokenNode)match(input,ID,FOLLOW_ID_in_expr1034); 
+					pushFollow(FOLLOW_expr_in_expr1038);
 					e=expr();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 					// TEMPLATE REWRITE
-					// 78:11: -> assign(expr=$e.staddr=((IdNode)$id).declaration.address)
+					// 102:11: -> assign(expr=$e.staddr=((IdNode)$id).declaration.getOffsettedAddress((IdNode)$id)noReturn=assign.shouldNotReturn())
 					{
-						retval.st = templateLib.getInstanceOf("assign",new STAttrMap().put("expr", (e!=null?((StringTemplate)e.getTemplate()):null)).put("addr", ((IdNode)id).declaration.address));
+						retval.st = templateLib.getInstanceOf("assign",new STAttrMap().put("expr", (e!=null?((StringTemplate)e.getTemplate()):null)).put("addr", ((IdNode)id).declaration.getOffsettedAddress((IdNode)id)).put("noReturn", assign.shouldNotReturn()));
 					}
 
 
@@ -1013,82 +1083,30 @@ public class HokenGenerator extends TreeParser {
 					}
 					break;
 				case 17 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:79:9: ^(write= WRITE (exprs+= expr )+ )
+					// src\\hoken\\generator\\HokenGenerator.g:103:9: ^(write= WRITE (exprs+= expr )+ )
 					{
-					write=(HokenNode)match(input,WRITE,FOLLOW_WRITE_in_expr978); 
+					write=(HokenNode)match(input,WRITE,FOLLOW_WRITE_in_expr1081); 
 					match(input, Token.DOWN, null); 
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:79:23: (exprs+= expr )+
-					int cnt9=0;
-					loop9:
-					while (true) {
-						int alt9=2;
-						int LA9_0 = input.LA(1);
-						if ( ((LA9_0 >= AND && LA9_0 <= ASSIGN)||LA9_0==CHAR||LA9_0==COMPOUND||(LA9_0 >= DIVIDE && LA9_0 <= EQ)||(LA9_0 >= FALSE && LA9_0 <= INT)||(LA9_0 >= LT && LA9_0 <= PLUS)||LA9_0==READ||(LA9_0 >= TIMES && LA9_0 <= TRUE)||LA9_0==WRITE) ) {
-							alt9=1;
-						}
-
-						switch (alt9) {
-						case 1 :
-							// ..\\src\\hoken\\generator\\HokenGenerator.g:79:24: exprs+= expr
-							{
-							pushFollow(FOLLOW_expr_in_expr983);
-							exprs=expr();
-							state._fsp--;
-
-							if (list_exprs==null) list_exprs=new ArrayList<Object>();
-							list_exprs.add(exprs.getTemplate());
-							}
-							break;
-
-						default :
-							if ( cnt9 >= 1 ) break loop9;
-							EarlyExitException eee = new EarlyExitException(9, input);
-							throw eee;
-						}
-						cnt9++;
-					}
-
-					match(input, Token.UP, null); 
-
-
-					    		List<IOInstruction> writes = new ArrayList<IOInstruction>();
-					    		for(Object child : write.getChildren()) {
-					    			HokenNode expr = (HokenNode)child;
-					    			writes.add(new IOInstruction(list_exprs.get(expr.childIndex), expr.type));
-					    		}  
-					    	
-					// TEMPLATE REWRITE
-					// 87:11: -> write(writes=writes)
-					{
-						retval.st = templateLib.getInstanceOf("write",new STAttrMap().put("writes", writes));
-					}
-
-
-
-					}
-					break;
-				case 18 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:88:9: ^(read= READ (ids+= ID )+ )
-					{
-					read=(HokenNode)match(input,READ,FOLLOW_READ_in_expr1025); 
-					match(input, Token.DOWN, null); 
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:88:21: (ids+= ID )+
+					// src\\hoken\\generator\\HokenGenerator.g:103:23: (exprs+= expr )+
 					int cnt10=0;
 					loop10:
 					while (true) {
 						int alt10=2;
 						int LA10_0 = input.LA(1);
-						if ( (LA10_0==ID) ) {
+						if ( ((LA10_0 >= AND && LA10_0 <= ASSIGN)||LA10_0==CHAR||LA10_0==COMPOUND||(LA10_0 >= DIVIDE && LA10_0 <= EQ)||(LA10_0 >= FALSE && LA10_0 <= INT)||(LA10_0 >= LT && LA10_0 <= PLUS)||LA10_0==READ||(LA10_0 >= TIMES && LA10_0 <= TRUE)||LA10_0==WRITE) ) {
 							alt10=1;
 						}
 
 						switch (alt10) {
 						case 1 :
-							// ..\\src\\hoken\\generator\\HokenGenerator.g:88:22: ids+= ID
+							// src\\hoken\\generator\\HokenGenerator.g:103:24: exprs+= expr
 							{
-							ids=(HokenNode)match(input,ID,FOLLOW_ID_in_expr1030); 
-							if (list_ids==null) list_ids=new ArrayList<Object>();
-							list_ids.add(ids);
+							pushFollow(FOLLOW_expr_in_expr1086);
+							exprs=expr();
+							state._fsp--;
+
+							if (list_exprs==null) list_exprs=new ArrayList<Object>();
+							list_exprs.add(exprs.getTemplate());
 							}
 							break;
 
@@ -1103,16 +1121,68 @@ public class HokenGenerator extends TreeParser {
 					match(input, Token.UP, null); 
 
 
+					    		List<IOInstruction> writes = new ArrayList<IOInstruction>();
+					    		for(Object child : write.getChildren()) {
+					    			HokenNode expr = (HokenNode)child;
+					    			writes.add(new IOInstruction(list_exprs.get(expr.childIndex), expr.type));
+					    		}  
+					    	
+					// TEMPLATE REWRITE
+					// 111:11: -> write(writes=writesnoReturn=write.shouldNotReturn())
+					{
+						retval.st = templateLib.getInstanceOf("write",new STAttrMap().put("writes", writes).put("noReturn", write.shouldNotReturn()));
+					}
+
+
+
+					}
+					break;
+				case 18 :
+					// src\\hoken\\generator\\HokenGenerator.g:112:9: ^(read= READ (ids+= ID )+ )
+					{
+					read=(HokenNode)match(input,READ,FOLLOW_READ_in_expr1133); 
+					match(input, Token.DOWN, null); 
+					// src\\hoken\\generator\\HokenGenerator.g:112:21: (ids+= ID )+
+					int cnt11=0;
+					loop11:
+					while (true) {
+						int alt11=2;
+						int LA11_0 = input.LA(1);
+						if ( (LA11_0==ID) ) {
+							alt11=1;
+						}
+
+						switch (alt11) {
+						case 1 :
+							// src\\hoken\\generator\\HokenGenerator.g:112:22: ids+= ID
+							{
+							ids=(HokenNode)match(input,ID,FOLLOW_ID_in_expr1138); 
+							if (list_ids==null) list_ids=new ArrayList<Object>();
+							list_ids.add(ids);
+							}
+							break;
+
+						default :
+							if ( cnt11 >= 1 ) break loop11;
+							EarlyExitException eee = new EarlyExitException(11, input);
+							throw eee;
+						}
+						cnt11++;
+					}
+
+					match(input, Token.UP, null); 
+
+
 					            List<IOInstruction> reads = new ArrayList<IOInstruction>();
 					            for(Object child : list_ids) {
 					                IdNode I = (IdNode)child;
-					                reads.add(new IOInstruction(I.declaration.address, I.declaration.type));
+					                reads.add(new IOInstruction(I.declaration.getOffsettedAddress(I), I.declaration.type));
 					            }
 					        
 					// TEMPLATE REWRITE
-					// 96:11: -> read(reads=reads)
+					// 120:11: -> read(reads=readsnoReturn=read.shouldNotReturn())
 					{
-						retval.st = templateLib.getInstanceOf("read",new STAttrMap().put("reads", reads));
+						retval.st = templateLib.getInstanceOf("read",new STAttrMap().put("reads", reads).put("noReturn", read.shouldNotReturn()));
 					}
 
 
@@ -1120,9 +1190,9 @@ public class HokenGenerator extends TreeParser {
 					}
 					break;
 				case 19 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:97:9: operand
+					// src\\hoken\\generator\\HokenGenerator.g:121:9: operand
 					{
-					pushFollow(FOLLOW_operand_in_expr1072);
+					pushFollow(FOLLOW_operand_in_expr1185);
 					operand2=operand();
 					state._fsp--;
 
@@ -1152,7 +1222,7 @@ public class HokenGenerator extends TreeParser {
 
 
 	// $ANTLR start "operand"
-	// ..\\src\\hoken\\generator\\HokenGenerator.g:100:1: operand : (id= ID -> load(addr=((IdNode)$id).declaration.address)|intval= INT -> integer(val=$intval.text)|charval= CHAR -> integer(val=(int)$charval.text.charAt(1))| TRUE -> integer(val=1)| FALSE -> integer(val=0));
+	// src\\hoken\\generator\\HokenGenerator.g:124:1: operand : (id= ID -> load(addr=((IdNode)$id).declaration.getOffsettedAddress(I))|intval= INT -> integer(val=$intval.text)|charval= CHAR -> integer(val=(int)$charval.text.charAt(1))| TRUE -> integer(val=1)| FALSE -> integer(val=0));
 	public final HokenGenerator.operand_return operand() throws RecognitionException {
 		HokenGenerator.operand_return retval = new HokenGenerator.operand_return();
 		retval.start = input.LT(1);
@@ -1162,48 +1232,49 @@ public class HokenGenerator extends TreeParser {
 		HokenNode charval=null;
 
 		try {
-			// ..\\src\\hoken\\generator\\HokenGenerator.g:101:5: (id= ID -> load(addr=((IdNode)$id).declaration.address)|intval= INT -> integer(val=$intval.text)|charval= CHAR -> integer(val=(int)$charval.text.charAt(1))| TRUE -> integer(val=1)| FALSE -> integer(val=0))
-			int alt12=5;
+			// src\\hoken\\generator\\HokenGenerator.g:125:5: (id= ID -> load(addr=((IdNode)$id).declaration.getOffsettedAddress(I))|intval= INT -> integer(val=$intval.text)|charval= CHAR -> integer(val=(int)$charval.text.charAt(1))| TRUE -> integer(val=1)| FALSE -> integer(val=0))
+			int alt13=5;
 			switch ( input.LA(1) ) {
 			case ID:
 				{
-				alt12=1;
+				alt13=1;
 				}
 				break;
 			case INT:
 				{
-				alt12=2;
+				alt13=2;
 				}
 				break;
 			case CHAR:
 				{
-				alt12=3;
+				alt13=3;
 				}
 				break;
 			case TRUE:
 				{
-				alt12=4;
+				alt13=4;
 				}
 				break;
 			case FALSE:
 				{
-				alt12=5;
+				alt13=5;
 				}
 				break;
 			default:
 				NoViableAltException nvae =
-					new NoViableAltException("", 12, 0, input);
+					new NoViableAltException("", 13, 0, input);
 				throw nvae;
 			}
-			switch (alt12) {
+			switch (alt13) {
 				case 1 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:101:9: id= ID
+					// src\\hoken\\generator\\HokenGenerator.g:125:9: id= ID
 					{
-					id=(HokenNode)match(input,ID,FOLLOW_ID_in_operand1099); 
+					id=(HokenNode)match(input,ID,FOLLOW_ID_in_operand1212); 
+					IdNode I = (IdNode)id;
 					// TEMPLATE REWRITE
-					// 102:11: -> load(addr=((IdNode)$id).declaration.address)
+					// 127:11: -> load(addr=((IdNode)$id).declaration.getOffsettedAddress(I))
 					{
-						retval.st = templateLib.getInstanceOf("load",new STAttrMap().put("addr", ((IdNode)id).declaration.address));
+						retval.st = templateLib.getInstanceOf("load",new STAttrMap().put("addr", ((IdNode)id).declaration.getOffsettedAddress(I)));
 					}
 
 
@@ -1211,11 +1282,11 @@ public class HokenGenerator extends TreeParser {
 					}
 					break;
 				case 2 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:103:9: intval= INT
+					// src\\hoken\\generator\\HokenGenerator.g:128:9: intval= INT
 					{
-					intval=(HokenNode)match(input,INT,FOLLOW_INT_in_operand1130); 
+					intval=(HokenNode)match(input,INT,FOLLOW_INT_in_operand1252); 
 					// TEMPLATE REWRITE
-					// 104:11: -> integer(val=$intval.text)
+					// 129:11: -> integer(val=$intval.text)
 					{
 						retval.st = templateLib.getInstanceOf("integer",new STAttrMap().put("val", (intval!=null?intval.getText():null)));
 					}
@@ -1225,11 +1296,11 @@ public class HokenGenerator extends TreeParser {
 					}
 					break;
 				case 3 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:105:9: charval= CHAR
+					// src\\hoken\\generator\\HokenGenerator.g:130:9: charval= CHAR
 					{
-					charval=(HokenNode)match(input,CHAR,FOLLOW_CHAR_in_operand1161); 
+					charval=(HokenNode)match(input,CHAR,FOLLOW_CHAR_in_operand1283); 
 					// TEMPLATE REWRITE
-					// 106:11: -> integer(val=(int)$charval.text.charAt(1))
+					// 131:11: -> integer(val=(int)$charval.text.charAt(1))
 					{
 						retval.st = templateLib.getInstanceOf("integer",new STAttrMap().put("val", (int)(charval!=null?charval.getText():null).charAt(1)));
 					}
@@ -1239,11 +1310,11 @@ public class HokenGenerator extends TreeParser {
 					}
 					break;
 				case 4 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:107:9: TRUE
+					// src\\hoken\\generator\\HokenGenerator.g:132:9: TRUE
 					{
-					match(input,TRUE,FOLLOW_TRUE_in_operand1190); 
+					match(input,TRUE,FOLLOW_TRUE_in_operand1312); 
 					// TEMPLATE REWRITE
-					// 108:11: -> integer(val=1)
+					// 133:11: -> integer(val=1)
 					{
 						retval.st = templateLib.getInstanceOf("integer",new STAttrMap().put("val", 1));
 					}
@@ -1253,11 +1324,11 @@ public class HokenGenerator extends TreeParser {
 					}
 					break;
 				case 5 :
-					// ..\\src\\hoken\\generator\\HokenGenerator.g:109:9: FALSE
+					// src\\hoken\\generator\\HokenGenerator.g:134:9: FALSE
 					{
-					match(input,FALSE,FOLLOW_FALSE_in_operand1219); 
+					match(input,FALSE,FOLLOW_FALSE_in_operand1341); 
 					// TEMPLATE REWRITE
-					// 110:11: -> integer(val=0)
+					// 135:11: -> integer(val=0)
 					{
 						retval.st = templateLib.getInstanceOf("integer",new STAttrMap().put("val", 0));
 					}
@@ -1291,65 +1362,67 @@ public class HokenGenerator extends TreeParser {
 	public static final BitSet FOLLOW_CHARACTER_in_statement126 = new BitSet(new long[]{0x0000000000200000L});
 	public static final BitSet FOLLOW_BOOLEAN_in_statement128 = new BitSet(new long[]{0x0000000000200000L});
 	public static final BitSet FOLLOW_ID_in_statement134 = new BitSet(new long[]{0x0000000000200008L});
-	public static final BitSet FOLLOW_CONST_in_statement179 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_set_in_statement181 = new BitSet(new long[]{0x0000000000200000L});
-	public static final BitSet FOLLOW_ID_in_statement192 = new BitSet(new long[]{0x0000020000640080L});
-	public static final BitSet FOLLOW_operand_in_statement196 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_expr_in_statement207 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_PLUS_in_expr224 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr228 = new BitSet(new long[]{0x00001327F87D90B8L});
-	public static final BitSet FOLLOW_expr_in_expr232 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_MINUS_in_expr271 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr275 = new BitSet(new long[]{0x00001327F87D90B8L});
-	public static final BitSet FOLLOW_expr_in_expr279 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_NOT_in_expr318 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr322 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_TIMES_in_expr353 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr357 = new BitSet(new long[]{0x00001327F87D90B0L});
-	public static final BitSet FOLLOW_expr_in_expr361 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_DIVIDE_in_expr402 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr406 = new BitSet(new long[]{0x00001327F87D90B0L});
-	public static final BitSet FOLLOW_expr_in_expr410 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_MODULO_in_expr451 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr455 = new BitSet(new long[]{0x00001327F87D90B0L});
-	public static final BitSet FOLLOW_expr_in_expr459 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_COMPOUND_in_expr500 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_statement_in_expr505 = new BitSet(new long[]{0x00001B27F87DB0B8L});
-	public static final BitSet FOLLOW_AND_in_expr538 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr542 = new BitSet(new long[]{0x00001327F87D90B0L});
-	public static final BitSet FOLLOW_expr_in_expr546 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_OR_in_expr587 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr591 = new BitSet(new long[]{0x00001327F87D90B0L});
-	public static final BitSet FOLLOW_expr_in_expr595 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_LT_in_expr636 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr640 = new BitSet(new long[]{0x00001327F87D90B0L});
-	public static final BitSet FOLLOW_expr_in_expr644 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_LTE_in_expr685 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_CONST_in_statement181 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_INTEGER_in_statement184 = new BitSet(new long[]{0x0000000000200000L});
+	public static final BitSet FOLLOW_CHARACTER_in_statement186 = new BitSet(new long[]{0x0000000000200000L});
+	public static final BitSet FOLLOW_BOOLEAN_in_statement188 = new BitSet(new long[]{0x0000000000200000L});
+	public static final BitSet FOLLOW_ID_in_statement194 = new BitSet(new long[]{0x0000020000640080L});
+	public static final BitSet FOLLOW_operand_in_statement200 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_expr_in_statement252 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_PLUS_in_expr269 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr273 = new BitSet(new long[]{0x00001327F87D90B8L});
+	public static final BitSet FOLLOW_expr_in_expr277 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MINUS_in_expr316 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr320 = new BitSet(new long[]{0x00001327F87D90B8L});
+	public static final BitSet FOLLOW_expr_in_expr324 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_NOT_in_expr363 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr367 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_TIMES_in_expr398 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr402 = new BitSet(new long[]{0x00001327F87D90B0L});
+	public static final BitSet FOLLOW_expr_in_expr406 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_DIVIDE_in_expr447 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr451 = new BitSet(new long[]{0x00001327F87D90B0L});
+	public static final BitSet FOLLOW_expr_in_expr455 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MODULO_in_expr496 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr500 = new BitSet(new long[]{0x00001327F87D90B0L});
+	public static final BitSet FOLLOW_expr_in_expr504 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_COMPOUND_in_expr547 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_statement_in_expr574 = new BitSet(new long[]{0x00001B27F87DB0B8L});
+	public static final BitSet FOLLOW_AND_in_expr631 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr635 = new BitSet(new long[]{0x00001327F87D90B0L});
+	public static final BitSet FOLLOW_expr_in_expr639 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_OR_in_expr685 = new BitSet(new long[]{0x0000000000000004L});
 	public static final BitSet FOLLOW_expr_in_expr689 = new BitSet(new long[]{0x00001327F87D90B0L});
 	public static final BitSet FOLLOW_expr_in_expr693 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_GT_in_expr734 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_LT_in_expr734 = new BitSet(new long[]{0x0000000000000004L});
 	public static final BitSet FOLLOW_expr_in_expr738 = new BitSet(new long[]{0x00001327F87D90B0L});
 	public static final BitSet FOLLOW_expr_in_expr742 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_GTE_in_expr783 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_LTE_in_expr783 = new BitSet(new long[]{0x0000000000000004L});
 	public static final BitSet FOLLOW_expr_in_expr787 = new BitSet(new long[]{0x00001327F87D90B0L});
 	public static final BitSet FOLLOW_expr_in_expr791 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_EQ_in_expr832 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_GT_in_expr832 = new BitSet(new long[]{0x0000000000000004L});
 	public static final BitSet FOLLOW_expr_in_expr836 = new BitSet(new long[]{0x00001327F87D90B0L});
 	public static final BitSet FOLLOW_expr_in_expr840 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_NEQ_in_expr881 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_GTE_in_expr881 = new BitSet(new long[]{0x0000000000000004L});
 	public static final BitSet FOLLOW_expr_in_expr885 = new BitSet(new long[]{0x00001327F87D90B0L});
 	public static final BitSet FOLLOW_expr_in_expr889 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_ASSIGN_in_expr932 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_ID_in_expr936 = new BitSet(new long[]{0x00001327F87D90B0L});
-	public static final BitSet FOLLOW_expr_in_expr940 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_WRITE_in_expr978 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr983 = new BitSet(new long[]{0x00001327F87D90B8L});
-	public static final BitSet FOLLOW_READ_in_expr1025 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_ID_in_expr1030 = new BitSet(new long[]{0x0000000000200008L});
-	public static final BitSet FOLLOW_operand_in_expr1072 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_operand1099 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_INT_in_operand1130 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_CHAR_in_operand1161 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_TRUE_in_operand1190 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_FALSE_in_operand1219 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_EQ_in_expr930 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr934 = new BitSet(new long[]{0x00001327F87D90B0L});
+	public static final BitSet FOLLOW_expr_in_expr938 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_NEQ_in_expr979 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr983 = new BitSet(new long[]{0x00001327F87D90B0L});
+	public static final BitSet FOLLOW_expr_in_expr987 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_ASSIGN_in_expr1030 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_ID_in_expr1034 = new BitSet(new long[]{0x00001327F87D90B0L});
+	public static final BitSet FOLLOW_expr_in_expr1038 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_WRITE_in_expr1081 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr1086 = new BitSet(new long[]{0x00001327F87D90B8L});
+	public static final BitSet FOLLOW_READ_in_expr1133 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_ID_in_expr1138 = new BitSet(new long[]{0x0000000000200008L});
+	public static final BitSet FOLLOW_operand_in_expr1185 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_operand1212 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_INT_in_operand1252 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_CHAR_in_operand1283 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_TRUE_in_operand1312 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_FALSE_in_operand1341 = new BitSet(new long[]{0x0000000000000002L});
 }

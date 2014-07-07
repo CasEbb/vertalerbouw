@@ -65,10 +65,11 @@ public class Compiler {
 				StringTemplateGroup templateLib = new StringTemplateGroup(
 						new FileReader("tam.stg"));
 				generator.setTemplateLib(templateLib);
+				String code = generator.program().toString();
+				System.err.println(code);
 
 				print("===> Assembleren...");
-				Assembler.assemble(new ByteArrayInputStream(generator.program()
-						.toString().getBytes()),
+				Assembler.assemble(new ByteArrayInputStream(code.getBytes()),
 						new FileOutputStream("obj.tam"));
 			} else if (this.target == Target.JVM) {
 				print("===> Code genereren voor JVM...");

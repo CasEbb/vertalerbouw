@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 ..\\src\\hoken\\parser\\Hoken.g 2014-07-07 00:36:28
+// $ANTLR 3.5.2 src\\hoken\\parser\\Hoken.g 2014-07-07 17:37:32
 
 package hoken.parser;
 import hoken.HokenException;
@@ -91,7 +91,7 @@ public class HokenParser extends Parser {
 		return adaptor;
 	}
 	@Override public String[] getTokenNames() { return HokenParser.tokenNames; }
-	@Override public String getGrammarFileName() { return "..\\src\\hoken\\parser\\Hoken.g"; }
+	@Override public String getGrammarFileName() { return "src\\hoken\\parser\\Hoken.g"; }
 
 
 	private int errors = 0;
@@ -116,7 +116,7 @@ public class HokenParser extends Parser {
 
 
 	// $ANTLR start "program"
-	// ..\\src\\hoken\\parser\\Hoken.g:82:1: program : statements EOF -> ^( PROGRAM statements ) ;
+	// src\\hoken\\parser\\Hoken.g:82:1: program : statements EOF -> ^( PROGRAM statements ) ;
 	public final HokenParser.program_return program() throws RecognitionException {
 		HokenParser.program_return retval = new HokenParser.program_return();
 		retval.start = input.LT(1);
@@ -131,8 +131,8 @@ public class HokenParser extends Parser {
 		RewriteRuleSubtreeStream stream_statements=new RewriteRuleSubtreeStream(adaptor,"rule statements");
 
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:83:5: ( statements EOF -> ^( PROGRAM statements ) )
-			// ..\\src\\hoken\\parser\\Hoken.g:83:9: statements EOF
+			// src\\hoken\\parser\\Hoken.g:83:5: ( statements EOF -> ^( PROGRAM statements ) )
+			// src\\hoken\\parser\\Hoken.g:83:9: statements EOF
 			{
 			pushFollow(FOLLOW_statements_in_program487);
 			statements1=statements();
@@ -155,7 +155,7 @@ public class HokenParser extends Parser {
 			root_0 = (HokenNode)adaptor.nil();
 			// 84:9: -> ^( PROGRAM statements )
 			{
-				// ..\\src\\hoken\\parser\\Hoken.g:84:12: ^( PROGRAM statements )
+				// src\\hoken\\parser\\Hoken.g:84:12: ^( PROGRAM statements )
 				{
 				HokenNode root_1 = (HokenNode)adaptor.nil();
 				root_1 = (HokenNode)adaptor.becomeRoot((HokenNode)adaptor.create(PROGRAM, "PROGRAM"), root_1);
@@ -197,7 +197,7 @@ public class HokenParser extends Parser {
 
 
 	// $ANTLR start "statements"
-	// ..\\src\\hoken\\parser\\Hoken.g:87:1: statements : ( statement SEMICOLON !)* ;
+	// src\\hoken\\parser\\Hoken.g:87:1: statements : ( statement SEMICOLON !)* ;
 	public final HokenParser.statements_return statements() throws RecognitionException {
 		HokenParser.statements_return retval = new HokenParser.statements_return();
 		retval.start = input.LT(1);
@@ -210,13 +210,13 @@ public class HokenParser extends Parser {
 		HokenNode SEMICOLON4_tree=null;
 
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:88:5: ( ( statement SEMICOLON !)* )
-			// ..\\src\\hoken\\parser\\Hoken.g:88:9: ( statement SEMICOLON !)*
+			// src\\hoken\\parser\\Hoken.g:88:5: ( ( statement SEMICOLON !)* )
+			// src\\hoken\\parser\\Hoken.g:88:9: ( statement SEMICOLON !)*
 			{
 			root_0 = (HokenNode)adaptor.nil();
 
 
-			// ..\\src\\hoken\\parser\\Hoken.g:88:9: ( statement SEMICOLON !)*
+			// src\\hoken\\parser\\Hoken.g:88:9: ( statement SEMICOLON !)*
 			loop1:
 			while (true) {
 				int alt1=2;
@@ -227,7 +227,7 @@ public class HokenParser extends Parser {
 
 				switch (alt1) {
 				case 1 :
-					// ..\\src\\hoken\\parser\\Hoken.g:88:10: statement SEMICOLON !
+					// src\\hoken\\parser\\Hoken.g:88:10: statement SEMICOLON !
 					{
 					pushFollow(FOLLOW_statement_in_statements525);
 					statement3=statement();
@@ -273,7 +273,7 @@ public class HokenParser extends Parser {
 
 
 	// $ANTLR start "statement"
-	// ..\\src\\hoken\\parser\\Hoken.g:91:1: statement : ( decl | expr );
+	// src\\hoken\\parser\\Hoken.g:91:1: statement : ( decl | expr );
 	public final HokenParser.statement_return statement() throws RecognitionException {
 		HokenParser.statement_return retval = new HokenParser.statement_return();
 		retval.start = input.LT(1);
@@ -285,7 +285,7 @@ public class HokenParser extends Parser {
 
 
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:92:5: ( decl | expr )
+			// src\\hoken\\parser\\Hoken.g:92:5: ( decl | expr )
 			int alt2=2;
 			int LA2_0 = input.LA(1);
 			if ( (LA2_0==BOOLEAN||LA2_0==CHARACTER||LA2_0==CONST||LA2_0==INTEGER) ) {
@@ -303,7 +303,7 @@ public class HokenParser extends Parser {
 
 			switch (alt2) {
 				case 1 :
-					// ..\\src\\hoken\\parser\\Hoken.g:92:9: decl
+					// src\\hoken\\parser\\Hoken.g:92:9: decl
 					{
 					root_0 = (HokenNode)adaptor.nil();
 
@@ -317,7 +317,7 @@ public class HokenParser extends Parser {
 					}
 					break;
 				case 2 :
-					// ..\\src\\hoken\\parser\\Hoken.g:93:9: expr
+					// src\\hoken\\parser\\Hoken.g:93:9: expr
 					{
 					root_0 = (HokenNode)adaptor.nil();
 
@@ -359,7 +359,7 @@ public class HokenParser extends Parser {
 
 
 	// $ANTLR start "decl"
-	// ..\\src\\hoken\\parser\\Hoken.g:96:1: decl : ( type id_list -> ^( VAR type id_list ) | CONST ^ type id_list EQUALS ! value );
+	// src\\hoken\\parser\\Hoken.g:96:1: decl : ( type id_list -> ^( VAR type id_list ) | CONST ^ type id_list EQUALS ! value );
 	public final HokenParser.decl_return decl() throws RecognitionException {
 		HokenParser.decl_return retval = new HokenParser.decl_return();
 		retval.start = input.LT(1);
@@ -380,7 +380,7 @@ public class HokenParser extends Parser {
 		RewriteRuleSubtreeStream stream_id_list=new RewriteRuleSubtreeStream(adaptor,"rule id_list");
 
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:96:5: ( type id_list -> ^( VAR type id_list ) | CONST ^ type id_list EQUALS ! value )
+			// src\\hoken\\parser\\Hoken.g:96:5: ( type id_list -> ^( VAR type id_list ) | CONST ^ type id_list EQUALS ! value )
 			int alt3=2;
 			int LA3_0 = input.LA(1);
 			if ( (LA3_0==BOOLEAN||LA3_0==CHARACTER||LA3_0==INTEGER) ) {
@@ -398,7 +398,7 @@ public class HokenParser extends Parser {
 
 			switch (alt3) {
 				case 1 :
-					// ..\\src\\hoken\\parser\\Hoken.g:96:9: type id_list
+					// src\\hoken\\parser\\Hoken.g:96:9: type id_list
 					{
 					pushFollow(FOLLOW_type_in_decl573);
 					type7=type();
@@ -411,7 +411,7 @@ public class HokenParser extends Parser {
 
 					stream_id_list.add(id_list8.getTree());
 					// AST REWRITE
-					// elements: type, id_list
+					// elements: id_list, type
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -423,7 +423,7 @@ public class HokenParser extends Parser {
 					root_0 = (HokenNode)adaptor.nil();
 					// 97:9: -> ^( VAR type id_list )
 					{
-						// ..\\src\\hoken\\parser\\Hoken.g:97:12: ^( VAR type id_list )
+						// src\\hoken\\parser\\Hoken.g:97:12: ^( VAR type id_list )
 						{
 						HokenNode root_1 = (HokenNode)adaptor.nil();
 						root_1 = (HokenNode)adaptor.becomeRoot(new DeclarationNode(VAR), root_1);
@@ -440,7 +440,7 @@ public class HokenParser extends Parser {
 					}
 					break;
 				case 2 :
-					// ..\\src\\hoken\\parser\\Hoken.g:98:9: CONST ^ type id_list EQUALS ! value
+					// src\\hoken\\parser\\Hoken.g:98:9: CONST ^ type id_list EQUALS ! value
 					{
 					root_0 = (HokenNode)adaptor.nil();
 
@@ -499,7 +499,7 @@ public class HokenParser extends Parser {
 
 
 	// $ANTLR start "expr"
-	// ..\\src\\hoken\\parser\\Hoken.g:101:1: expr : assignment_expr ;
+	// src\\hoken\\parser\\Hoken.g:101:1: expr : assignment_expr ;
 	public final HokenParser.expr_return expr() throws RecognitionException {
 		HokenParser.expr_return retval = new HokenParser.expr_return();
 		retval.start = input.LT(1);
@@ -510,8 +510,8 @@ public class HokenParser extends Parser {
 
 
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:101:5: ( assignment_expr )
-			// ..\\src\\hoken\\parser\\Hoken.g:101:9: assignment_expr
+			// src\\hoken\\parser\\Hoken.g:101:5: ( assignment_expr )
+			// src\\hoken\\parser\\Hoken.g:101:9: assignment_expr
 			{
 			root_0 = (HokenNode)adaptor.nil();
 
@@ -551,7 +551,7 @@ public class HokenParser extends Parser {
 
 
 	// $ANTLR start "assignment_expr"
-	// ..\\src\\hoken\\parser\\Hoken.g:104:1: assignment_expr : logical_or_expr ( ASSIGN ^ assignment_expr )? ;
+	// src\\hoken\\parser\\Hoken.g:104:1: assignment_expr : logical_or_expr ( ASSIGN ^ assignment_expr )? ;
 	public final HokenParser.assignment_expr_return assignment_expr() throws RecognitionException {
 		HokenParser.assignment_expr_return retval = new HokenParser.assignment_expr_return();
 		retval.start = input.LT(1);
@@ -565,8 +565,8 @@ public class HokenParser extends Parser {
 		HokenNode ASSIGN16_tree=null;
 
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:105:5: ( logical_or_expr ( ASSIGN ^ assignment_expr )? )
-			// ..\\src\\hoken\\parser\\Hoken.g:105:9: logical_or_expr ( ASSIGN ^ assignment_expr )?
+			// src\\hoken\\parser\\Hoken.g:105:5: ( logical_or_expr ( ASSIGN ^ assignment_expr )? )
+			// src\\hoken\\parser\\Hoken.g:105:9: logical_or_expr ( ASSIGN ^ assignment_expr )?
 			{
 			root_0 = (HokenNode)adaptor.nil();
 
@@ -577,7 +577,7 @@ public class HokenParser extends Parser {
 
 			adaptor.addChild(root_0, logical_or_expr15.getTree());
 
-			// ..\\src\\hoken\\parser\\Hoken.g:105:25: ( ASSIGN ^ assignment_expr )?
+			// src\\hoken\\parser\\Hoken.g:105:25: ( ASSIGN ^ assignment_expr )?
 			int alt4=2;
 			int LA4_0 = input.LA(1);
 			if ( (LA4_0==ASSIGN) ) {
@@ -585,7 +585,7 @@ public class HokenParser extends Parser {
 			}
 			switch (alt4) {
 				case 1 :
-					// ..\\src\\hoken\\parser\\Hoken.g:105:26: ASSIGN ^ assignment_expr
+					// src\\hoken\\parser\\Hoken.g:105:26: ASSIGN ^ assignment_expr
 					{
 					ASSIGN16=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_assignment_expr659); 
 					ASSIGN16_tree = (HokenNode)adaptor.create(ASSIGN16);
@@ -631,7 +631,7 @@ public class HokenParser extends Parser {
 
 
 	// $ANTLR start "read_stat"
-	// ..\\src\\hoken\\parser\\Hoken.g:108:1: read_stat : READ ^ LPAREN ! id_list RPAREN !;
+	// src\\hoken\\parser\\Hoken.g:108:1: read_stat : READ ^ LPAREN ! id_list RPAREN !;
 	public final HokenParser.read_stat_return read_stat() throws RecognitionException {
 		HokenParser.read_stat_return retval = new HokenParser.read_stat_return();
 		retval.start = input.LT(1);
@@ -648,8 +648,8 @@ public class HokenParser extends Parser {
 		HokenNode RPAREN21_tree=null;
 
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:109:5: ( READ ^ LPAREN ! id_list RPAREN !)
-			// ..\\src\\hoken\\parser\\Hoken.g:109:9: READ ^ LPAREN ! id_list RPAREN !
+			// src\\hoken\\parser\\Hoken.g:109:5: ( READ ^ LPAREN ! id_list RPAREN !)
+			// src\\hoken\\parser\\Hoken.g:109:9: READ ^ LPAREN ! id_list RPAREN !
 			{
 			root_0 = (HokenNode)adaptor.nil();
 
@@ -695,7 +695,7 @@ public class HokenParser extends Parser {
 
 
 	// $ANTLR start "write_stat"
-	// ..\\src\\hoken\\parser\\Hoken.g:112:1: write_stat : WRITE ^ LPAREN ! expr_list RPAREN !;
+	// src\\hoken\\parser\\Hoken.g:112:1: write_stat : WRITE ^ LPAREN ! expr_list RPAREN !;
 	public final HokenParser.write_stat_return write_stat() throws RecognitionException {
 		HokenParser.write_stat_return retval = new HokenParser.write_stat_return();
 		retval.start = input.LT(1);
@@ -712,8 +712,8 @@ public class HokenParser extends Parser {
 		HokenNode RPAREN25_tree=null;
 
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:113:5: ( WRITE ^ LPAREN ! expr_list RPAREN !)
-			// ..\\src\\hoken\\parser\\Hoken.g:113:9: WRITE ^ LPAREN ! expr_list RPAREN !
+			// src\\hoken\\parser\\Hoken.g:113:5: ( WRITE ^ LPAREN ! expr_list RPAREN !)
+			// src\\hoken\\parser\\Hoken.g:113:9: WRITE ^ LPAREN ! expr_list RPAREN !
 			{
 			root_0 = (HokenNode)adaptor.nil();
 
@@ -759,7 +759,7 @@ public class HokenParser extends Parser {
 
 
 	// $ANTLR start "compound_stat"
-	// ..\\src\\hoken\\parser\\Hoken.g:116:1: compound_stat : LCURLY statements RCURLY -> ^( COMPOUND statements ) ;
+	// src\\hoken\\parser\\Hoken.g:116:1: compound_stat : LCURLY statements RCURLY -> ^( COMPOUND statements ) ;
 	public final HokenParser.compound_stat_return compound_stat() throws RecognitionException {
 		HokenParser.compound_stat_return retval = new HokenParser.compound_stat_return();
 		retval.start = input.LT(1);
@@ -777,8 +777,8 @@ public class HokenParser extends Parser {
 		RewriteRuleSubtreeStream stream_statements=new RewriteRuleSubtreeStream(adaptor,"rule statements");
 
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:117:5: ( LCURLY statements RCURLY -> ^( COMPOUND statements ) )
-			// ..\\src\\hoken\\parser\\Hoken.g:117:9: LCURLY statements RCURLY
+			// src\\hoken\\parser\\Hoken.g:117:5: ( LCURLY statements RCURLY -> ^( COMPOUND statements ) )
+			// src\\hoken\\parser\\Hoken.g:117:9: LCURLY statements RCURLY
 			{
 			LCURLY26=(Token)match(input,LCURLY,FOLLOW_LCURLY_in_compound_stat739);  
 			stream_LCURLY.add(LCURLY26);
@@ -804,7 +804,7 @@ public class HokenParser extends Parser {
 			root_0 = (HokenNode)adaptor.nil();
 			// 118:9: -> ^( COMPOUND statements )
 			{
-				// ..\\src\\hoken\\parser\\Hoken.g:118:12: ^( COMPOUND statements )
+				// src\\hoken\\parser\\Hoken.g:118:12: ^( COMPOUND statements )
 				{
 				HokenNode root_1 = (HokenNode)adaptor.nil();
 				root_1 = (HokenNode)adaptor.becomeRoot((HokenNode)adaptor.create(COMPOUND, "COMPOUND"), root_1);
@@ -846,7 +846,7 @@ public class HokenParser extends Parser {
 
 
 	// $ANTLR start "logical_or_expr"
-	// ..\\src\\hoken\\parser\\Hoken.g:121:1: logical_or_expr : logical_and_expr ( OR ^ logical_and_expr )* ;
+	// src\\hoken\\parser\\Hoken.g:121:1: logical_or_expr : logical_and_expr ( OR ^ logical_and_expr )* ;
 	public final HokenParser.logical_or_expr_return logical_or_expr() throws RecognitionException {
 		HokenParser.logical_or_expr_return retval = new HokenParser.logical_or_expr_return();
 		retval.start = input.LT(1);
@@ -860,8 +860,8 @@ public class HokenParser extends Parser {
 		HokenNode OR30_tree=null;
 
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:122:5: ( logical_and_expr ( OR ^ logical_and_expr )* )
-			// ..\\src\\hoken\\parser\\Hoken.g:122:9: logical_and_expr ( OR ^ logical_and_expr )*
+			// src\\hoken\\parser\\Hoken.g:122:5: ( logical_and_expr ( OR ^ logical_and_expr )* )
+			// src\\hoken\\parser\\Hoken.g:122:9: logical_and_expr ( OR ^ logical_and_expr )*
 			{
 			root_0 = (HokenNode)adaptor.nil();
 
@@ -872,7 +872,7 @@ public class HokenParser extends Parser {
 
 			adaptor.addChild(root_0, logical_and_expr29.getTree());
 
-			// ..\\src\\hoken\\parser\\Hoken.g:122:26: ( OR ^ logical_and_expr )*
+			// src\\hoken\\parser\\Hoken.g:122:26: ( OR ^ logical_and_expr )*
 			loop5:
 			while (true) {
 				int alt5=2;
@@ -883,7 +883,7 @@ public class HokenParser extends Parser {
 
 				switch (alt5) {
 				case 1 :
-					// ..\\src\\hoken\\parser\\Hoken.g:122:27: OR ^ logical_and_expr
+					// src\\hoken\\parser\\Hoken.g:122:27: OR ^ logical_and_expr
 					{
 					OR30=(Token)match(input,OR,FOLLOW_OR_in_logical_or_expr781); 
 					OR30_tree = new ExpressionNode(OR30) ;
@@ -932,7 +932,7 @@ public class HokenParser extends Parser {
 
 
 	// $ANTLR start "logical_and_expr"
-	// ..\\src\\hoken\\parser\\Hoken.g:125:1: logical_and_expr : logical_comparative_expr ( AND ^ logical_comparative_expr )* ;
+	// src\\hoken\\parser\\Hoken.g:125:1: logical_and_expr : logical_comparative_expr ( AND ^ logical_comparative_expr )* ;
 	public final HokenParser.logical_and_expr_return logical_and_expr() throws RecognitionException {
 		HokenParser.logical_and_expr_return retval = new HokenParser.logical_and_expr_return();
 		retval.start = input.LT(1);
@@ -946,8 +946,8 @@ public class HokenParser extends Parser {
 		HokenNode AND33_tree=null;
 
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:126:5: ( logical_comparative_expr ( AND ^ logical_comparative_expr )* )
-			// ..\\src\\hoken\\parser\\Hoken.g:126:9: logical_comparative_expr ( AND ^ logical_comparative_expr )*
+			// src\\hoken\\parser\\Hoken.g:126:5: ( logical_comparative_expr ( AND ^ logical_comparative_expr )* )
+			// src\\hoken\\parser\\Hoken.g:126:9: logical_comparative_expr ( AND ^ logical_comparative_expr )*
 			{
 			root_0 = (HokenNode)adaptor.nil();
 
@@ -958,7 +958,7 @@ public class HokenParser extends Parser {
 
 			adaptor.addChild(root_0, logical_comparative_expr32.getTree());
 
-			// ..\\src\\hoken\\parser\\Hoken.g:126:34: ( AND ^ logical_comparative_expr )*
+			// src\\hoken\\parser\\Hoken.g:126:34: ( AND ^ logical_comparative_expr )*
 			loop6:
 			while (true) {
 				int alt6=2;
@@ -969,7 +969,7 @@ public class HokenParser extends Parser {
 
 				switch (alt6) {
 				case 1 :
-					// ..\\src\\hoken\\parser\\Hoken.g:126:35: AND ^ logical_comparative_expr
+					// src\\hoken\\parser\\Hoken.g:126:35: AND ^ logical_comparative_expr
 					{
 					AND33=(Token)match(input,AND,FOLLOW_AND_in_logical_and_expr811); 
 					AND33_tree = new ExpressionNode(AND33) ;
@@ -1018,7 +1018,7 @@ public class HokenParser extends Parser {
 
 
 	// $ANTLR start "logical_comparative_expr"
-	// ..\\src\\hoken\\parser\\Hoken.g:129:1: logical_comparative_expr : additive_expr ( ( LT ^| LTE ^| GTE ^| GT ^| EQ ^| NEQ ^) additive_expr )* ;
+	// src\\hoken\\parser\\Hoken.g:129:1: logical_comparative_expr : additive_expr ( ( LT ^| LTE ^| GTE ^| GT ^| EQ ^| NEQ ^) additive_expr )* ;
 	public final HokenParser.logical_comparative_expr_return logical_comparative_expr() throws RecognitionException {
 		HokenParser.logical_comparative_expr_return retval = new HokenParser.logical_comparative_expr_return();
 		retval.start = input.LT(1);
@@ -1042,8 +1042,8 @@ public class HokenParser extends Parser {
 		HokenNode NEQ41_tree=null;
 
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:130:5: ( additive_expr ( ( LT ^| LTE ^| GTE ^| GT ^| EQ ^| NEQ ^) additive_expr )* )
-			// ..\\src\\hoken\\parser\\Hoken.g:130:9: additive_expr ( ( LT ^| LTE ^| GTE ^| GT ^| EQ ^| NEQ ^) additive_expr )*
+			// src\\hoken\\parser\\Hoken.g:130:5: ( additive_expr ( ( LT ^| LTE ^| GTE ^| GT ^| EQ ^| NEQ ^) additive_expr )* )
+			// src\\hoken\\parser\\Hoken.g:130:9: additive_expr ( ( LT ^| LTE ^| GTE ^| GT ^| EQ ^| NEQ ^) additive_expr )*
 			{
 			root_0 = (HokenNode)adaptor.nil();
 
@@ -1054,7 +1054,7 @@ public class HokenParser extends Parser {
 
 			adaptor.addChild(root_0, additive_expr35.getTree());
 
-			// ..\\src\\hoken\\parser\\Hoken.g:131:9: ( ( LT ^| LTE ^| GTE ^| GT ^| EQ ^| NEQ ^) additive_expr )*
+			// src\\hoken\\parser\\Hoken.g:131:9: ( ( LT ^| LTE ^| GTE ^| GT ^| EQ ^| NEQ ^) additive_expr )*
 			loop8:
 			while (true) {
 				int alt8=2;
@@ -1065,9 +1065,9 @@ public class HokenParser extends Parser {
 
 				switch (alt8) {
 				case 1 :
-					// ..\\src\\hoken\\parser\\Hoken.g:132:13: ( LT ^| LTE ^| GTE ^| GT ^| EQ ^| NEQ ^) additive_expr
+					// src\\hoken\\parser\\Hoken.g:132:13: ( LT ^| LTE ^| GTE ^| GT ^| EQ ^| NEQ ^) additive_expr
 					{
-					// ..\\src\\hoken\\parser\\Hoken.g:132:13: ( LT ^| LTE ^| GTE ^| GT ^| EQ ^| NEQ ^)
+					// src\\hoken\\parser\\Hoken.g:132:13: ( LT ^| LTE ^| GTE ^| GT ^| EQ ^| NEQ ^)
 					int alt7=6;
 					switch ( input.LA(1) ) {
 					case LT:
@@ -1107,7 +1107,7 @@ public class HokenParser extends Parser {
 					}
 					switch (alt7) {
 						case 1 :
-							// ..\\src\\hoken\\parser\\Hoken.g:132:15: LT ^
+							// src\\hoken\\parser\\Hoken.g:132:15: LT ^
 							{
 							LT36=(Token)match(input,LT,FOLLOW_LT_in_logical_comparative_expr864); 
 							LT36_tree = new ExpressionNode(LT36) ;
@@ -1116,7 +1116,7 @@ public class HokenParser extends Parser {
 							}
 							break;
 						case 2 :
-							// ..\\src\\hoken\\parser\\Hoken.g:133:15: LTE ^
+							// src\\hoken\\parser\\Hoken.g:133:15: LTE ^
 							{
 							LTE37=(Token)match(input,LTE,FOLLOW_LTE_in_logical_comparative_expr885); 
 							LTE37_tree = new ExpressionNode(LTE37) ;
@@ -1125,7 +1125,7 @@ public class HokenParser extends Parser {
 							}
 							break;
 						case 3 :
-							// ..\\src\\hoken\\parser\\Hoken.g:134:15: GTE ^
+							// src\\hoken\\parser\\Hoken.g:134:15: GTE ^
 							{
 							GTE38=(Token)match(input,GTE,FOLLOW_GTE_in_logical_comparative_expr905); 
 							GTE38_tree = new ExpressionNode(GTE38) ;
@@ -1134,7 +1134,7 @@ public class HokenParser extends Parser {
 							}
 							break;
 						case 4 :
-							// ..\\src\\hoken\\parser\\Hoken.g:135:15: GT ^
+							// src\\hoken\\parser\\Hoken.g:135:15: GT ^
 							{
 							GT39=(Token)match(input,GT,FOLLOW_GT_in_logical_comparative_expr925); 
 							GT39_tree = new ExpressionNode(GT39) ;
@@ -1143,7 +1143,7 @@ public class HokenParser extends Parser {
 							}
 							break;
 						case 5 :
-							// ..\\src\\hoken\\parser\\Hoken.g:136:15: EQ ^
+							// src\\hoken\\parser\\Hoken.g:136:15: EQ ^
 							{
 							EQ40=(Token)match(input,EQ,FOLLOW_EQ_in_logical_comparative_expr946); 
 							EQ40_tree = new ExpressionNode(EQ40) ;
@@ -1152,7 +1152,7 @@ public class HokenParser extends Parser {
 							}
 							break;
 						case 6 :
-							// ..\\src\\hoken\\parser\\Hoken.g:137:15: NEQ ^
+							// src\\hoken\\parser\\Hoken.g:137:15: NEQ ^
 							{
 							NEQ41=(Token)match(input,NEQ,FOLLOW_NEQ_in_logical_comparative_expr967); 
 							NEQ41_tree = new ExpressionNode(NEQ41) ;
@@ -1206,7 +1206,7 @@ public class HokenParser extends Parser {
 
 
 	// $ANTLR start "additive_expr"
-	// ..\\src\\hoken\\parser\\Hoken.g:142:1: additive_expr : multiplicative_expr ( ( PLUS ^| MINUS ^) multiplicative_expr )* ;
+	// src\\hoken\\parser\\Hoken.g:142:1: additive_expr : multiplicative_expr ( ( PLUS ^| MINUS ^) multiplicative_expr )* ;
 	public final HokenParser.additive_expr_return additive_expr() throws RecognitionException {
 		HokenParser.additive_expr_return retval = new HokenParser.additive_expr_return();
 		retval.start = input.LT(1);
@@ -1222,8 +1222,8 @@ public class HokenParser extends Parser {
 		HokenNode MINUS45_tree=null;
 
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:143:5: ( multiplicative_expr ( ( PLUS ^| MINUS ^) multiplicative_expr )* )
-			// ..\\src\\hoken\\parser\\Hoken.g:143:9: multiplicative_expr ( ( PLUS ^| MINUS ^) multiplicative_expr )*
+			// src\\hoken\\parser\\Hoken.g:143:5: ( multiplicative_expr ( ( PLUS ^| MINUS ^) multiplicative_expr )* )
+			// src\\hoken\\parser\\Hoken.g:143:9: multiplicative_expr ( ( PLUS ^| MINUS ^) multiplicative_expr )*
 			{
 			root_0 = (HokenNode)adaptor.nil();
 
@@ -1234,7 +1234,7 @@ public class HokenParser extends Parser {
 
 			adaptor.addChild(root_0, multiplicative_expr43.getTree());
 
-			// ..\\src\\hoken\\parser\\Hoken.g:144:9: ( ( PLUS ^| MINUS ^) multiplicative_expr )*
+			// src\\hoken\\parser\\Hoken.g:144:9: ( ( PLUS ^| MINUS ^) multiplicative_expr )*
 			loop10:
 			while (true) {
 				int alt10=2;
@@ -1245,9 +1245,9 @@ public class HokenParser extends Parser {
 
 				switch (alt10) {
 				case 1 :
-					// ..\\src\\hoken\\parser\\Hoken.g:145:13: ( PLUS ^| MINUS ^) multiplicative_expr
+					// src\\hoken\\parser\\Hoken.g:145:13: ( PLUS ^| MINUS ^) multiplicative_expr
 					{
-					// ..\\src\\hoken\\parser\\Hoken.g:145:13: ( PLUS ^| MINUS ^)
+					// src\\hoken\\parser\\Hoken.g:145:13: ( PLUS ^| MINUS ^)
 					int alt9=2;
 					int LA9_0 = input.LA(1);
 					if ( (LA9_0==PLUS) ) {
@@ -1265,7 +1265,7 @@ public class HokenParser extends Parser {
 
 					switch (alt9) {
 						case 1 :
-							// ..\\src\\hoken\\parser\\Hoken.g:145:15: PLUS ^
+							// src\\hoken\\parser\\Hoken.g:145:15: PLUS ^
 							{
 							PLUS44=(Token)match(input,PLUS,FOLLOW_PLUS_in_additive_expr1042); 
 							PLUS44_tree = new ExpressionNode(PLUS44) ;
@@ -1274,7 +1274,7 @@ public class HokenParser extends Parser {
 							}
 							break;
 						case 2 :
-							// ..\\src\\hoken\\parser\\Hoken.g:146:15: MINUS ^
+							// src\\hoken\\parser\\Hoken.g:146:15: MINUS ^
 							{
 							MINUS45=(Token)match(input,MINUS,FOLLOW_MINUS_in_additive_expr1063); 
 							MINUS45_tree = new ExpressionNode(MINUS45) ;
@@ -1328,7 +1328,7 @@ public class HokenParser extends Parser {
 
 
 	// $ANTLR start "multiplicative_expr"
-	// ..\\src\\hoken\\parser\\Hoken.g:151:1: multiplicative_expr : unary_expr ( ( TIMES ^| DIVIDE ^| MODULO ^) unary_expr )* ;
+	// src\\hoken\\parser\\Hoken.g:151:1: multiplicative_expr : unary_expr ( ( TIMES ^| DIVIDE ^| MODULO ^) unary_expr )* ;
 	public final HokenParser.multiplicative_expr_return multiplicative_expr() throws RecognitionException {
 		HokenParser.multiplicative_expr_return retval = new HokenParser.multiplicative_expr_return();
 		retval.start = input.LT(1);
@@ -1346,8 +1346,8 @@ public class HokenParser extends Parser {
 		HokenNode MODULO50_tree=null;
 
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:152:5: ( unary_expr ( ( TIMES ^| DIVIDE ^| MODULO ^) unary_expr )* )
-			// ..\\src\\hoken\\parser\\Hoken.g:152:9: unary_expr ( ( TIMES ^| DIVIDE ^| MODULO ^) unary_expr )*
+			// src\\hoken\\parser\\Hoken.g:152:5: ( unary_expr ( ( TIMES ^| DIVIDE ^| MODULO ^) unary_expr )* )
+			// src\\hoken\\parser\\Hoken.g:152:9: unary_expr ( ( TIMES ^| DIVIDE ^| MODULO ^) unary_expr )*
 			{
 			root_0 = (HokenNode)adaptor.nil();
 
@@ -1358,7 +1358,7 @@ public class HokenParser extends Parser {
 
 			adaptor.addChild(root_0, unary_expr47.getTree());
 
-			// ..\\src\\hoken\\parser\\Hoken.g:153:9: ( ( TIMES ^| DIVIDE ^| MODULO ^) unary_expr )*
+			// src\\hoken\\parser\\Hoken.g:153:9: ( ( TIMES ^| DIVIDE ^| MODULO ^) unary_expr )*
 			loop12:
 			while (true) {
 				int alt12=2;
@@ -1369,9 +1369,9 @@ public class HokenParser extends Parser {
 
 				switch (alt12) {
 				case 1 :
-					// ..\\src\\hoken\\parser\\Hoken.g:154:13: ( TIMES ^| DIVIDE ^| MODULO ^) unary_expr
+					// src\\hoken\\parser\\Hoken.g:154:13: ( TIMES ^| DIVIDE ^| MODULO ^) unary_expr
 					{
-					// ..\\src\\hoken\\parser\\Hoken.g:154:13: ( TIMES ^| DIVIDE ^| MODULO ^)
+					// src\\hoken\\parser\\Hoken.g:154:13: ( TIMES ^| DIVIDE ^| MODULO ^)
 					int alt11=3;
 					switch ( input.LA(1) ) {
 					case TIMES:
@@ -1396,7 +1396,7 @@ public class HokenParser extends Parser {
 					}
 					switch (alt11) {
 						case 1 :
-							// ..\\src\\hoken\\parser\\Hoken.g:154:15: TIMES ^
+							// src\\hoken\\parser\\Hoken.g:154:15: TIMES ^
 							{
 							TIMES48=(Token)match(input,TIMES,FOLLOW_TIMES_in_multiplicative_expr1138); 
 							TIMES48_tree = new ExpressionNode(TIMES48) ;
@@ -1405,7 +1405,7 @@ public class HokenParser extends Parser {
 							}
 							break;
 						case 2 :
-							// ..\\src\\hoken\\parser\\Hoken.g:155:15: DIVIDE ^
+							// src\\hoken\\parser\\Hoken.g:155:15: DIVIDE ^
 							{
 							DIVIDE49=(Token)match(input,DIVIDE,FOLLOW_DIVIDE_in_multiplicative_expr1159); 
 							DIVIDE49_tree = new ExpressionNode(DIVIDE49) ;
@@ -1414,7 +1414,7 @@ public class HokenParser extends Parser {
 							}
 							break;
 						case 3 :
-							// ..\\src\\hoken\\parser\\Hoken.g:156:15: MODULO ^
+							// src\\hoken\\parser\\Hoken.g:156:15: MODULO ^
 							{
 							MODULO50=(Token)match(input,MODULO,FOLLOW_MODULO_in_multiplicative_expr1179); 
 							MODULO50_tree = new ExpressionNode(MODULO50) ;
@@ -1468,7 +1468,7 @@ public class HokenParser extends Parser {
 
 
 	// $ANTLR start "unary_expr"
-	// ..\\src\\hoken\\parser\\Hoken.g:160:1: unary_expr : ( PLUS ^| MINUS ^| NOT ^)? operand ;
+	// src\\hoken\\parser\\Hoken.g:160:1: unary_expr : ( PLUS ^| MINUS ^| NOT ^)? operand ;
 	public final HokenParser.unary_expr_return unary_expr() throws RecognitionException {
 		HokenParser.unary_expr_return retval = new HokenParser.unary_expr_return();
 		retval.start = input.LT(1);
@@ -1485,13 +1485,13 @@ public class HokenParser extends Parser {
 		HokenNode NOT54_tree=null;
 
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:161:5: ( ( PLUS ^| MINUS ^| NOT ^)? operand )
-			// ..\\src\\hoken\\parser\\Hoken.g:161:9: ( PLUS ^| MINUS ^| NOT ^)? operand
+			// src\\hoken\\parser\\Hoken.g:161:5: ( ( PLUS ^| MINUS ^| NOT ^)? operand )
+			// src\\hoken\\parser\\Hoken.g:161:9: ( PLUS ^| MINUS ^| NOT ^)? operand
 			{
 			root_0 = (HokenNode)adaptor.nil();
 
 
-			// ..\\src\\hoken\\parser\\Hoken.g:161:9: ( PLUS ^| MINUS ^| NOT ^)?
+			// src\\hoken\\parser\\Hoken.g:161:9: ( PLUS ^| MINUS ^| NOT ^)?
 			int alt13=4;
 			switch ( input.LA(1) ) {
 				case PLUS:
@@ -1512,7 +1512,7 @@ public class HokenParser extends Parser {
 			}
 			switch (alt13) {
 				case 1 :
-					// ..\\src\\hoken\\parser\\Hoken.g:161:11: PLUS ^
+					// src\\hoken\\parser\\Hoken.g:161:11: PLUS ^
 					{
 					PLUS52=(Token)match(input,PLUS,FOLLOW_PLUS_in_unary_expr1218); 
 					PLUS52_tree = new ExpressionNode(PLUS52) ;
@@ -1521,7 +1521,7 @@ public class HokenParser extends Parser {
 					}
 					break;
 				case 2 :
-					// ..\\src\\hoken\\parser\\Hoken.g:162:11: MINUS ^
+					// src\\hoken\\parser\\Hoken.g:162:11: MINUS ^
 					{
 					MINUS53=(Token)match(input,MINUS,FOLLOW_MINUS_in_unary_expr1234); 
 					MINUS53_tree = new ExpressionNode(MINUS53) ;
@@ -1530,7 +1530,7 @@ public class HokenParser extends Parser {
 					}
 					break;
 				case 3 :
-					// ..\\src\\hoken\\parser\\Hoken.g:163:11: NOT ^
+					// src\\hoken\\parser\\Hoken.g:163:11: NOT ^
 					{
 					NOT54=(Token)match(input,NOT,FOLLOW_NOT_in_unary_expr1250); 
 					NOT54_tree = new ExpressionNode(NOT54) ;
@@ -1576,7 +1576,7 @@ public class HokenParser extends Parser {
 
 
 	// $ANTLR start "operand"
-	// ..\\src\\hoken\\parser\\Hoken.g:167:1: operand : ( ID | value | read_stat | write_stat | compound_stat | LPAREN ! expr RPAREN !);
+	// src\\hoken\\parser\\Hoken.g:167:1: operand : ( ID | value | read_stat | write_stat | compound_stat | LPAREN ! expr RPAREN !);
 	public final HokenParser.operand_return operand() throws RecognitionException {
 		HokenParser.operand_return retval = new HokenParser.operand_return();
 		retval.start = input.LT(1);
@@ -1597,7 +1597,7 @@ public class HokenParser extends Parser {
 		HokenNode RPAREN63_tree=null;
 
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:168:5: ( ID | value | read_stat | write_stat | compound_stat | LPAREN ! expr RPAREN !)
+			// src\\hoken\\parser\\Hoken.g:168:5: ( ID | value | read_stat | write_stat | compound_stat | LPAREN ! expr RPAREN !)
 			int alt14=6;
 			switch ( input.LA(1) ) {
 			case ID:
@@ -1640,7 +1640,7 @@ public class HokenParser extends Parser {
 			}
 			switch (alt14) {
 				case 1 :
-					// ..\\src\\hoken\\parser\\Hoken.g:168:9: ID
+					// src\\hoken\\parser\\Hoken.g:168:9: ID
 					{
 					root_0 = (HokenNode)adaptor.nil();
 
@@ -1652,7 +1652,7 @@ public class HokenParser extends Parser {
 					}
 					break;
 				case 2 :
-					// ..\\src\\hoken\\parser\\Hoken.g:169:9: value
+					// src\\hoken\\parser\\Hoken.g:169:9: value
 					{
 					root_0 = (HokenNode)adaptor.nil();
 
@@ -1666,7 +1666,7 @@ public class HokenParser extends Parser {
 					}
 					break;
 				case 3 :
-					// ..\\src\\hoken\\parser\\Hoken.g:170:9: read_stat
+					// src\\hoken\\parser\\Hoken.g:170:9: read_stat
 					{
 					root_0 = (HokenNode)adaptor.nil();
 
@@ -1680,7 +1680,7 @@ public class HokenParser extends Parser {
 					}
 					break;
 				case 4 :
-					// ..\\src\\hoken\\parser\\Hoken.g:171:9: write_stat
+					// src\\hoken\\parser\\Hoken.g:171:9: write_stat
 					{
 					root_0 = (HokenNode)adaptor.nil();
 
@@ -1694,7 +1694,7 @@ public class HokenParser extends Parser {
 					}
 					break;
 				case 5 :
-					// ..\\src\\hoken\\parser\\Hoken.g:172:9: compound_stat
+					// src\\hoken\\parser\\Hoken.g:172:9: compound_stat
 					{
 					root_0 = (HokenNode)adaptor.nil();
 
@@ -1708,7 +1708,7 @@ public class HokenParser extends Parser {
 					}
 					break;
 				case 6 :
-					// ..\\src\\hoken\\parser\\Hoken.g:173:9: LPAREN ! expr RPAREN !
+					// src\\hoken\\parser\\Hoken.g:173:9: LPAREN ! expr RPAREN !
 					{
 					root_0 = (HokenNode)adaptor.nil();
 
@@ -1752,7 +1752,7 @@ public class HokenParser extends Parser {
 
 
 	// $ANTLR start "id_list"
-	// ..\\src\\hoken\\parser\\Hoken.g:179:1: id_list : ID ( COMMA ! ID )* ;
+	// src\\hoken\\parser\\Hoken.g:179:1: id_list : ID ( COMMA ! ID )* ;
 	public final HokenParser.id_list_return id_list() throws RecognitionException {
 		HokenParser.id_list_return retval = new HokenParser.id_list_return();
 		retval.start = input.LT(1);
@@ -1768,8 +1768,8 @@ public class HokenParser extends Parser {
 		HokenNode ID66_tree=null;
 
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:180:5: ( ID ( COMMA ! ID )* )
-			// ..\\src\\hoken\\parser\\Hoken.g:180:9: ID ( COMMA ! ID )*
+			// src\\hoken\\parser\\Hoken.g:180:5: ( ID ( COMMA ! ID )* )
+			// src\\hoken\\parser\\Hoken.g:180:9: ID ( COMMA ! ID )*
 			{
 			root_0 = (HokenNode)adaptor.nil();
 
@@ -1778,7 +1778,7 @@ public class HokenParser extends Parser {
 			ID64_tree = new IdNode(ID64) ;
 			adaptor.addChild(root_0, ID64_tree);
 
-			// ..\\src\\hoken\\parser\\Hoken.g:180:20: ( COMMA ! ID )*
+			// src\\hoken\\parser\\Hoken.g:180:20: ( COMMA ! ID )*
 			loop15:
 			while (true) {
 				int alt15=2;
@@ -1789,7 +1789,7 @@ public class HokenParser extends Parser {
 
 				switch (alt15) {
 				case 1 :
-					// ..\\src\\hoken\\parser\\Hoken.g:180:21: COMMA ! ID
+					// src\\hoken\\parser\\Hoken.g:180:21: COMMA ! ID
 					{
 					COMMA65=(Token)match(input,COMMA,FOLLOW_COMMA_in_id_list1373); 
 					ID66=(Token)match(input,ID,FOLLOW_ID_in_id_list1376); 
@@ -1833,7 +1833,7 @@ public class HokenParser extends Parser {
 
 
 	// $ANTLR start "expr_list"
-	// ..\\src\\hoken\\parser\\Hoken.g:183:1: expr_list : expr ( COMMA ! expr )* ;
+	// src\\hoken\\parser\\Hoken.g:183:1: expr_list : expr ( COMMA ! expr )* ;
 	public final HokenParser.expr_list_return expr_list() throws RecognitionException {
 		HokenParser.expr_list_return retval = new HokenParser.expr_list_return();
 		retval.start = input.LT(1);
@@ -1847,8 +1847,8 @@ public class HokenParser extends Parser {
 		HokenNode COMMA68_tree=null;
 
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:184:5: ( expr ( COMMA ! expr )* )
-			// ..\\src\\hoken\\parser\\Hoken.g:184:9: expr ( COMMA ! expr )*
+			// src\\hoken\\parser\\Hoken.g:184:5: ( expr ( COMMA ! expr )* )
+			// src\\hoken\\parser\\Hoken.g:184:9: expr ( COMMA ! expr )*
 			{
 			root_0 = (HokenNode)adaptor.nil();
 
@@ -1859,7 +1859,7 @@ public class HokenParser extends Parser {
 
 			adaptor.addChild(root_0, expr67.getTree());
 
-			// ..\\src\\hoken\\parser\\Hoken.g:184:14: ( COMMA ! expr )*
+			// src\\hoken\\parser\\Hoken.g:184:14: ( COMMA ! expr )*
 			loop16:
 			while (true) {
 				int alt16=2;
@@ -1870,7 +1870,7 @@ public class HokenParser extends Parser {
 
 				switch (alt16) {
 				case 1 :
-					// ..\\src\\hoken\\parser\\Hoken.g:184:15: COMMA ! expr
+					// src\\hoken\\parser\\Hoken.g:184:15: COMMA ! expr
 					{
 					COMMA68=(Token)match(input,COMMA,FOLLOW_COMMA_in_expr_list1403); 
 					pushFollow(FOLLOW_expr_in_expr_list1406);
@@ -1916,7 +1916,7 @@ public class HokenParser extends Parser {
 
 
 	// $ANTLR start "value"
-	// ..\\src\\hoken\\parser\\Hoken.g:190:1: value : ( CHAR | INT | bool );
+	// src\\hoken\\parser\\Hoken.g:190:1: value : ( CHAR | INT | bool );
 	public final HokenParser.value_return value() throws RecognitionException {
 		HokenParser.value_return retval = new HokenParser.value_return();
 		retval.start = input.LT(1);
@@ -1931,7 +1931,7 @@ public class HokenParser extends Parser {
 		HokenNode INT71_tree=null;
 
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:191:5: ( CHAR | INT | bool )
+			// src\\hoken\\parser\\Hoken.g:191:5: ( CHAR | INT | bool )
 			int alt17=3;
 			switch ( input.LA(1) ) {
 			case CHAR:
@@ -1957,7 +1957,7 @@ public class HokenParser extends Parser {
 			}
 			switch (alt17) {
 				case 1 :
-					// ..\\src\\hoken\\parser\\Hoken.g:191:9: CHAR
+					// src\\hoken\\parser\\Hoken.g:191:9: CHAR
 					{
 					root_0 = (HokenNode)adaptor.nil();
 
@@ -1969,7 +1969,7 @@ public class HokenParser extends Parser {
 					}
 					break;
 				case 2 :
-					// ..\\src\\hoken\\parser\\Hoken.g:192:9: INT
+					// src\\hoken\\parser\\Hoken.g:192:9: INT
 					{
 					root_0 = (HokenNode)adaptor.nil();
 
@@ -1981,7 +1981,7 @@ public class HokenParser extends Parser {
 					}
 					break;
 				case 3 :
-					// ..\\src\\hoken\\parser\\Hoken.g:193:9: bool
+					// src\\hoken\\parser\\Hoken.g:193:9: bool
 					{
 					root_0 = (HokenNode)adaptor.nil();
 
@@ -2023,7 +2023,7 @@ public class HokenParser extends Parser {
 
 
 	// $ANTLR start "type"
-	// ..\\src\\hoken\\parser\\Hoken.g:196:1: type : ( INTEGER | BOOLEAN | CHARACTER );
+	// src\\hoken\\parser\\Hoken.g:196:1: type : ( INTEGER | BOOLEAN | CHARACTER );
 	public final HokenParser.type_return type() throws RecognitionException {
 		HokenParser.type_return retval = new HokenParser.type_return();
 		retval.start = input.LT(1);
@@ -2035,8 +2035,8 @@ public class HokenParser extends Parser {
 		HokenNode set73_tree=null;
 
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:196:5: ( INTEGER | BOOLEAN | CHARACTER )
-			// ..\\src\\hoken\\parser\\Hoken.g:
+			// src\\hoken\\parser\\Hoken.g:196:5: ( INTEGER | BOOLEAN | CHARACTER )
+			// src\\hoken\\parser\\Hoken.g:
 			{
 			root_0 = (HokenNode)adaptor.nil();
 
@@ -2080,7 +2080,7 @@ public class HokenParser extends Parser {
 
 
 	// $ANTLR start "bool"
-	// ..\\src\\hoken\\parser\\Hoken.g:210:1: bool : ( TRUE | FALSE );
+	// src\\hoken\\parser\\Hoken.g:210:1: bool : ( TRUE | FALSE );
 	public final HokenParser.bool_return bool() throws RecognitionException {
 		HokenParser.bool_return retval = new HokenParser.bool_return();
 		retval.start = input.LT(1);
@@ -2092,8 +2092,8 @@ public class HokenParser extends Parser {
 		HokenNode set74_tree=null;
 
 		try {
-			// ..\\src\\hoken\\parser\\Hoken.g:210:5: ( TRUE | FALSE )
-			// ..\\src\\hoken\\parser\\Hoken.g:
+			// src\\hoken\\parser\\Hoken.g:210:5: ( TRUE | FALSE )
+			// src\\hoken\\parser\\Hoken.g:
 			{
 			root_0 = (HokenNode)adaptor.nil();
 
