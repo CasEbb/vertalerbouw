@@ -8,6 +8,7 @@ import hoken.parser.HokenLexer;
 import hoken.parser.HokenParser;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -29,7 +30,7 @@ import TAM.Assembler;
 public class Compiler {
 
 	/** Enumeratie van de mogelijke uitvoertypen van de compiler. **/
-	enum Target {
+	public enum Target {
 		TAM, JVM, DOT
 	};
 
@@ -37,8 +38,12 @@ public class Compiler {
 	private Target target = Target.TAM;
 	/** Geeft aan of er uitgebreide uitvoer moet plaatsvinden. **/
 	private boolean verbose = true;
+	/** Geeft aan of de assemblercode uitgevoerd moet worden. **/
+	private boolean asm = false;
 	/** Het bestand met de broncode. **/
 	private ANTLRFileStream infile;
+	/** De naam van het programma **/
+	private String programName;
 
 	/**
 	 * Maakt een nieuwe instantie van <code>Compiler</code> aan met de opgegeven
@@ -79,14 +84,31 @@ public class Compiler {
 				StringTemplateGroup templateLib = new StringTemplateGroup(
 						new FileReader("tam.stg"));
 				generator.setTemplateLib(templateLib);
-				String code = generator.program().toString();
-				System.err.println(code);
+				generator.target = Target.TAM;
+				String code = generator.program(this.programName).toString();
+				if(this.asm) System.out.println(code); 
 
 				print("===> Assembleren...");
 				Assembler.assemble(new ByteArrayInputStream(code.getBytes()),
 						new FileOutputStream("obj.tam"));
 			} else if (this.target == Target.JVM) {
 				print("===> Code genereren voor JVM...");
+				HokenGenerator generator = new HokenGenerator(new CommonTreeNodeStream(ast));
+				StringTemplateGroup templateLib = new StringTemplateGroup(new FileReader("jvm.stg"));
+				generator.setTemplateLib(templateLib);
+				generator.target = Target.JVM;
+				// verhoog addrs, want voor JVM geldt 0=this, en 1=Scanner voor de input
+				generator.nextAddr = 2;
+				String code = generator.program(this.programName).toString();
+				if(this.asm) System.out.println(code);
+				print("===> Assembleren...");
+				File temp = new File("hoken.tmp");
+				FileWriter fw = new FileWriter(temp);
+				fw.write(code);
+				fw.close();
+				new jasmin.Main().assemble("hoken.tmp");
+				temp.delete();
+				new File("_temp.j").delete();
 			} else if (this.target == Target.DOT) {
 				print("===> Genereert DOT-file van AST...");
 				DOTTreeGenerator gen = new DOTTreeGenerator();
@@ -136,13 +158,15 @@ public class Compiler {
 			System.err.println("  -silent");
 			System.err
 					.println("     Onderdruk informatie gegeven door de compiler");
+			System.err.println("  -asm");
+			System.err.println("     Produceer naast het object ook de gegenereerde code op de standaardoutput");
 			System.err.println("  -tam");
 			System.err.println("     Gebruik TAM als doelmachine (standaard)");
 			System.err.println("  -jvm");
 			System.err.println("     Gebruik Java als doelmachine");
 			System.err.println("  -dot");
 			System.err
-					.println("     Geef de AST als graaf op de standaardoutput");
+					.println("     Tekent de AST als doel");
 			System.exit(1);
 		}
 
@@ -155,27 +179,38 @@ public class Compiler {
 				this.verbose = false;
 			} else if (args[i].equals("-dot")) {
 				this.target = Target.DOT;
+			} else if (args[i].equals("-asm")) {
+				this.asm = true;
 			} else {
 				if (i < args.length - 1) {
 					System.err
-							.println("FOUT: Invoer bestandsnaam '%s' zou het laatste argument moeten zijn.");
+							.println("FOUT: Invoer bestandsnaam '" + args[i] + "' zou het laatste argument moeten zijn.");
 					System.exit(1);
 				} else {
 					try {
-						infile = new ANTLRFileStream(args[i]);
+						this.infile = new ANTLRFileStream(args[i]);
+						this.programName = stripExtension(args[i]);
 					} catch (IOException e) {
 						System.err
-								.println("FOUT: Kon invoer bestand '%s' niet openen.");
+								.println("FOUT: Kon invoer bestand '"+ args[i] + "' niet openen.");
 						System.exit(1);
 					}
 				}
 			}
 		}
 
-		if (infile == null) {
+		if (this.infile == null) {
 			System.err.println("FOUT: Geen invoer bestand opgegeven.");
 			System.exit(1);
 		}
+	}
+	
+	private String stripExtension(String filename) {
+		int pos = filename.lastIndexOf('.');
+		if(pos == -1)
+			return filename;
+		else
+			return filename.substring(0, pos);
 	}
 
 	/**

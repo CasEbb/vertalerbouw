@@ -257,7 +257,7 @@ public class HokenChecker extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					                Declarationnode D = (DeclarationNode)declaration;
+					                DeclarationNode D = (DeclarationNode)declaration;
 					                D.type = Type.getType((type!=null?type.getText():null));
 					                for(Object child : list_ids) {
 					                    String id = ((HokenNode)child).getText();
@@ -320,7 +320,7 @@ public class HokenChecker extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					                DeclarationNode D = (Declarationnode)declaration;
+					                DeclarationNode D = (DeclarationNode)declaration;
 					                D.type = Type.getType((type!=null?type.getText():null));
 					                D.isConstant = true;
 					                for(Object child : list_ids) {

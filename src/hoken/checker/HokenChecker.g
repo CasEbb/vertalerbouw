@@ -38,7 +38,7 @@ program
 statement
     :   ^(declaration=VAR type=(INTEGER|CHARACTER|BOOLEAN) (ids+=ID)+)
             {
-                Declarationnode D = (DeclarationNode)declaration;
+                DeclarationNode D = (DeclarationNode)declaration;
                 D.type = Type.getType($type.text);
                 for(Object child : $ids) {
                     String id = ((HokenNode)child).getText();
@@ -48,7 +48,7 @@ statement
             }
     |   ^(declaration=CONST type=(INTEGER|CHARACTER|BOOLEAN) (ids+=ID)+ operand)
             {
-                DeclarationNode D = (Declarationnode)declaration;
+                DeclarationNode D = (DeclarationNode)declaration;
                 D.type = Type.getType($type.text);
                 D.isConstant = true;
                 for(Object child : $ids) {

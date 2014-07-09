@@ -1,0 +1,137 @@
+
+group jvm;
+
+program(name, instructions) ::= <<
+.class public <name>
+.super java/lang/Object
+
+.method public static main([Ljava/lang/String;)V
+    .limit stack 50
+    .limit locals 100
+    new java/util/Scanner
+    dup
+    getstatic java/lang/System/in Ljava/io/InputStream;
+    invokespecial java/util/Scanner/\<init\>(Ljava/io/InputStream;)V
+    astore_1
+    <instructions; separator="\n">
+    aload_1
+    invokevirtual java/util/Scanner/close()V
+    return
+.end method
+>>
+
+declaration(size, addrs) ::= <<
+<addrs:{iconst_0
+istore <it>}; separator="\n">
+>>
+
+constant(size, addrs, val) ::= <<
+<addrs:{<val>
+istore <it>}; separator="\n">
+>>
+
+addexpr(x, y, noReturn) ::= <<
+<if(y)><x>
+<y>
+iadd
+<else><x>
+<endif><if(noReturn)>
+
+pop<endif>
+>>
+
+subexpr(x, y, noReturn) ::= <<
+<if(y)><x>
+<y>
+isub
+<else><x>
+ineg
+<endif><if(noReturn)>
+
+pop<endif>
+>>
+
+notexpr(x, label, noReturn, label) ::= <<
+<x>
+ifeq L<label>
+iconst_0
+goto L<label>r
+L<label>:
+iconst_1
+L<label>r:<if(noReturn)>
+
+pop<endif>
+>>
+
+compound(instructions, numPop, popResult) ::= <<
+<instructions; separator="\n">
+>>
+
+binexpr(x, y, instr, noReturn) ::= <<
+<x>
+<y>
+i<instr><if(noReturn)>
+
+pop
+<endif>
+>>
+
+ifexpr(x, y, instr, label, noReturn) ::= <<
+<x>
+<y>
+if_icmp<instr> L<label>
+iconst_0
+goto L<label>r
+L<label>:
+iconst_1
+L<label>r:<if(noReturn)>
+
+pop
+<endif>
+>>
+
+assign(expr, addr, noReturn) ::= <<
+<expr>
+istore <addr><if(!noReturn)>
+
+iload <addr><endif>
+>>
+
+write(writes, noReturn) ::= <<
+<writes:{getstatic java/lang/System/out Ljava/io/PrintStream;
+<it.attr>
+<if(it.character)>
+invokevirtual java/io/PrintStream/print(C)V
+<else>
+invokevirtual java/io/PrintStream/print(I)V
+<endif>}; separator="\n">
+getstatic java/lang/System/out Ljava/io/PrintStream;
+invokevirtual java/io/PrintStream/println()V<if(!noReturn)>
+
+<last(writes).attr>
+<endif>
+>>
+
+read(reads, noReturn) ::= <<
+<reads:{aload_1
+<if(it.character)>
+invokevirtual java/util/Scanner/next()Ljava/lang/String;
+iconst_0
+invokevirtual java/lang/String/charAt(I)C
+<else>
+invokevirtual java/util/Scanner/nextInt()I
+<endif>
+
+istore <it.attr>}; separator="\n"><if(!noReturn)>
+
+iload <last(reads).attr>
+<endif>
+>>
+
+load(addr) ::= <<
+iload <addr>
+>>
+
+integer(val) ::= <<
+bipush <val>
+>>

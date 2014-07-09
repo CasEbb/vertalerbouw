@@ -3,7 +3,7 @@ group tam;
 
 program(instructions) ::= <<
 <instructions; separator="\n">
-HALT                                    ; end of program
+HALT
 >>
 
 declaration(size) ::= <<
@@ -16,26 +16,30 @@ PUSH        <size>
 STORE(1)    <it>[SB]}; separator="\n">
 >>
 
-addexpr(x, y) ::= <<
+addexpr(x, y, noReturn) ::= <<
 <if(y)><x>
 <y>
 CALL        add
-<else><x>
-<endif>
+<else><x><endif><if(noReturn)>
+
+POP(0)      1<endif>
 >>
 
-subexpr(x, y) ::= <<
+subexpr(x, y, noReturn) ::= <<
 <if(y)><x>
 <y>
 CALL        sub
 <else><x>
-CALL        neg
-<endif>
+CALL        neg<endif><if(noReturn)>
+
+POP(0)      1<endif>
 >>
 
-notexpr(x) ::= <<
+notexpr(x, noReturn) ::= <<
 <x>
-CALL        not
+CALL        not<if(noReturn)>
+
+POP(0)      1<endif>
 >>
 
 compound(instructions, numPop, popResult) ::= <<
@@ -46,48 +50,45 @@ POP(<popResult>)      <numPop>
 binexpr(x, y, instr, noReturn) ::= <<
 <x>
 <y>
-CALL        <instr>
-<if(noReturn)>POP(0)      1
-<endif>
+CALL        <instr><if(noReturn)>
+
+POP(0)      1<endif>
 >>
 
-ifexpr(x, y, instr) ::= <<
+ifexpr(x, y, instr, noReturn, wordLength) ::= <<
 <x>
-<y>
-LOADL       1
-CALL        <instr>
-<if(noReturn)>POP(0)      1
-<endif>
+<y><if(wordLength)>
+
+LOADL       1<endif>
+CALL        <instr><if(noReturn)>
+
+POP(0)      1<endif>
 >>
 
 assign(expr, addr, noReturn) ::= <<
 <expr>
-STORE(1)    <addr>[SB]
-<if(!noReturn)>
+STORE(1)    <addr>[SB]<if(!noReturn)>
+
 LOAD(1)     <addr>[SB]<endif>
 >>
 
 write(writes, noReturn) ::= <<
 <writes:{<it.attr>
-<if(it.character)>
-CALL        put
+<if(it.character)>CALL        put
+<else>CALL        putint
+<endif>}; separator="\n">
+CALL        puteol<if(!noReturn)>
 
-<else>
-CALL        putint
-
-<endif>
-}>CALL        puteol
-<if(!noReturn)><last(writes).attr>
-<endif>
+<last(writes).attr><endif>
 >>
 
 read(reads, noReturn) ::= <<
 <reads:{LOADA       <it.attr>[SB]
 <if(it.character)>CALL        get
 <else>CALL        getint
-<endif>}; separator="\n">
-<if(!noReturn)>LOAD(1)     <last(reads).attr>[SB]
-<endif>
+<endif>}; separator="\n"><if(!noReturn)>
+
+LOAD(1)     <last(reads).attr>[SB]<endif>
 >>
 
 load(addr) ::= <<
