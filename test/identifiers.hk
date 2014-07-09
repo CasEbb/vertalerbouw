@@ -1,0 +1,35 @@
+hennigan!
+  Testen van variabelen en constanten
+deurgoan!
+
+getalletjen g;
+getalletjen g1;
+blievend getalletjen gconst = 6;
+lettertjen l;
+walofneet w;
+
+dunoffel! Type mismatch
+g := l;
+l := g;
+w := l;
+
+dunoffel! Niet gedeclareerd
+skrieben(g2);
+
+dunoffel! Constante wijzigen
+gconst := 6;
+
+dunoffel! Herdeclareren
+walofneet g;
+blievend lettertjen gconst = 'c';
+
+dunoffel! Herdeclareren in een compound
+{
+  getalletjen g;
+  getalletjen g1;
+  getalletjen g;
+};
+
+dunoffel! Te laat declareren
+skrieben(l1);
+lettertjen l1;

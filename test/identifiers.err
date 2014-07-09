@@ -1,0 +1,9 @@
+':=' (regel: 12, kolom: 2) Verkeerde combinatie: identifier 'g' is van type INTEGER, maar er wordt CHARACTER toegekend
+':=' (regel: 13, kolom: 2) Verkeerde combinatie: identifier 'l' is van type CHARACTER, maar er wordt INTEGER toegekend
+':=' (regel: 14, kolom: 2) Verkeerde combinatie: identifier 'w' is van type BOOLEAN, maar er wordt CHARACTER toegekend
+'g2' (regel: 17, kolom: 9) Onbekende identifier: (g2)
+':=' (regel: 20, kolom: 7) Identifier 'gconst' is een constante.
+'VAR' (regel: 23, kolom: 0) Dubbele declaratie van (g)!
+'blievend' (regel: 24, kolom: 0) Dubbele declaratie van (gconst)!
+'VAR' (regel: 29, kolom: 2) Dubbele declaratie van (g)!
+'l1' (regel: 33, kolom: 9) Onbekende identifier: (l1)

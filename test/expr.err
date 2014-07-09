@@ -1,0 +1,20 @@
+'>' (regel: 15, kolom: 4) Foute operands voor GT. Toegestaan is [INTEGER, INTEGER], gevonden is [CHARACTER,CHARACTER]
+'>' (regel: 19, kolom: 4) Foute operands voor GT. Toegestaan is [INTEGER, INTEGER], gevonden is [INTEGER,CHARACTER]
+'<' (regel: 20, kolom: 5) Foute operands voor LT. Toegestaan is [INTEGER, INTEGER], gevonden is [BOOLEAN,CHARACTER]
+'<=' (regel: 21, kolom: 4) Foute operands voor LTE. Toegestaan is [INTEGER, INTEGER], gevonden is [INTEGER,BOOLEAN]
+'>=' (regel: 22, kolom: 2) Foute operands voor GTE. Toegestaan is [INTEGER, INTEGER], gevonden is [INTEGER,BOOLEAN]
+'<=' (regel: 29, kolom: 2) Foute operands voor LTE. Toegestaan is [INTEGER, INTEGER], gevonden is [INTEGER,VOID]
+'==' (regel: 30, kolom: 2) Foute operands voor EQ. Types moeten matchen en mogen geen VOID zijn, gevonden is [INTEGER,VOID]
+'!' (regel: 32, kolom: 5) Foute operand voor unaire NOT. Toegestaan is BOOLEAN, gevonden is INTEGER
+':=' (regel: 32, kolom: 2) Verkeerde combinatie: identifier 'g' is van type INTEGER, maar er wordt null toegekend
+'!' (regel: 33, kolom: 5) Foute operand voor unaire NOT. Toegestaan is BOOLEAN, gevonden is CHARACTER
+':=' (regel: 33, kolom: 2) Verkeerde combinatie: identifier 'l' is van type CHARACTER, maar er wordt null toegekend
+'!' (regel: 34, kolom: 0) Foute operand voor unaire NOT. Toegestaan is BOOLEAN, gevonden is INTEGER
+':=' (regel: 37, kolom: 2) Verkeerde combinatie: identifier 'g' is van type INTEGER, maar er wordt CHARACTER toegekend
+'+' (regel: 40, kolom: 0) Foute operand voor unaire PLUS. Toegestaan is INTEGER, gevonden is CHARACTER
+'-' (regel: 41, kolom: 0) Foute operand voor unaire MINUS. Toegestaan is INTEGER, gevonden is BOOLEAN
+'*' (regel: 42, kolom: 7) Foute operands voor TIMES. Toegestaan is [INTEGER, INTEGER], gevonden is [INTEGER,BOOLEAN]
+'%' (regel: 42, kolom: 11) Foute operands voor MODULO. Toegestaan is [INTEGER, INTEGER], gevonden is [null,INTEGER]
+'+' (regel: 42, kolom: 2) Foute operands voor PLUS. Toegestaan is [INTEGER, INTEGER], gevonden is [INTEGER,null]
+'&&' (regel: 43, kolom: 7) Foute operands voor AND. Toegestaan is [BOOLEAN, BOOLEAN], gevonden is [CHARACTER,BOOLEAN]
+'||' (regel: 43, kolom: 2) Foute operands voor OR. Toegestaan is [BOOLEAN, BOOLEAN], gevonden is [INTEGER,null]

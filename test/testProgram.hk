@@ -1,0 +1,40 @@
+skrieben('i','n','t');
+getalletjen ivar;
+ivar := {
+    getalletjen ivar1, ivar2;
+    vraogen(ivar1, ivar2);
+    skrieben(ivar1, ivar2);
+    
+    blievend getalletjen iconst1 = 1;
+    blievend getalletjen iconst2 = 2;
+    
+    ivar2 := ivar1 := +18 + 2 * -9;
+    skrieben(iconst1 * iconst2 > ivar2 - ivar1,
+        ivar1 < ivar2 && iconst1 <= iconst2);
+    ivar1 < vraogen(ivar2) && iconst1 <= iconst2;
+    ivar2 := skrieben(ivar2) + 10;
+} + 5;
+
+skrieben('b','o','o','l');
+walofneet bvar;
+bvar := {
+    walofneet bvar;
+    vraogen(bvar);
+    skrieben(bvar);
+    bvar := 12 / 5 * 5 + 12 % 5 == 12 && 6 >= 6;
+    blievend walofneet bconst = wal;
+    skrieben(!neet && bvar == bconst || wal <> neet);
+} && wal;
+
+skrieben('c','h','a','r');
+lettertjen cvar;
+cvar := {
+    lettertjen cvar1, cvar2;
+    vraogen(cvar1);
+    blievend lettertjen cconst = 'c';
+    cvar2 := 'z';
+    skrieben('a', cvar1 == cconst && (cvar2 <> 'b' || !wal));
+    'b';
+};
+
+skrieben(ivar, bvar, cvar);

@@ -1,0 +1,37 @@
+hennigan!
+  Testen van I/O-functies.
+deurgoan!
+
+dunoffel! Writen van een INT, CHAR en BOOL
+skrieben(1, 'a', wal, !wal, neet, !neet);
+
+dunoffel! Je mag geen VOID writen
+skrieben(skrieben(1,2,3));
+
+dunoffel! Iets als enige writen returnt een waarde.
+lettertjen l;
+l := 'a';
+getalletjen g;
+g := 1;
+walofneet w;
+w := neet;
+
+l := skrieben(l);
+g := skrieben(g);
+w := skrieben(w);
+
+dunoffel! Returnwaardes kunnen in expressies
+skrieben( skrieben(g) + 1 );
+
+dunoffel! VOID dus niet
+skrieben( skrieben(g, w) + 1 );
+
+dunoffel! Eén id vragen geeft de waarde terug
+getalletjen g2;
+g := vraogen(g2) + g;
+
+dunoffel! Het schrijven van het resultaat van een compound expression
+skrieben({'a';});
+
+dunoffel! En al helemaal geen dingen aan read/write assignen
+skrieben(g) := 1;

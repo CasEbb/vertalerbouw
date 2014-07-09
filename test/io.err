@@ -1,0 +1,3 @@
+'skrieben' (regel: 9, kolom: 0) Verkeerd argument: verwachtte [INTEGER, BOOLEAN, CHARACTER], kreeg VOID
+'+' (regel: 27, kolom: 25) Foute operands voor PLUS. Toegestaan is [INTEGER, INTEGER], gevonden is [VOID,INTEGER]
+':=' (regel: 37, kolom: 12) Linkerkant van een toekenning moet een identifier zijn.

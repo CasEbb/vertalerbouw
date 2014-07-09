@@ -1,0 +1,43 @@
+hennigan!
+    Testen van expressies
+deurgoan!
+
+getalletjen g;
+lettertjen l;
+walofneet w;
+walofneet n;
+
+w := wal;
+n := !wal;
+
+g := -5 + +1;
+
+'b' > 'a';
+5   < 1;
+wal <> neet;
+
+100 > 'a'; dunoffel! Mismatch
+neet < 'b';
+100 <= neet;
+g >= w;
+w == n; dunoffel! Kloppende match
+w <> n;
+
+g <= skrieben(g);
+g >= vraogen(g);
+
+g <= skrieben(1, 2);
+g == vraogen(g, l);
+
+g := !g;
+l := !l;
+!vraogen(g);
+
+dunoffel! Multiple mismatch
+g := l := 'c';
+
+dunoffel! Nog meer operatorhorror
++'a';
+-neet;
+g + 10 * w % 2;
+g || l && w;
